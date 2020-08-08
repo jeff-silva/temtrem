@@ -1,0 +1,23 @@
+[
+  {
+    "name": "test",
+    "path": "/test",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\test.vue",
+    "chunkName": "pages/test",
+    "_name": "_222c3fac"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_3c317128"
+  },
+  {
+    "name": "__laravel_nuxt__",
+    "path": "/__laravel_nuxt__",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_3c317128"
+  }
+]
