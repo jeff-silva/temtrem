@@ -1,5 +1,12 @@
 [
   {
+    "name": "auth",
+    "path": "/auth",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\index.vue",
+    "chunkName": "pages/auth/index",
+    "_name": "_de834f00"
+  },
+  {
     "name": "test",
     "path": "/test",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\test.vue",
@@ -7,8 +14,29 @@
     "_name": "_222c3fac"
   },
   {
+    "name": "auth-password",
+    "path": "/auth/password",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\password.vue",
+    "chunkName": "pages/auth/password",
+    "_name": "_07c0b1dd"
+  },
+  {
+    "name": "auth-register",
+    "path": "/auth/register",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\register.vue",
+    "chunkName": "pages/auth/register",
+    "_name": "_ffac3c36"
+  },
+  {
     "name": "index",
     "path": "/",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_3c317128"
+  },
+  {
+    "name": "__laravel_nuxt__",
+    "path": "/__laravel_nuxt__",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
     "_name": "_3c317128"
