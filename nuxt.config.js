@@ -23,6 +23,6 @@ module.exports = laravelNuxt({
     },
 
     modules: [],
-    plugins: [],
+    plugins: ['@/plugins/axios.js'],
     css: ['@/assets/bootstrap.css'],
 });
