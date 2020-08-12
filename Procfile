@@ -1,2 +1,2 @@
 web: vendor/bin/heroku-php-apache2 public/
-release: php artisan migrate --force && php artisan db:seed
+release: php artisan migrate --force && php artisan db:seed && php artisan config:clear
