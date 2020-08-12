@@ -1,5 +1,5 @@
 <template><div>
-    <form action="" style="max-width:400px; margin:0 auto;" @submit.prevent="user.login().then(loginThen).catch(loginCatch)">
+    <form action="" style="max-width:400px; margin:0 auto;" @submit.prevent="login()">
         <label class="row">
             <div class="col-3 p-2">Login</div>
             <div class="col-9"><input type="text" class="form-control" v-model="user.email"></div>
@@ -19,12 +19,15 @@
 </div></template>
 
 <script>
-import User from '@/models/User';
+// import User from '@/models/User';
 
 export default {
     data() {
         return {
-            user: new User(),
+            user: {
+                email: '',
+                password: '',
+            },
         };
     },
 
@@ -35,11 +38,19 @@ export default {
         loginCatch(error) {
             console.log(error);
         },
+        async login() {
+            try {
+                this.$store.dispatch('auth/login', this.user).then((resp) => {
+                    this.$router.push('/dashboard');
+                })
+            }
+            catch(err) {
+                // console.log(err);
+            }
+        },
     },
 
     mounted() {
-        this.user.me().then((resp) => {
-            console.log(resp);
-        });
+        // this.$store.dispatch('auth/me');
     },
 };</script>

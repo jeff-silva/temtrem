@@ -31,6 +31,10 @@ export default class User extends Eloquent
         });
     }
 
+    logout() {
+        localStorage.removeItem('access_token');
+    }
+
     register() {
         // 
     }

@@ -1186,15 +1186,17 @@
 </div></template>
 
 <script>export default {
-    data() {
-        return {
-            server: {},
-        };
-    },
+  layout: 'admin',
 
-    mounted() {
-        // this.$axios.get('/api/server').then((resp) => {
-        //     this.server = resp.data;
-        // });
-    },
+  data() {
+    return {
+      server: {},
+    };
+  },
+
+  mounted() {
+    // this.$axios.get('/api/server').then((resp) => {
+    //     this.server = resp.data;
+    // });
+  },
 };</script>

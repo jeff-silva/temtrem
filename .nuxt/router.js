@@ -4,9 +4,13 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _de834f00 = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\index.vue' /* webpackChunkName: "pages/auth/index" */))
+const _73761a2c = () => interopDefault(import('..\\resources\\nuxt\\pages\\dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
 const _222c3fac = () => interopDefault(import('..\\resources\\nuxt\\pages\\test.vue' /* webpackChunkName: "pages/test" */))
+const _256a267d = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\index.vue' /* webpackChunkName: "pages/user/index" */))
 const _07c0b1dd = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\password.vue' /* webpackChunkName: "pages/auth/password" */))
 const _ffac3c36 = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
+const _1eb5d493 = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\notifications.vue' /* webpackChunkName: "pages/user/notifications" */))
+const _0ae5c448 = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\settings.vue' /* webpackChunkName: "pages/user/settings" */))
 const _3c317128 = () => interopDefault(import('..\\resources\\nuxt\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -30,9 +34,17 @@ export const routerOptions = {
     component: _de834f00,
     name: "auth"
   }, {
+    path: "/dashboard",
+    component: _73761a2c,
+    name: "dashboard"
+  }, {
     path: "/test",
     component: _222c3fac,
     name: "test"
+  }, {
+    path: "/user",
+    component: _256a267d,
+    name: "user"
   }, {
     path: "/auth/password",
     component: _07c0b1dd,
@@ -42,9 +54,21 @@ export const routerOptions = {
     component: _ffac3c36,
     name: "auth-register"
   }, {
+    path: "/user/notifications",
+    component: _1eb5d493,
+    name: "user-notifications"
+  }, {
+    path: "/user/settings",
+    component: _0ae5c448,
+    name: "user-settings"
+  }, {
     path: "/",
     component: _3c317128,
     name: "index"
+  }, {
+    path: "/__laravel_nuxt__",
+    component: _3c317128,
+    name: "__laravel_nuxt__"
   }],
 
   fallback: false

@@ -2,11 +2,6 @@ const laravelNuxt = require("laravel-nuxt");
 require('dotenv').config();
 
 module.exports = laravelNuxt({
-    server: {
-        port: 8000, // default: 3000
-        host: '192.168.15.6', // default: localhost
-    },
-
     head: {
         title: process.env.APP_NAME || '',
         meta: [
@@ -25,4 +20,16 @@ module.exports = laravelNuxt({
     modules: [],
     plugins: ['@/plugins/axios.js'],
     css: ['@/assets/bootstrap.css'],
+
+    // auth: {
+    //     strategies: {
+    //         local: {
+    //             endpoints: {
+    //                 login: { url: '/api/auth/login', method: 'post', propertyName: 'access_token' },
+    //                 logout: { url: '/api/auth/logout', method: 'post' },
+    //                 user: { url: '/api/auth/user', method: 'post', propertyName: 'user' },
+    //             },
+    //         },
+    //     },
+    // },
 });

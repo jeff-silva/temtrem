@@ -7,11 +7,25 @@
     "_name": "_de834f00"
   },
   {
+    "name": "dashboard",
+    "path": "/dashboard",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\dashboard.vue",
+    "chunkName": "pages/dashboard",
+    "_name": "_73761a2c"
+  },
+  {
     "name": "test",
     "path": "/test",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\test.vue",
     "chunkName": "pages/test",
     "_name": "_222c3fac"
+  },
+  {
+    "name": "user",
+    "path": "/user",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\user\\\\index.vue",
+    "chunkName": "pages/user/index",
+    "_name": "_256a267d"
   },
   {
     "name": "auth-password",
@@ -28,8 +42,29 @@
     "_name": "_ffac3c36"
   },
   {
+    "name": "user-notifications",
+    "path": "/user/notifications",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\user\\\\notifications.vue",
+    "chunkName": "pages/user/notifications",
+    "_name": "_1eb5d493"
+  },
+  {
+    "name": "user-settings",
+    "path": "/user/settings",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\user\\\\settings.vue",
+    "chunkName": "pages/user/settings",
+    "_name": "_0ae5c448"
+  },
+  {
     "name": "index",
     "path": "/",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_3c317128"
+  },
+  {
+    "name": "__laravel_nuxt__",
+    "path": "/__laravel_nuxt__",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
     "_name": "_3c317128"

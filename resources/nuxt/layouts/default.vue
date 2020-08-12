@@ -8,6 +8,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><nuxt-link class="nav-link" to="/auth">Login</nuxt-link></li>
                 <li class="nav-item"><nuxt-link class="nav-link" to="/test">Test</nuxt-link></li>
+                <li class="nav-item"><nuxt-link class="nav-link" to="/dashboard">Dashboard</nuxt-link></li>
             </ul>
         </template>
     </ui-navbar>

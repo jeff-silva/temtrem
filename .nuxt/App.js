@@ -3,12 +3,14 @@ import Vue from 'vue'
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
 
 import NuxtLoading from './components/nuxt-loading.vue'
+import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '..\\resources\\nuxt\\assets\\bootstrap.css'
 
+import _77068119 from '..\\resources\\nuxt\\layouts\\admin.vue'
 import _6f6c098b from '..\\resources\\nuxt\\layouts\\default.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
@@ -43,7 +45,7 @@ export default {
       }
     }, [
       loadingEl,
-
+      h(NuxtBuildIndicator),
       transitionEl
     ])
   },
@@ -93,10 +95,6 @@ export default {
 
     isFetching () {
       return this.nbFetching > 0
-    },
-
-    isPreview () {
-      return Boolean(this.$options.previewData)
     },
   },
 
@@ -173,6 +171,10 @@ export default {
     },
 
     setLayout (layout) {
+      if(layout && typeof layout !== 'string') {
+        throw new Error('[nuxt] Avoid using non-string value as layout property.')
+      }
+
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }
