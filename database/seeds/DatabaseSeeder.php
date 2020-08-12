@@ -15,10 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
 
-        DB::table('users')->insert([
-            'name' => 'Root User',
-            'email' => 'root@grr.la',
-            'password' => Hash::make('321321'),
-        ]);
+        if (!$root = \App\User::where('email', 'root@grr.la')->first()) {
+            DB::table('users')->insert([
+                'name' => 'Root User',
+                'email' => 'root@grr.la',
+                'password' => Hash::make('321321'),
+            ]);
+        }
     }
 }
