@@ -22,6 +22,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
-        "laravel-nuxt": "^2.0.2"
+        "laravel-nuxt": "^2.0.2",
+        "nuxt-leaflet": "0.0.21"
     }
 }

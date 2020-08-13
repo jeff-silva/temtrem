@@ -689,7 +689,7 @@ pre {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    padding: 0;
+    font-weight: bold;
     border-radius: 0;
     min-height: 50px;
     border: none; }

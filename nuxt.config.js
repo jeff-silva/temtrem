@@ -17,7 +17,10 @@ module.exports = laravelNuxt({
         script: [],
     },
 
-    modules: [],
+    modules: [
+        ['nuxt-leaflet', { /* module options */ }],
+    ],
+    
     plugins: ['@/plugins/axios.js'],
     css: ['@/assets/bootstrap.css'],
 

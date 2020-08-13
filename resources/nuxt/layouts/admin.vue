@@ -148,13 +148,13 @@ export default {
                                 <span class="name"> {{ $store.state.auth.user.name }} </span>
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" :class="{show:profileOpen}">
-                                <nuxt-link to="/user/" class="dropdown-item">
+                                <nuxt-link to="/user/" class="dropdown-item" @click.native="profileOpen=false">
                                     <i class="fa fa-user icon"></i> Profile
                                 </nuxt-link>
-                                <nuxt-link to="/user/notifications/" class="dropdown-item">
+                                <nuxt-link to="/user/notifications/" class="dropdown-item" @click.native="profileOpen=false">
                                     <i class="fa fa-bell icon"></i> Notifications
                                 </nuxt-link>
-                                <nuxt-link to="/user/settings/" class="dropdown-item">
+                                <nuxt-link to="/user/settings/" class="dropdown-item" @click.native="profileOpen=false">
                                     <i class="fa fa-gear icon"></i> Configurações
                                 </nuxt-link>
                                 <div class="dropdown-divider"></div>
@@ -309,17 +309,14 @@ export default {
                 <nuxt />
             </article>
 
+            <br>
             <footer class="footer">
                 <div class="footer-block buttons">
-                    <iframe class="footer-github-btn" src="https://ghbtns.com/github-btn.html?user=modularcode&amp;repo=modular-admin-html&amp;type=star&amp;count=true" frameborder="0" scrolling="0" width="140px" height="20px"></iframe>
+                    &nbsp;
                 </div>
                 <div class="footer-block author">
                     <ul>
-                        <li> created by <a href="https://github.com/modularcode">ModularCode</a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/modularcode/modular-admin-html#get-in-touch">get in touch</a>
-                        </li>
+                        <li><a href="https://jsiqueira.com">jsiqueira.com</a></li>
                     </ul>
                 </div>
             </footer>

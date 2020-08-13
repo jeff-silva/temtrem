@@ -25,9 +25,17 @@ export const actions = {
         let access_token = localStorage.getItem('access_token');
         if (access_token) {
             this.$axios.setToken(access_token, 'Bearer');
-            let resp = await this.$axios.$post('/api/auth/me');
-            commit('setToken', access_token);
-            commit('setUser', resp);
+            try {
+                let resp = await this.$axios.$post('/api/auth/me');
+                commit('setToken', access_token);
+                commit('setUser', resp);
+            }
+            catch(err) {
+                localStorage.removeItem('access_token');
+                commit('setToken', null);
+                commit('setUser', {});
+                location.reload();
+            }
         }
     },
 

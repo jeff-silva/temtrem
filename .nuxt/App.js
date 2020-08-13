@@ -6,6 +6,8 @@ import NuxtLoading from './components/nuxt-loading.vue'
 
 import '..\\resources\\nuxt\\assets\\bootstrap.css'
 
+import '..\\node_modules\\leaflet\\dist\\leaflet.css'
+
 import _77068119 from '..\\resources\\nuxt\\layouts\\admin.vue'
 import _6f6c098b from '..\\resources\\nuxt\\layouts\\default.vue'
 

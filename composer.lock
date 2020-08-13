@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "025802c69d15533beec2ba914bb731d3",
+    "content-hash": "861c46b9aa9c166bbdad319cc556f8b1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1561,6 +1561,40 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "parsnick/eloquentjs",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parsnick/eloquentjs.git",
+                "reference": "963a8049b58e3d6492a3aeec302e9a7a0ed4682c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parsnick/eloquentjs/zipball/963a8049b58e3d6492a3aeec302e9a7a0ed4682c",
+                "reference": "963a8049b58e3d6492a3aeec302e9a7a0ed4682c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "fzaninotto/faker": "^1.5",
+                "orchestra/testbench": "~3.2",
+                "parsnick/steak": "dev-master",
+                "phpspec/phpspec": "^2.4",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EloquentJs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Brings the Eloquent ORM from the Laravel framework to the browser.",
+            "time": "2016-04-18T10:16:02+00:00"
         },
         {
             "name": "phpoption/phpoption",

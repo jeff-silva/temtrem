@@ -24,3 +24,32 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
+
+
+$models[] = [
+    'class' => \App\Address::class,
+];
+
+$models[] = [
+    'class' => \App\User::class,
+];
+
+foreach($models as $model) {
+    $instance = new $model['class'];
+    if (in_array('endpoints', get_class_methods($instance))) {
+        call_user_func([$instance, 'endpoints']);
+    }
+}
+
+Route::get('/', function() {
+    $routes = [];
+
+    foreach(\Route::getRoutes() as $route) {
+        $routes[] = [
+            'methods' => $route->methods(),
+            'uri' => $route->uri(),
+        ];
+    }
+
+    return $routes;
+});
