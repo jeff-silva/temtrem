@@ -53,16 +53,18 @@ class Address extends Model
     public function endpoints()
     {
         \Route::get('/address/search', function() {
+            $input = request()->all();
             $query = new Address;
 
-            if ($ref = request()->input('ref')) {
-                $query = $query->where('ref', $ref);
+            if (array_key_exists('ref', $input)) {
+                $query = $query->where('ref', $input['ref']);
             }
 
-            // if ($ref_id = request()->input('ref_id')) {
-            //     $query = $query->where('ref_id', $ref);
-            // }
+            if (array_key_exists('ref_id', $input)) {
+                $query = $query->where('ref_id', $input['ref_id']);
+            }
 
+            // return $query->toSql();
             return $query->get();
         });
 

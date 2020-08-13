@@ -317,7 +317,7 @@ pre {
   .alert.alert-primary {
     color: #ffffff;}
     .alert.alert-primary hr {
-      border-top-color: #78bd2e; }
+      border-top-color: var(--primary); }
     .alert.alert-primary .alert-link {
       color: #e6e6e6; }
   .alert.alert-success {
@@ -1468,7 +1468,7 @@ a:not(.btn) {
   color: #969696; }
   a:not(.btn):hover {
     text-decoration: underline;
-    color: #70b02b; }
+    color: var(--primary); }
     a:not(.btn):hover:before {
       -webkit-transform: scaleX(1);
               transform: scaleX(1); }
@@ -1565,7 +1565,7 @@ span a {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background: #78bd2e; }
+  background: var(--primary); }
 
 ::-webkit-scrollbar-thumb:window-inactive {
   background: var(--primary); }

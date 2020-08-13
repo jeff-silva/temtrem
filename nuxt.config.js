@@ -23,6 +23,7 @@ module.exports = laravelNuxt({
     
     plugins: ['@/plugins/axios.js'],
     css: ['@/assets/bootstrap.css'],
+    components: true,
 
     // auth: {
     //     strategies: {

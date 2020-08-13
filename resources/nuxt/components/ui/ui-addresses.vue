@@ -10,10 +10,10 @@
     <table class="table table-borderless table-striped">
         <tbody>
             <tr v-for="v in props.value" @click="edit=v">
-                <td><a href="javascript:;">
+                <td style="cursor:pointer;">
                     <strong class="d-block">{{ v.name||'Sem descrição' }}</strong>
                     <small class="d-block text-muted">{{ [v.route, v.district, v.city].join(' ') }}</small>
-                </a></td>
+                </td>
             </tr>
         </tbody>
     </table>

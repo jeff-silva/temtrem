@@ -144,7 +144,7 @@ export default {
 
                         <li class="profile dropdown" :class="{show:profileOpen}">
                             <a class="nav-link dropdown-toggle" href="javascript:;" @click="profileOpen=!profileOpen">
-                                <div class="img" style="background-image: url('https://avatars3.githubusercontent.com/u/3959008?v=3&amp;s=40')"></div>
+                                <div class="img" :style="`background-image: url(${$store.state.auth.user.photo})`"></div>
                                 <span class="name"> {{ $store.state.auth.user.name }} </span>
                             </a>
                             <div class="dropdown-menu profile-dropdown-menu" :class="{show:profileOpen}">

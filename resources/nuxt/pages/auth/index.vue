@@ -1,14 +1,15 @@
 <template><div>
     <form action="" style="max-width:400px; margin:0 auto;" @submit.prevent="login()">
-        <label class="row">
-            <div class="col-3 p-2">Login</div>
-            <div class="col-9"><input type="text" class="form-control" v-model="user.email"></div>
-        </label>
-
-        <label class="row">
-            <div class="col-3 p-2">Senha</div>
-            <div class="col-9"><input type="password" class="form-control" v-model="user.password"></div>
-        </label>
+        <h2>Cadastre-se <small>e comece a vender imediatamente.</small></h2>
+        <div class="mb-3"></div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" v-model="user.email" placeholder="Email">
+            <!-- <small class="text-danger" v-html="error.name"></small> -->
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-lg" v-model="user.password" placeholder="Senha">
+            <!-- <small class="text-danger" v-html="error.email"></small> -->
+        </div>
 
         <div class="text-right">
             <button type="submit" class="btn btn-primary">
@@ -22,6 +23,8 @@
 // import User from '@/models/User';
 
 export default {
+    layout: 'auth',
+
     data() {
         return {
             user: {

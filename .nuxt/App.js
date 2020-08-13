@@ -9,9 +9,10 @@ import '..\\resources\\nuxt\\assets\\bootstrap.css'
 import '..\\node_modules\\leaflet\\dist\\leaflet.css'
 
 import _77068119 from '..\\resources\\nuxt\\layouts\\admin.vue'
+import _2d217e9e from '..\\resources\\nuxt\\layouts\\auth.vue'
 import _6f6c098b from '..\\resources\\nuxt\\layouts\\default.vue'
 
-const layouts = { "_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_admin": sanitizeComponent(_77068119),"_auth": sanitizeComponent(_2d217e9e),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
