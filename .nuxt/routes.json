@@ -14,6 +14,13 @@
     "_name": "_73761a2c"
   },
   {
+    "name": "store",
+    "path": "/store",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\index.vue",
+    "chunkName": "pages/store/index",
+    "_name": "_b254b22a"
+  },
+  {
     "name": "test",
     "path": "/test",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\test.vue",
@@ -40,6 +47,27 @@
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\register.vue",
     "chunkName": "pages/auth/register",
     "_name": "_ffac3c36"
+  },
+  {
+    "name": "store-products",
+    "path": "/store/products",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\products.vue",
+    "chunkName": "pages/store/products",
+    "_name": "_34b25c4a"
+  },
+  {
+    "name": "store-settings",
+    "path": "/store/settings",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\settings.vue",
+    "chunkName": "pages/store/settings",
+    "_name": "_700775cc"
+  },
+  {
+    "name": "store-stores",
+    "path": "/store/stores",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\stores.vue",
+    "chunkName": "pages/store/stores",
+    "_name": "_41f5b8e9"
   },
   {
     "name": "user-notifications",

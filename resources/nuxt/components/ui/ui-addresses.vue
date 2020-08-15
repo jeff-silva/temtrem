@@ -1,5 +1,5 @@
 <template><div class="ui-addresses">
-    <button type="button" class="btn btn-outline-primary" @click="props.value.push({})">
+    <button type="button" class="btn btn-outline-primary" @click="add()">
         <i class="fa fa-fw fa-plus"></i> Adicionar endereço
     </button>
 
@@ -25,7 +25,7 @@
                 :ref-id="refId"
                 :show-btn-save="false"
                 ref="edit"
-                @saved="edit=false; listAddresses()"
+                @saved="edit=false; list()"
             ></ui-address>
         </template>
 
@@ -42,15 +42,11 @@
         reference: {default:''},
         refId: {default:''},
         value: {default: () => ([])},
-    },
-
-    components: {
-        "ui-modal": () => import("@/components/ui/ui-modal"),
-        "ui-address": () => import("@/components/ui/ui-address"),
+        loadOnStart: {default:true},
     },
 
     methods: {
-        listAddresses() {
+        list() {
             var params = {
                 ref: this.reference,
                 ref_id: this.refId,
@@ -58,6 +54,13 @@
             this.$axios.get('/api/address/search', {params:params}).then((resp) => {
                 this.props.value = resp.data;
             });
+        },
+
+        add() {
+            this.props.value.push({
+                name: `Endereço #${this.props.value.length+1}`,
+            });
+            this.edit = this.props.value[this.props.value.length-1];
         },
     },
 
@@ -69,6 +72,8 @@
     },
 
     mounted() {
-        this.listAddresses();
+        if (this.loadOnStart) {
+            this.list();
+        }
     },
 };</script>

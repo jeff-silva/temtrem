@@ -21,6 +21,7 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'photo',
+        'birth',
     ];
 
     /**
@@ -129,5 +130,47 @@ class User extends Authenticatable implements JWTSubject
 
             return false;
         });
+    }
+
+    public function tableMigration($table, $fields)
+    {
+        if (!in_array('name', $fields)) {
+            $table->string('name')->nullable();
+        }
+
+        if (!in_array('email', $fields)) {
+            $table->string('email')->nullable();
+        }
+
+        if (!in_array('birth', $fields)) {
+            $table->dateTime('birth')->nullable();
+        }
+
+        if (!in_array('photo', $fields)) {
+            $table->string('photo')->nullable();
+        }
+
+        if (!in_array('email_verified_at', $fields)) {
+            $table->timestamp('email_verified_at')->nullable();
+        }
+
+        if (!in_array('password', $fields)) {
+            $table->string('password')->nullable();
+        }
+        
+        if (!in_array('remember_token', $fields)) {
+            $table->rememberToken();
+        }
+    }
+
+    public function tableSeed()
+    {
+        if (!$root = \App\User::where('email', 'root@grr.la')->first()) {
+            \Illuminate\Support\Facades\DB::table('users')->insert([
+                'name' => 'Root User',
+                'email' => 'root@grr.la',
+                'password' => \Illuminate\Support\Facades\Hash::make('321321'),
+            ]);
+        }
     }
 }

@@ -2,10 +2,6 @@
 import User from '@/models/User';
 
 export default {
-    components: {
-        "ui-navbar": () => import("@/components/ui/ui-navbar"),
-    },
-
     methods: {
         logout() {
             this.$store.dispatch('auth/logout').then((resp) => {
@@ -20,32 +16,13 @@ export default {
             sidebarOpen: false,
             sidebarItems: [
                 {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                {to:"/settings", title:"Configurações", icon:"fa fa-home", children:[
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
+                {to:"", title:"Lojas", icon:"fa fa-shopping-bag", children:[
+                    {to:"/store/stores", title:"Lojas", icon:"fa fa-shopping-bag", children:[]},
+                    {to:"/store/products", title:"Produtos", icon:"fa fa-shopping-bag", children:[]},
+                    {to:"/store/categories", title:"Categorias", icon:"fa fa-home", children:[]},
+                    {to:"/store/settings", title:"Configurações", icon:"fa fa-home", children:[]},
                 ]},
-                {to:"/settings", title:"Configurações", icon:"fa fa-home", children:[
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                ]},
-                {to:"/settings", title:"Configurações", icon:"fa fa-home", children:[
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[
-                        {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                        {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                        {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                        {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                        {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
-                    ]},
-                ]},
+                {to:"/user/settings/", title:"Configurações", icon:"fa fa-cog", children:[]},
             ],
         };
     },
@@ -60,6 +37,34 @@ export default {
 <template><div>
     <div class="main-wrapper">
         <div id="app" class="app" :class="{'sidebar-open':sidebarOpen}">
+            
+            <!--
+            <div class="d-flex align-items-center bg-white shadow p-1">
+                <div class="flex-grow-1">Aaa</div>
+                <div class="">
+                    <ui-btn-dropdown :right="true">
+                        <template #dropdown>
+                            <div class="profile-sidebar bg-white shadow-sm px-2 py-2" style="width:160px;">
+                                <div class="text-center mb-2">
+                                    <img :src="$store.state.auth.user.photo" alt="" style="width:90%; border-radius:5px;">
+                                </div>
+
+                                <div class="text-center font-weight-bold text-uppercase">
+                                    {{ $store.state.auth.user.name }}
+                                </div>
+
+                                <div class="list-group">
+                                    <nuxt-link class="list-group-item border-0 p-2" to="/">Aaa</nuxt-link>
+                                    <nuxt-link class="list-group-item border-0 p-2" to="/">Aaa</nuxt-link>
+                                    <nuxt-link class="list-group-item border-0 p-2" to="/">Aaa</nuxt-link>
+                                </div>
+                            </div>
+                        </template>
+                    </ui-btn-dropdown>
+                </div>
+            </div>
+            -->
+
             <header class="header">
                 <div class="header-block header-block-collapse d-lg-none d-xl-none">
                     <button class="collapse-btn" id="sidebar-collapse-btn" @click="sidebarOpen=true">
@@ -170,30 +175,24 @@ export default {
                 <div class="sidebar-container">
                     <div class="sidebar-header">
                         <div class="brand">
-                            <div class="logo">
-                                <span class="l l1"></span>
-                                <span class="l l2"></span>
-                                <span class="l l3"></span>
-                                <span class="l l4"></span>
-                                <span class="l l5"></span>
-                            </div> Modular Admin
+                            Modular Admin
                         </div>
                     </div>
                     <nav class="menu">
                         <ul class="sidebar-menu metismenu" id="sidebar-menu">
                             <li class="" v-for="i in sidebarItems" :class="{open:!!i.open}">
                                 <a href="javascript:;" v-if="i.children.length>0" @click="$set(i, 'open', !i.open)">
-                                    <i class="fa fa-home"></i> {{ i.title }}
+                                    <i :class="i.icon"></i> {{ i.title }}
                                     <i class="fa arrow"></i>
                                 </a>
 
                                 <nuxt-link :to="i.to" v-if="i.children.length==0" @click.native="sidebarOpen=false">
-                                    <i class="fa fa-home"></i> {{ i.title }}
+                                    <i :class="i.icon"></i> {{ i.title }}
                                 </nuxt-link>
 
                                 <ul class="sidebar-nav collapse" v-if="i.children.length>0" :style="i.open? `height:auto; display:block;`: `height:0px;`">
                                     <li v-for="ii in i.children">
-                                        <nuxt-link :to="ii.to" @click.native="sidebarOpen=false"> {{ i.title }} </nuxt-link>
+                                        <nuxt-link :to="ii.to" @click.native="sidebarOpen=false"> {{ ii.title }} </nuxt-link>
                                     </li>
                                 </ul>
                             </li>

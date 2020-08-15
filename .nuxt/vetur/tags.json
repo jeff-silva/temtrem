@@ -11,6 +11,18 @@
   "LazyUiAddresses": {
     "description": "Auto imported from components/ui/ui-addresses.vue"
   },
+  "UiBtnDropdown": {
+    "description": "Auto imported from components/ui/ui-btn-dropdown.vue"
+  },
+  "LazyUiBtnDropdown": {
+    "description": "Auto imported from components/ui/ui-btn-dropdown.vue"
+  },
+  "UiDatetime": {
+    "description": "Auto imported from components/ui/ui-datetime.vue"
+  },
+  "LazyUiDatetime": {
+    "description": "Auto imported from components/ui/ui-datetime.vue"
+  },
   "UiField": {
     "description": "Auto imported from components/ui/ui-field.vue"
   },
@@ -34,5 +46,11 @@
   },
   "LazyUiPasswordMeter": {
     "description": "Auto imported from components/ui/ui-password-meter.vue"
+  },
+  "UiPhoto": {
+    "description": "Auto imported from components/ui/ui-photo.vue"
+  },
+  "LazyUiPhoto": {
+    "description": "Auto imported from components/ui/ui-photo.vue"
   }
 }

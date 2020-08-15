@@ -2,28 +2,40 @@
     <form @submit.prevent="register()">
         <h2>Cadastre-se <small>e comece a vender imediatamente.</small></h2>
         <div class="mb-3"></div>
+
         <div class="form-group">
+            <label>Informe seu nome</label>
             <input type="text" class="form-control input-lg" v-model="post.name" placeholder="Nome">
             <small class="text-danger" v-html="error.name"></small>
         </div>
+
         <div class="form-group">
+            <label>Qual seu email?</label>
             <input type="email" class="form-control input-lg" v-model="post.email" placeholder="Email">
             <small class="text-danger" v-html="error.email"></small>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="form-group">
+
+        <div class="form-group">
+            <label>Crie uma senha</label>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
                     <input type="password" class="form-control input-lg" v-model="post.password" placeholder="Senha">
+                    <ui-password-meter v-model="post.password" class="mt-1"></ui-password-meter>
                     <small class="text-danger" v-html="error.password"></small>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="form-group">
+                <div class="col-xs-12 col-sm-6 col-md-6">
                     <input type="password" class="form-control input-lg" v-model="post.password2" placeholder="Repita senha">
                     <small class="text-danger" v-html="error.password2"></small>
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+            <label>Qual a sua data de nasicmento?</label>
+            <ui-datetime v-model="post.birth" :time="false"></ui-datetime>
+            <small class="text-danger" v-html="error.birth"></small>
+        </div>
+
         <div class="row align-items-center mb-3">
             <div class="col-xs-4 col-md-4">
                 <label class="button-checkbox">

@@ -18,10 +18,14 @@ module.exports = laravelNuxt({
     },
 
     modules: [
+        '@nuxtjs/pwa',
+        // '@nuxtjs/axios',
+        // '@nuxtjs/dotenv',
+
         ['nuxt-leaflet', { /* module options */ }],
     ],
     
-    plugins: ['@/plugins/axios.js'],
+    plugins: ['@/plugins/axios.js', '@/plugins/utils.js'],
     css: ['@/assets/bootstrap.css'],
     components: true,
 

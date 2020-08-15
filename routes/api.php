@@ -26,20 +26,14 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 });
 
 
-$models[] = [
-    'class' => \App\Address::class,
-];
 
-$models[] = [
-    'class' => \App\User::class,
-];
-
-foreach($models as $model) {
-    $instance = new $model['class'];
+foreach(\App\Utils::classes() as $model) {
+    $instance = new $model;
     if (in_array('endpoints', get_class_methods($instance))) {
         call_user_func([$instance, 'endpoints']);
     }
 }
+
 
 Route::get('/', function() {
     $routes = [];

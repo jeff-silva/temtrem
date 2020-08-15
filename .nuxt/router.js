@@ -5,10 +5,14 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _de834f00 = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\index.vue' /* webpackChunkName: "pages/auth/index" */))
 const _73761a2c = () => interopDefault(import('..\\resources\\nuxt\\pages\\dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
+const _b254b22a = () => interopDefault(import('..\\resources\\nuxt\\pages\\store\\index.vue' /* webpackChunkName: "pages/store/index" */))
 const _222c3fac = () => interopDefault(import('..\\resources\\nuxt\\pages\\test.vue' /* webpackChunkName: "pages/test" */))
 const _256a267d = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\index.vue' /* webpackChunkName: "pages/user/index" */))
 const _07c0b1dd = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\password.vue' /* webpackChunkName: "pages/auth/password" */))
 const _ffac3c36 = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\register.vue' /* webpackChunkName: "pages/auth/register" */))
+const _34b25c4a = () => interopDefault(import('..\\resources\\nuxt\\pages\\store\\products.vue' /* webpackChunkName: "pages/store/products" */))
+const _700775cc = () => interopDefault(import('..\\resources\\nuxt\\pages\\store\\settings.vue' /* webpackChunkName: "pages/store/settings" */))
+const _41f5b8e9 = () => interopDefault(import('..\\resources\\nuxt\\pages\\store\\stores.vue' /* webpackChunkName: "pages/store/stores" */))
 const _1eb5d493 = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\notifications.vue' /* webpackChunkName: "pages/user/notifications" */))
 const _0ae5c448 = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\settings.vue' /* webpackChunkName: "pages/user/settings" */))
 const _3c317128 = () => interopDefault(import('..\\resources\\nuxt\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
@@ -38,6 +42,10 @@ export const routerOptions = {
     component: _73761a2c,
     name: "dashboard"
   }, {
+    path: "/store",
+    component: _b254b22a,
+    name: "store"
+  }, {
     path: "/test",
     component: _222c3fac,
     name: "test"
@@ -53,6 +61,18 @@ export const routerOptions = {
     path: "/auth/register",
     component: _ffac3c36,
     name: "auth-register"
+  }, {
+    path: "/store/products",
+    component: _34b25c4a,
+    name: "store-products"
+  }, {
+    path: "/store/settings",
+    component: _700775cc,
+    name: "store-settings"
+  }, {
+    path: "/store/stores",
+    component: _41f5b8e9,
+    name: "store-stores"
   }, {
     path: "/user/notifications",
     component: _1eb5d493,

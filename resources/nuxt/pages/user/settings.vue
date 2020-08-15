@@ -1,10 +1,20 @@
 <template><div>
     <form @submit.prevent="userSave()">
         <fieldset><legend>Meus dados</legend>
-            <ui-field type="photo" label="Foto" placeholder="Foto" v-model="user.photo" v-bind="{imgMaxWidth:400, imgMaxHeight:400}"></ui-field>
+            <ui-field type="photo" label="Foto" placeholder="Foto">
+                <template #field>
+                    <ui-photo v-model="user.photo"></ui-photo>
+                </template>
+            </ui-field>
             <ui-field type="text" label="Nome" placeholder="Seu nome" v-model="user.name"></ui-field>
             <ui-field type="email" label="Email" placeholder="nome@grr.la" v-model="user.email"></ui-field>
-            <ui-field type="password" label="Senha" placeholder="123456" v-model="user.password">
+            <ui-field type="text" label="Aniversário" placeholder="31/12/1989" v-model="user.birth">
+                <template #field>
+                    <ui-datetime v-model="user.birth" :time="false"></ui-datetime>
+                </template>
+            </ui-field>
+
+            <ui-field type="password" label="Senha" placeholder="123456">
                 <template #hint>Sua senha será alterada caso você preencha estes campos.</template>
 
                 <template #field>
@@ -29,7 +39,11 @@
     <hr>
 
     <fieldset><legend>Meus endereços</legend>
-        <ui-addresses reference="users" :ref-id="$store.state.auth.user.id"></ui-addresses>
+        <ui-addresses reference="users"
+            :ref-id="$store.state.auth.user.id"
+            :load-on-start="false"
+            ref="userAddresses"
+        ></ui-addresses>
     </fieldset>
 </div></template>
 
@@ -64,6 +78,7 @@ export default {
     mounted() {
         this.$store.watch((state) => {
             this.user = Object.assign({}, state.auth.user);
+            this.$refs.userAddresses.list();
         }, () => {}, {deep: true});
     },
 };</script>
