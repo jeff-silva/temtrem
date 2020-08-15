@@ -17,6 +17,7 @@ export default {
             sidebarItems: [
                 {to:"/dashboard", title:"Dashboard", icon:"fa fa-home", children:[]},
                 {to:"", title:"Lojas", icon:"fa fa-shopping-bag", children:[
+                    {to:"/store", title:"Lojas", icon:"fa fa-shopping-bag", children:[]},
                     {to:"/store/stores", title:"Lojas", icon:"fa fa-shopping-bag", children:[]},
                     {to:"/store/products", title:"Produtos", icon:"fa fa-shopping-bag", children:[]},
                     {to:"/store/categories", title:"Categorias", icon:"fa fa-home", children:[]},

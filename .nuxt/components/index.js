@@ -7,6 +7,7 @@ export { default as UiModal } from '../..\\resources\\nuxt\\components\\ui\\ui-m
 export { default as UiNavbar } from '../..\\resources\\nuxt\\components\\ui\\ui-navbar.vue'
 export { default as UiPasswordMeter } from '../..\\resources\\nuxt\\components\\ui\\ui-password-meter.vue'
 export { default as UiPhoto } from '../..\\resources\\nuxt\\components\\ui\\ui-photo.vue'
+export { default as UiProductCategories } from '../..\\resources\\nuxt\\components\\ui\\ui-product-categories.vue'
 
 export const LazyUiAddress = import('../..\\resources\\nuxt\\components\\ui\\ui-address.vue' /* webpackChunkName: "components_ui/ui-address" */).then(c => c.default || c)
 export const LazyUiAddresses = import('../..\\resources\\nuxt\\components\\ui\\ui-addresses.vue' /* webpackChunkName: "components_ui/ui-addresses" */).then(c => c.default || c)
@@ -17,3 +18,4 @@ export const LazyUiModal = import('../..\\resources\\nuxt\\components\\ui\\ui-mo
 export const LazyUiNavbar = import('../..\\resources\\nuxt\\components\\ui\\ui-navbar.vue' /* webpackChunkName: "components_ui/ui-navbar" */).then(c => c.default || c)
 export const LazyUiPasswordMeter = import('../..\\resources\\nuxt\\components\\ui\\ui-password-meter.vue' /* webpackChunkName: "components_ui/ui-password-meter" */).then(c => c.default || c)
 export const LazyUiPhoto = import('../..\\resources\\nuxt\\components\\ui\\ui-photo.vue' /* webpackChunkName: "components_ui/ui-photo" */).then(c => c.default || c)
+export const LazyUiProductCategories = import('../..\\resources\\nuxt\\components\\ui\\ui-product-categories.vue' /* webpackChunkName: "components_ui/ui-product-categories" */).then(c => c.default || c)
