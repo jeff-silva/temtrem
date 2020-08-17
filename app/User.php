@@ -132,7 +132,7 @@ class User extends Authenticatable implements JWTSubject
         });
     }
 
-    public function tableMigration($table, $fields)
+    public function deployMigration($table, $fields)
     {
         if (!in_array('name', $fields)) {
             $table->string('name')->nullable();
@@ -163,7 +163,7 @@ class User extends Authenticatable implements JWTSubject
         }
     }
 
-    public function tableSeed()
+    public function deploySeed()
     {
         if (!$root = \App\User::where('email', 'root@grr.la')->first()) {
             \Illuminate\Support\Facades\DB::table('users')->insert([

@@ -1,4 +1,10 @@
 {
+  "UiAddressOld": {
+    "description": "Auto imported from components/ui/ui-address-old.vue"
+  },
+  "LazyUiAddressOld": {
+    "description": "Auto imported from components/ui/ui-address-old.vue"
+  },
   "UiAddress": {
     "description": "Auto imported from components/ui/ui-address.vue"
   },
@@ -29,6 +35,12 @@
   "LazyUiField": {
     "description": "Auto imported from components/ui/ui-field.vue"
   },
+  "UiForm": {
+    "description": "Auto imported from components/ui/ui-form.vue"
+  },
+  "LazyUiForm": {
+    "description": "Auto imported from components/ui/ui-form.vue"
+  },
   "UiModal": {
     "description": "Auto imported from components/ui/ui-modal.vue"
   },
@@ -58,5 +70,17 @@
   },
   "LazyUiProductCategories": {
     "description": "Auto imported from components/ui/ui-product-categories.vue"
+  },
+  "UiProduct": {
+    "description": "Auto imported from components/ui/ui-product.vue"
+  },
+  "LazyUiProduct": {
+    "description": "Auto imported from components/ui/ui-product.vue"
+  },
+  "UiSelect": {
+    "description": "Auto imported from components/ui/ui-select.vue"
+  },
+  "LazyUiSelect": {
+    "description": "Auto imported from components/ui/ui-select.vue"
   }
 }

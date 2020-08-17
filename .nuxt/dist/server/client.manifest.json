@@ -2,48 +2,50 @@
   "publicPath": "/_nuxt/",
   "all": [
     "../server/index.spa.html",
-    "16.6461cd6.js",
+    "17.da55a2c.js",
     "LICENSES",
-    "app.31b4ac5.js",
+    "app.cfeb0dc.js",
     "img/layers-2x.4f0283c.png",
     "img/marker-icon.2273e3d.png",
-    "manifest.998c6233.json",
-    "node_modules/commons.f299a70.js",
-    "pages/auth/index.1e9236e.js",
-    "pages/auth/password.010e814.js",
-    "pages/auth/register.a110337.js",
-    "pages/dashboard.c5d3969.js",
-    "pages/index.d056f84.js",
-    "pages/store/index.73510e8.js",
-    "pages/store/products.cb8c8f7.js",
-    "pages/store/settings.9cb03ac.js",
-    "pages/store/stores.584b155.js",
-    "pages/test.88b7d60.js",
-    "pages/user/index.acd0c83.js",
-    "pages/user/notifications.e593659.js",
-    "pages/user/settings.f882908.js",
-    "runtime.ea9d9a3.js"
+    "manifest.b9ee0fe1.json",
+    "node_modules/commons.c1db2b7.js",
+    "pages/auth/index.36125e0.js",
+    "pages/auth/password.2351735.js",
+    "pages/auth/register.67d9af3.js",
+    "pages/dashboard.8de111e.js",
+    "pages/index.faecc8c.js",
+    "pages/search.be4a9a5.js",
+    "pages/store/index.7379fa9.js",
+    "pages/store/products.25ea5c4.js",
+    "pages/store/settings.ff61d6a.js",
+    "pages/store/stores.41a5746.js",
+    "pages/test.bcd0d2b.js",
+    "pages/user/index.9248cec.js",
+    "pages/user/notifications.65ae257.js",
+    "pages/user/settings.aa4c791.js",
+    "runtime.fe7911d.js"
   ],
   "initial": [
-    "runtime.ea9d9a3.js",
-    "node_modules/commons.f299a70.js",
-    "app.31b4ac5.js"
+    "runtime.fe7911d.js",
+    "node_modules/commons.c1db2b7.js",
+    "app.cfeb0dc.js"
   ],
   "async": [
-    "16.6461cd6.js",
-    "pages/auth/index.1e9236e.js",
-    "pages/auth/password.010e814.js",
-    "pages/auth/register.a110337.js",
-    "pages/dashboard.c5d3969.js",
-    "pages/index.d056f84.js",
-    "pages/store/index.73510e8.js",
-    "pages/store/products.cb8c8f7.js",
-    "pages/store/settings.9cb03ac.js",
-    "pages/store/stores.584b155.js",
-    "pages/test.88b7d60.js",
-    "pages/user/index.acd0c83.js",
-    "pages/user/notifications.e593659.js",
-    "pages/user/settings.f882908.js"
+    "17.da55a2c.js",
+    "pages/auth/index.36125e0.js",
+    "pages/auth/password.2351735.js",
+    "pages/auth/register.67d9af3.js",
+    "pages/dashboard.8de111e.js",
+    "pages/index.faecc8c.js",
+    "pages/search.be4a9a5.js",
+    "pages/store/index.7379fa9.js",
+    "pages/store/products.25ea5c4.js",
+    "pages/store/settings.ff61d6a.js",
+    "pages/store/stores.41a5746.js",
+    "pages/test.bcd0d2b.js",
+    "pages/user/index.9248cec.js",
+    "pages/user/notifications.65ae257.js",
+    "pages/user/settings.aa4c791.js"
   ],
   "modules": {
     "13277697": [
@@ -51,19 +53,14 @@
       4,
       5
     ],
+    "23001350": [
+      8
+    ],
     "26219614": [
       7
     ],
-    "33964856": [
-      3,
-      4,
-      5
-    ],
-    "36184426": [
-      20
-    ],
     "55987948": [
-      19
+      20
     ],
     "58405548": [
       7
@@ -71,11 +68,8 @@
     "72067985": [
       7
     ],
-    "74063494": [
-      20
-    ],
     "74286730": [
-      13
+      14
     ],
     "89979516": [
       3,
@@ -115,19 +109,19 @@
     "2711b0ac": [
       7
     ],
-    "fa9a441e": [
+    "8ab642f8": [
       7
     ],
-    "8ab642f8": [
+    "39c854b5": [
+      7
+    ],
+    "fa9a441e": [
       7
     ],
     "cdc61c28": [
       7
     ],
     "1686574a": [
-      7
-    ],
-    "39c854b5": [
       7
     ],
     "6846f254": [
@@ -234,6 +228,11 @@
       4,
       5
     ],
+    "5a3f475e": [
+      3,
+      4,
+      5
+    ],
     "6e238460": [
       3,
       4,
@@ -259,17 +258,32 @@
       4,
       5
     ],
+    "7cf3db99": [
+      3,
+      4,
+      5
+    ],
     "41310fd8": [
       3,
       4,
       5
     ],
-    "3767d6f2": [
+    "96feb7a8": [
       3,
       4,
       5
     ],
     "28a09359": [
+      3,
+      4,
+      5
+    ],
+    "2bbefad6": [
+      3,
+      4,
+      5
+    ],
+    "93d972ce": [
       3,
       4,
       5
@@ -399,7 +413,7 @@
       4,
       5
     ],
-    "c16184de": [
+    "360e3d55": [
       3,
       4,
       5
@@ -409,7 +423,7 @@
       4,
       5
     ],
-    "ed40ed6a": [
+    "599418f0": [
       3,
       4,
       5
@@ -419,10 +433,17 @@
       4,
       5
     ],
-    "3bf152be": [
-      7
+    "364d46dc": [
+      3,
+      4,
+      5
     ],
-    "21cb29c4": [
+    "4af65f32": [
+      3,
+      4,
+      5
+    ],
+    "3bf152be": [
       7
     ],
     "7fc7af21": [
@@ -437,10 +458,16 @@
     "a29dedb4": [
       7
     ],
+    "21cb29c4": [
+      7
+    ],
     "3f1afa8a": [
       3,
       4,
       5
+    ],
+    "42d0e8d2": [
+      7
     ],
     "7852034e": [
       7
@@ -452,9 +479,6 @@
       7
     ],
     "452bcd0a": [
-      7
-    ],
-    "42d0e8d2": [
       7
     ],
     "17d9cc06": [
@@ -557,6 +581,9 @@
     "a391ee8e": [
       7
     ],
+    "0b1165a2": [
+      7
+    ],
     "a0c0e34a": [
       7
     ],
@@ -585,9 +612,6 @@
       7
     ],
     "a94ceb2c": [
-      7
-    ],
-    "0b1165a2": [
       7
     ],
     "1666609c": [
@@ -1105,6 +1129,11 @@
       4,
       5
     ],
+    "57ebdb52": [
+      3,
+      4,
+      5
+    ],
     "664f909a": [
       3,
       4,
@@ -1133,127 +1162,130 @@
     "67416c9e": [
       1
     ],
-    "6a567a9c": [
+    "6c2f0113": [
       13
+    ],
+    "7478a19a": [
+      14
     ],
     "fa726dc6": [
-      20
+      21
     ],
-    "31e95cf2": [
+    "d8aaf106": [
       13
     ],
-    "04f324da": [
+    "f9ad5008": [
       13
     ],
-    "36bfc5c0": [
-      20
+    "e3885620": [
+      14
     ],
-    "4f67271f": [
-      20
+    "6907e1de": [
+      14
     ],
     "28c4d307": [
-      20
+      21
     ],
     "017450c6": [
-      20
+      21
     ],
-    "30fe7046": [
-      13
+    "024cbf48": [
+      14
     ],
-    "7d2cb6fc": [
-      13
+    "6198bd27": [
+      14
     ],
-    "68a6c8d6": [
-      13
+    "45dae74a": [
+      14
     ],
-    "13570f46": [
-      13
+    "116264e3": [
+      14
     ],
-    "7291d7c6": [
-      13
+    "0a608774": [
+      14
     ],
     "3780c95f": [
-      20
+      21
     ],
     "4ddd74ee": [
-      20
+      21
     ],
     "0c255138": [
-      20
+      21
     ],
     "23b448ac": [
-      20
+      21
     ],
     "e28d82de": [
-      20
-    ],
-    "9514efb2": [
-      20
-    ],
-    "d460452c": [
-      20
-    ],
-    "262b4370": [
-      20
-    ],
-    "ae819e6e": [
-      20
+      21
     ],
     "bb960762": [
-      20
+      21
     ],
     "0d087978": [
-      20
+      21
     ],
     "5612c348": [
-      20
+      21
     ],
     "1df1bb98": [
-      20
+      21
     ],
     "67ce5c21": [
-      20
+      21
     ],
-    "05aa64e1": [
-      20
+    "76c5fa9f": [
+      14
     ],
-    "f034555c": [
-      20
+    "4a59b61b": [
+      14
     ],
-    "79ce7776": [
-      20
+    "fe23cd58": [
+      14
     ],
-    "37af7d0e": [
-      20
+    "99c3b242": [
+      14
     ],
-    "b1c71ae2": [
-      20
+    "50d7d71b": [
+      14
+    ],
+    "557715b2": [
+      14
+    ],
+    "bfd30dde": [
+      14
+    ],
+    "d412b968": [
+      14
+    ],
+    "83ef6a56": [
+      14
+    ],
+    "9a19b25a": [
+      14
     ],
     "293e5f4c": [
-      20
+      21
     ],
     "29c1c11e": [
-      20
+      21
     ],
     "5c4c8a9d": [
-      20
+      21
     ],
     "6bebb04c": [
-      20
+      21
     ],
     "423f1014": [
-      20
+      21
     ],
     "1b06094c": [
       8
     ],
-    "7d3ec4be": [
+    "25a4ef94": [
       8
     ],
     "d57a05c6": [
-      8
-    ],
-    "7a99e87a": [
       8
     ],
     "5b462136": [
@@ -1274,47 +1306,62 @@
     "40ebe652": [
       11
     ],
+    "50cefc64": [
+      13
+    ],
+    "036d40fc": [
+      13
+    ],
+    "bd7db75a": [
+      13
+    ],
+    "91387d84": [
+      13
+    ],
+    "36243cec": [
+      13
+    ],
     "1d785b8b": [
-      13
+      14
     ],
-    "c07af54a": [
-      13
+    "4fd9cba6": [
+      14
     ],
-    "4dcbd91f": [
-      13
+    "f3c7241e": [
+      14
     ],
     "7f65a922": [
-      13
+      14
     ],
     "4795e164": [
-      17
+      18
     ],
     "74ea8b32": [
-      17
+      18
     ],
     "39d1e129": [
-      17
+      18
     ],
     "612ba824": [
-      17
+      18
     ],
     "79a44c02": [
-      17
+      18
     ],
     "1850f9bd": [
-      18
+      19
     ],
     "35e17e7d": [
-      18
+      19
     ],
     "2b5837cc": [
-      18
+      19
     ],
     "333ca239": [
-      18
+      19
     ],
     "9f51ef9a": [
-      18
+      19
     ],
     "a16c2e7a": [
       9
@@ -1347,76 +1394,76 @@
       10
     ],
     "b43f4d8a": [
-      14
+      15
     ],
     "bcd20d46": [
-      14
+      15
     ],
     "0341055c": [
-      14
+      15
     ],
     "7101df19": [
-      14
+      15
     ],
     "0c7274f5": [
-      14
+      15
     ],
     "ef94670c": [
-      15
+      16
     ],
     "0e9b2df5": [
-      15
+      16
     ],
     "0f5e66fd": [
-      15
+      16
     ],
     "43f3d89e": [
-      15
+      16
     ],
     "188fd696": [
-      15
+      16
     ],
     "c0accf6e": [
-      16
+      17
     ],
     "7fde4382": [
-      16
+      17
     ],
     "2a0b468e": [
-      16
+      17
     ],
     "da012f84": [
-      16
+      17
     ],
     "7bd5c867": [
-      16
+      17
     ],
     "443567d3": [
-      19
+      20
     ],
     "b4625ce8": [
-      19
+      20
     ],
     "e08b6e78": [
-      19
+      20
     ],
     "85ef7846": [
-      19
+      20
     ],
     "7371adf0": [
-      20
+      21
     ],
     "10d27332": [
-      20
+      21
     ],
     "86884bea": [
-      20
+      21
     ],
     "61d5e5f6": [
-      20
+      21
     ],
     "b77cd95c": [
-      20
+      21
     ],
     "797ad474": [
       12
@@ -1436,55 +1483,58 @@
   },
   "assetsMapping": {
     "bba68bf6": [
-      "16.6461cd6.js"
+      "17.da55a2c.js"
     ],
     "1a3ae26b": [
-      "app.31b4ac5.js"
+      "app.cfeb0dc.js"
     ],
     "dabc93ce": [
-      "node_modules/commons.f299a70.js"
+      "node_modules/commons.c1db2b7.js"
     ],
     "27f1eccc": [
-      "pages/auth/index.1e9236e.js"
+      "pages/auth/index.36125e0.js"
     ],
     "982c873e": [
-      "pages/auth/password.010e814.js"
+      "pages/auth/password.2351735.js"
     ],
     "423c3069": [
-      "pages/auth/register.a110337.js"
+      "pages/auth/register.67d9af3.js"
     ],
     "1bd60353": [
-      "pages/dashboard.c5d3969.js"
+      "pages/dashboard.8de111e.js"
     ],
     "2a130dde": [
-      "pages/index.d056f84.js"
+      "pages/index.faecc8c.js"
+    ],
+    "f72dc56e": [
+      "pages/search.be4a9a5.js"
     ],
     "48e1df23": [
-      "pages/store/index.73510e8.js"
+      "pages/store/index.7379fa9.js"
     ],
     "22662d73": [
-      "pages/store/products.cb8c8f7.js"
+      "pages/store/products.25ea5c4.js"
     ],
     "9885cf9c": [
-      "pages/store/settings.9cb03ac.js"
+      "pages/store/settings.ff61d6a.js"
     ],
     "367790fe": [
-      "pages/store/stores.584b155.js"
+      "pages/store/stores.41a5746.js"
     ],
     "b6ff1f1a": [
-      "pages/test.88b7d60.js"
+      "pages/test.bcd0d2b.js"
     ],
     "0ff294af": [
-      "pages/user/index.acd0c83.js"
+      "pages/user/index.9248cec.js"
     ],
     "0846d3c5": [
-      "pages/user/notifications.e593659.js"
+      "pages/user/notifications.65ae257.js"
     ],
     "2533e726": [
-      "pages/user/settings.f882908.js"
+      "pages/user/settings.aa4c791.js"
     ],
     "6fca0322": [
-      "runtime.ea9d9a3.js"
+      "runtime.fe7911d.js"
     ]
   }
 }

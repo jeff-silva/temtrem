@@ -20,7 +20,8 @@ Artisan::command('inspire', function () {
 
 
 Artisan::command('app-deploy', function () {
-    
+    $models = [];
+
     $this->comment('Verificação de colunas de tabelas');
     
     $classes = \App\Utils::classes();
@@ -34,31 +35,41 @@ Artisan::command('app-deploy', function () {
         $table_exists = \Schema::hasTable($table_name);
         $this->comment("{$class} | {$table_name} | table_exists = {$table_exists}");
 
-        if (in_array('tableMigration', get_class_methods($instance))) {
+        $models[ $table_name ] = $instance;
+
+        if (in_array('deployMigration', get_class_methods($instance))) {
             $this->comment("Migrating {$table_name} on {$class} model");
 
             if ($table_exists) {
                 \Schema::table($table_name, function($table) use($instance, $table_name) {
                     $fields = \Schema::getColumnListing($table_name);
-                    call_user_func([$instance, 'tableMigration'], $table, $fields);
+                    call_user_func([$instance, 'deployMigration'], $table, $fields);
                 });
             }
             else {
                 \Schema::create($table_name, function($table) use($instance) {
                     $table->id();
+                    call_user_func([$instance, 'deployMigration'], $table, []);
                     $table->timestamps();
-                    call_user_func([$instance, 'tableMigration'], $table, []);
                 });
             }
 
-            if (in_array('tableSeed', get_class_methods($instance))) {
-                call_user_func([$instance, 'tableSeed'], !$table_exists);
+            if (in_array('deploySeed', get_class_methods($instance))) {
+                call_user_func([$instance, 'deploySeed'], !$table_exists);
+            }
+
+            if (in_array('deployModels', get_class_methods($instance))) {
+                $models = call_user_func([$instance, 'deployModels'], $models);
             }
         }
 
         $bar->advance();
     }
     $bar->finish();
+
+    $models_file = base_path(join(['resources', 'nuxt', 'plugins', 'models.json'], DIRECTORY_SEPARATOR));
+    file_put_contents($models_file, json_encode($models));
+    $this->comment('Models generated');
     
-    $this->comment('Finalizado');
+    $this->comment('Finish');
 })->describe('Teste');

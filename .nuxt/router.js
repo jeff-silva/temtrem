@@ -5,6 +5,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _de834f00 = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\index.vue' /* webpackChunkName: "pages/auth/index" */))
 const _73761a2c = () => interopDefault(import('..\\resources\\nuxt\\pages\\dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
+const _1488e57c = () => interopDefault(import('..\\resources\\nuxt\\pages\\search.vue' /* webpackChunkName: "pages/search" */))
 const _b254b22a = () => interopDefault(import('..\\resources\\nuxt\\pages\\store\\index.vue' /* webpackChunkName: "pages/store/index" */))
 const _222c3fac = () => interopDefault(import('..\\resources\\nuxt\\pages\\test.vue' /* webpackChunkName: "pages/test" */))
 const _256a267d = () => interopDefault(import('..\\resources\\nuxt\\pages\\user\\index.vue' /* webpackChunkName: "pages/user/index" */))
@@ -41,6 +42,10 @@ export const routerOptions = {
     path: "/dashboard",
     component: _73761a2c,
     name: "dashboard"
+  }, {
+    path: "/search",
+    component: _1488e57c,
+    name: "search"
   }, {
     path: "/store",
     component: _b254b22a,

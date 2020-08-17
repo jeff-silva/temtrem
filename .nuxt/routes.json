@@ -14,6 +14,13 @@
     "_name": "_73761a2c"
   },
   {
+    "name": "search",
+    "path": "/search",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\search.vue",
+    "chunkName": "pages/search",
+    "_name": "_1488e57c"
+  },
+  {
     "name": "store",
     "path": "/store",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\index.vue",

@@ -29,6 +29,18 @@ module.exports = laravelNuxt({
     css: ['@/assets/bootstrap.css'],
     components: true,
 
+    pwa: {
+        meta: {
+            title: (process.env.APP_NAME||'APP_NAME'),
+            author: 'jeferson.i.silva@gmail.com',
+        },
+        manifest: {
+            name: (process.env.APP_NAME||'APP_NAME'),
+            short_name: (process.env.APP_DESCRIPTION||'APP_DESCRIPTION'),
+            lang: 'pt-BR',
+        },
+    },
+
     // auth: {
     //     strategies: {
     //         local: {

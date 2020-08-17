@@ -8,45 +8,200 @@ class Product extends Model
 {
     protected $fillable = [
         'id',
+        'user_id',
+        'parent',
         'name',
+        'description',
         'photo',
+        'type',
+        'virtual',
+        'category',
         'price',
+        'promo',
+        'gallery',
+        'lat',
+        'lng',
+        'route',
+        'number',
+        'complement',
+        'zipcode',
+        'district',
+        'city',
+        'state',
+        'st',
+        'country',
+        'co',
     ];
 
     protected $attributes = [
-        'id' => false,
+        'user_id' => '',
+        'parent' => '',
         'name' => '',
+        'description' => '',
         'photo' => '',
+        'type' => '', // business|product|service|rent
+        'virtual' => '',
+        'category' => '',
         'price' => 0,
+        'promo' => 0,
+        'gallery' => [],
+        'lat' => '',
+        'lng' => '',
+        'route' => '',
+        'number' => '',
+        'complement' => '',
+        'zipcode' => '',
+        'district' => '',
+        'city' => '',
+        'state' => '',
+        'st' => '',
+        'country' => '',
+        'co' => '',
     ];
 
-    public function tableMigration($table, $fields)
-    {   
-        if (!in_array('name', $fields)) {
-            $table->string('name')->nullable();
+
+    public function setGalleryAttribute($value) {
+        if (is_array($value)) { $value = json_encode($value); }
+        $this->attributes['gallery'] = $value;
+    }
+
+    public function getGalleryAttribute() {
+        $value = is_array($this->attributes['gallery'])?
+            $this->attributes['gallery']:
+            json_decode($this->attributes['gallery']);
+        return is_array($value)? $value: [];
+    }
+
+
+    public function deployMigration($table, $fields)
+    {
+        foreach(['user_id', 'parent', 'virtual'] as $key) {
+            if (in_array($key, $fields)) continue;
+            $table->integer($key)->nullable()->default(0);
         }
 
-        if (!in_array('photo', $fields)) {
-            $table->string('photo')->nullable();
+        foreach(['name', 'description', 'photo', 'type', 'category'] as $key) {
+            if (in_array($key, $fields)) continue;
+            $table->string($key)->nullable();
         }
 
-        if (!in_array('price', $fields)) {
-            $table->decimal('price', 10, 2)->nullable()->default(0);
+        foreach(['price', 'promo'] as $key) {
+            if (in_array($key, $fields)) continue;
+            $table->decimal($key, 10, 2)->nullable()->default(0);
         }
+
+        foreach(['gallery'] as $key) {
+            if (in_array($key, $fields)) continue;
+            $table->longText($key)->nullable();
+        }
+
+        foreach(['lat', 'lng'] as $key) {
+            if (in_array($key, $fields)) continue;
+            $table->decimal($key, 10, 7)->nullable();
+        }
+
+        foreach(['route', 'number', 'complement', 'zipcode', 'district', 'city', 'state', 'st', 'country', 'co'] as $key) {
+            if (in_array($key, $fields)) continue;
+            $table->string($key)->nullable();
+        }
+    }
+
+
+    public function deploySeed($created=false)
+    {
+        if ($created AND 'local'==env('local')) {
+            for($x=0; $x<=10; $x++) {
+                Product::insert([
+                    'name' => uniqid(),
+                ]);
+            }
+        }
+    }
+    
+
+    public function deployModels($models=[])
+    {
+        $models['productCategories'] = array_values(Product::categories());
+        $models['productTypes'] = array_values(Product::types());
+        return $models;
     }
 
 
 
     public function endpoints()
     {
-        \Route::get('/product/categories', function() {
+        \Route::get('/categories', function() {
             $categories = Product::categories();
             return array_values($categories);
+        });
+
+
+        \Route::get('/business-search', function() {
+            $request = request();
+
+            $types = $this->types();
+            $categories = $this->categories();
+            // dd($types, $categories);
+            
+            $query = $this->where('lat', '>=', $request->input('latMin'))
+                ->where('lat', '<=', $request->input('latMax'))
+                ->where('lng', '>=', $request->input('lngMin'))
+                ->where('lng', '<=', $request->input('lngMax'));
+
+            // dd(\Str::replaceArray('?', $query->getBindings(), $query->toSql()));
+
+            $results = [];
+            foreach($query->get() as $item) {
+                if (isset($types[$item->type]) AND $type = $types[$item->type]) {
+                    $item->type_name = $type['name'];
+                    $item->type_photo = $type['photo'];
+                }
+
+                if (isset($categories[$item->category]) AND $cat = $categories[$item->category]) {
+                    $item->category_name = $cat['name'];
+                    $item->category_photo = $cat['photo'];
+                }
+
+                $results[] = $item;
+            }
+
+            return $results;
         });
     }
 
     
-    static function categories($hierarchical=false)
+    static function types()
+    {
+        $types['business'] = [
+            'name' => 'Negócio',
+            'description' => 'É um negócio, empresa ou loja física ou virtual',
+            'photo' => 'https://image.flaticon.com/icons/svg/572/572701.svg',
+        ];
+        
+        $types['product'] = [
+            'name' => 'Produto',
+            'description' => 'É um produto final físico ou virtual',
+            'photo' => 'https://image.flaticon.com/icons/svg/2125/2125378.svg',
+        ];
+
+        $types['service'] = [
+            'name' => 'Serviço',
+            'description' => 'É uma prestação de serviço físico ou virtual',
+            'photo' => 'https://image.flaticon.com/icons/svg/2962/2962817.svg',
+        ];
+        
+        $types['rent'] = [
+            'name' => 'Locação',
+            'description' => 'É uma locação, de imóveis, automóveis e bens físicos ou virtuais',
+            'photo' => 'https://image.flaticon.com/icons/svg/2590/2590551.svg',
+        ];
+
+        foreach($types as $i=>$type) { $types[$i]['slug'] = $i; }
+        return $types;
+    }
+
+    
+    static function categories()
     {
         // Administrativo
         $categories['syndic'] = [
@@ -320,7 +475,7 @@ class Product extends Model
             'description' => 'Serviços de DJ em geral',
         ];
 
-        // Informatica
+        // Tecnologia
         $categories['developer'] = [
             'name' => 'Programação e desenvolvimento', 
             'photo' => 'https://image.flaticon.com/icons/svg/867/867644.svg',
@@ -331,12 +486,17 @@ class Product extends Model
             'photo' => 'https://image.flaticon.com/icons/svg/868/868784.svg',
             'description' => 'Instalação de softwares, formatação, manutenção',
         ];
+        $categories['wire'] = [
+            'name' => 'Redes internas', 
+            'photo' => 'https://image.flaticon.com/icons/svg/2162/2162560.svg',
+            'description' => 'Instalação de circuitos internos, telefonia, redes de computadores',
+        ];
 
         // Casa
         $categories['diarist'] = [
             'name' => 'Diaristas', 
             'photo' => 'https://image.flaticon.com/icons/svg/578/578079.svg',
-            'description' => 'Serviços de limpeza doméstica em geral',
+            'description' => 'Diaristas, empregadas domésticas',
         ];
         $categories['plumber'] = [
             'name' => 'Bombeiro hidráulico', 
@@ -359,9 +519,16 @@ class Product extends Model
             'description' => 'Limpeza de automóveis, interior e exterior',
         ];
 
+        // Aluguel
+        $categories['renthouse'] = [
+            'name' => 'Aluguel de imóveis', 
+            'photo' => 'https://image.flaticon.com/icons/svg/3079/3079182.svg',
+            'description' => 'Locação de imóveis residenciais',
+        ];
+
         // Outros
         $categories['404'] = [
-            'name' => 'Não encontrou?', 
+            'name' => 'Não encontrado', 
             'photo' => 'https://image.flaticon.com/icons/svg/763/763727.svg',
             'description' => 'Selecione esta opção e entraremos em contato ;)',
         ];
@@ -374,6 +541,8 @@ class Product extends Model
             - Fabricação, utilização, conserto, descarte, reciclagem
 
         Recicladores
+        https://image.flaticon.com/icons/svg/3141/3141542.svg
+
         Locadores (equipamentos fotograficos, notebooks, câmeras, carros, casas)
         Conserto de celulares, computadores, televisões, tablets
         Caseiro, pscineiro
@@ -394,19 +563,6 @@ class Product extends Model
         - Venda de animais
 
         Algumas categorias, como médicos ou advogados, precisam ter licença
-
-        {
-            product: {
-                id: false,
-                parent: false,
-                name: '',
-                photo: '',
-                type: '', //product|service|location
-                virtual: true,
-                category: '',
-                gallery: [],
-            },
-        }
 
         */
 

@@ -1,4 +1,4 @@
-<template><div>
+<template><div class="ui-product-categories">
     <slot name="search">
         <div style="position:relative;">
             <div class="input-group form-control p-0">
@@ -8,7 +8,7 @@
                 </div></div>
             </div>
 
-            <div class="bg-white shadow-sm" ref="dropdown" style="position:absolute; top:100%; left:0px; width:100%; max-height:300px; overflow:auto;" v-if="dropdown">
+            <div class="bg-white shadow-sm" ref="dropdown" style="position:absolute; top:100%; left:0px; width:100%; max-height:300px; overflow:auto; z-index:2;" v-if="dropdown">
                 <a href="javascript:;" class="d-block ui-product-categories-each-link" v-for="c in compCategories" :key="c.slug" @click="select(c.slug)" :class="{active:c.slug==props.value}" :ref="c.slug">
                     <div class="d-flex align-items-center">
                         <div class="p-2">
@@ -23,7 +23,6 @@
             </div>
         </div>
     </slot>
-    <pre>props: {{ props }}</pre>
 </div></template>
 
 <script>export default {
@@ -114,4 +113,5 @@
 .ui-product-categories-each-link {text-decoration: none !important;}
 .ui-product-categories-each-link.active,
 .ui-product-categories-each-link:hover {background:#eee; color:#444;}
+.ui-product-categories input:focus {box-shadow:none!important;}
 </style>

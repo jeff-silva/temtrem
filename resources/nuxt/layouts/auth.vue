@@ -32,10 +32,22 @@
     background-size: cover;
 }
 
+.layout-auth:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #000000cc 0%, #00000022 40%, #00000022 60%, #000000cc 100%);
+}
+
 .layout-auth-content {
+    position: relative;
     width: 400px;
     max-width: 90%;
     background:#ffffffdd;
+    z-index: 2;
 }
 
 .colorgraph {

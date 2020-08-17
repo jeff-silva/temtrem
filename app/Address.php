@@ -52,40 +52,73 @@ class Address extends Model
 
     public function endpoints()
     {
+        \Route::get('/autocomplete', function() {
+            $request = request();
+            $results = [];
+
+            $zipcode = $request->input('zipcode');
+            $lat = $request->input('lat');
+            $lng = $request->input('lng');
+            $q = $request->input('q');
+
+            // zipcode
+            if ($zipcode) {
+                $zipcode = preg_replace('/[^0-9]/', '', $zipcode);
+                $resp = \Illuminate\Support\Facades\Http::get("https://viacep.com.br/ws/{$zipcode}/json/")->json();
+                if (is_array($resp) AND isset($resp['cep'])) {
+                    $q = urlencode("{$resp['logradouro']} {$resp['bairro']} {$resp['localidade']}");
+                    $results = \Illuminate\Support\Facades\Http::get("https://nominatim.openstreetmap.org/search?q={$q}&format=json&addressdetails=1")->json();
+                }
+            }
+
+            // latlng
+            else if ($lat AND $lng) {
+                $results[] = \Illuminate\Support\Facades\Http::get("https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lng}&format=json&addressdetails=1")->json();
+            }
+
+            // address
+            else {
+                $results = \Illuminate\Support\Facades\Http::get("https://nominatim.openstreetmap.org/search?q={$q}&format=json&addressdetails=1")->json();
+            }
+
+            return $results;
+        });
+        
+        /*
         \Route::get('/address/search', function() {
             $input = request()->all();
             $query = new Address;
-
+            
             if (array_key_exists('ref', $input)) {
                 $query = $query->where('ref', $input['ref']);
             }
-
+            
             if (array_key_exists('ref_id', $input)) {
                 $query = $query->where('ref_id', $input['ref_id']);
             }
-
-            // return $query->toSql();
+            
             return $query->get();
         });
-
+        
         \Route::get('/address/find', function($request) {
             return $request->all();
         });
-
+        
         \Route::post('/address/save', function() {
             $addr = Address::firstOrNew(['id' => request()->input('id')]);
             $addr->fill(request()->all());
             $addr->save();
             return $addr;
         });
-
+        
         \Route::post('/address/delete', function($request) {
             return $request->all();
         });
+        */
     }
 
 
-    public function tableMigration($table, $fields)
+    public function deployMigration($table, $fields)
     {
         if (!in_array('name', $fields)) {
             $table->string('name')->nullable();

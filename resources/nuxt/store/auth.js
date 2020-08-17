@@ -6,10 +6,13 @@ export const state = () => ({
 export const mutations = {
     setUser (state, user) {
         state.user = user;
+        user = user? JSON.stringify(user): '';
+        localStorage.setItem('user', user);
     },
 
     setToken(state, access_token) {
         state.access_token = access_token;
+        localStorage.setItem('access_token', access_token||'');
     }
 };
 
@@ -31,7 +34,6 @@ export const actions = {
                 commit('setUser', resp);
             }
             catch(err) {
-                localStorage.removeItem('access_token');
                 commit('setToken', null);
                 commit('setUser', {});
                 location.reload();
@@ -42,19 +44,17 @@ export const actions = {
     async login({commit}, credentials) {
         let resp = await this.$axios.$post('/api/auth/login', credentials);
         if (resp.access_token) {
-            localStorage.setItem('access_token', resp.access_token);
             this.$axios.setToken(resp.access_token, 'Bearer');
             commit('setToken', resp.access_token);
 
             let me = await this.$axios.$post('/api/auth/me', credentials);
-            if (me.id) commit('setUser', me);
+            if (me.id) { commit('setUser', me); }
         }
     },
 
     async logout({commit}) {
         let resp = await this.$axios.$post('/api/auth/logout');
         if (resp.message) {
-            localStorage.removeItem('access_token');
             commit('setToken', null);
             commit('setUser', {});
         }

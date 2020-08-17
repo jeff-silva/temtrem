@@ -1,13 +1,13 @@
 <template><div class="form-group">
     <div class="row">
-        <div class="col-12 col-md-3 p-2">
+        <div class="col-12 col-md-4 col-lg-3 p-2">
             <div>{{ label }}</div>
         </div>
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-8 col-lg-9">
             <template v-if="$slots.field"><slot name="field"></slot></template>
 
-            <template v-else-if="type=='select'">
-                Select
+            <template v-else-if="type=='textarea'">
+                <textarea class="form-control" v-model="props.value" @keyup="emit()"></textarea>
             </template>
 
             <template v-else>

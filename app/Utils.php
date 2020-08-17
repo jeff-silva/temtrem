@@ -9,8 +9,6 @@ class Utils
         return [
             \App\Address::class,
             \App\Product::class,
-            \App\Store::class,
-            \App\StoreCategory::class,
             \App\User::class,
         ];
     }
