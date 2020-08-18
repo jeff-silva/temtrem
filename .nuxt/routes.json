@@ -3,98 +3,90 @@
     "name": "auth",
     "path": "/auth",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\index.vue",
-    "chunkName": "pages/auth/index",
-    "_name": "_de834f00"
+    "chunkName": "pages/auth/index"
   },
   {
     "name": "dashboard",
     "path": "/dashboard",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\dashboard.vue",
-    "chunkName": "pages/dashboard",
-    "_name": "_73761a2c"
+    "chunkName": "pages/dashboard"
   },
   {
     "name": "search",
     "path": "/search",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\search.vue",
-    "chunkName": "pages/search",
-    "_name": "_1488e57c"
+    "chunkName": "pages/search"
   },
   {
     "name": "store",
     "path": "/store",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\index.vue",
-    "chunkName": "pages/store/index",
-    "_name": "_b254b22a"
+    "chunkName": "pages/store/index"
   },
   {
     "name": "test",
     "path": "/test",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\test.vue",
-    "chunkName": "pages/test",
-    "_name": "_222c3fac"
+    "chunkName": "pages/test"
   },
   {
     "name": "user",
     "path": "/user",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\user\\\\index.vue",
-    "chunkName": "pages/user/index",
-    "_name": "_256a267d"
+    "chunkName": "pages/user/index"
   },
   {
     "name": "auth-password",
     "path": "/auth/password",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\password.vue",
-    "chunkName": "pages/auth/password",
-    "_name": "_07c0b1dd"
+    "chunkName": "pages/auth/password"
   },
   {
     "name": "auth-register",
     "path": "/auth/register",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\auth\\\\register.vue",
-    "chunkName": "pages/auth/register",
-    "_name": "_ffac3c36"
+    "chunkName": "pages/auth/register"
   },
   {
     "name": "store-products",
     "path": "/store/products",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\products.vue",
-    "chunkName": "pages/store/products",
-    "_name": "_34b25c4a"
+    "chunkName": "pages/store/products"
   },
   {
     "name": "store-settings",
     "path": "/store/settings",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\settings.vue",
-    "chunkName": "pages/store/settings",
-    "_name": "_700775cc"
+    "chunkName": "pages/store/settings"
   },
   {
     "name": "store-stores",
     "path": "/store/stores",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\store\\\\stores.vue",
-    "chunkName": "pages/store/stores",
-    "_name": "_41f5b8e9"
+    "chunkName": "pages/store/stores"
   },
   {
     "name": "user-notifications",
     "path": "/user/notifications",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\user\\\\notifications.vue",
-    "chunkName": "pages/user/notifications",
-    "_name": "_1eb5d493"
+    "chunkName": "pages/user/notifications"
   },
   {
     "name": "user-settings",
     "path": "/user/settings",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\user\\\\settings.vue",
-    "chunkName": "pages/user/settings",
-    "_name": "_0ae5c448"
+    "chunkName": "pages/user/settings"
   },
   {
     "name": "index",
     "path": "/",
     "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_3c317128"
+    "chunkName": "pages/index"
+  },
+  {
+    "name": "__laravel_nuxt__",
+    "path": "/__laravel_nuxt__",
+    "component": "E:\\\\@rede\\\\@git\\\\@repos\\\\temtrem\\\\resources\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
   }
 ]

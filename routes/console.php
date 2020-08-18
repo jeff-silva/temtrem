@@ -22,7 +22,7 @@ Artisan::command('inspire', function () {
 Artisan::command('app-deploy', function () {
     $models = [];
 
-    $this->comment('Verificação de colunas de tabelas');
+    $this->comment('Verifying tables');
     
     $classes = \App\Utils::classes();
     $bar = $this->output->createProgressBar(count($classes));
@@ -67,9 +67,11 @@ Artisan::command('app-deploy', function () {
     }
     $bar->finish();
 
-    $models_file = base_path(join(['resources', 'nuxt', 'plugins', 'models.json'], DIRECTORY_SEPARATOR));
-    file_put_contents($models_file, json_encode($models));
-    $this->comment('Models generated');
+    if ('local'==env('APP_ENV')) {
+        $models_file = base_path(join(['resources', 'nuxt', 'plugins', 'models.json'], DIRECTORY_SEPARATOR));
+        file_put_contents($models_file, json_encode($models));
+        $this->comment('Models generated');
+    }
     
     $this->comment('Finish');
 })->describe('Teste');

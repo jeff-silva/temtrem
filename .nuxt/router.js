@@ -90,6 +90,10 @@ export const routerOptions = {
     path: "/",
     component: _3c317128,
     name: "index"
+  }, {
+    path: "/__laravel_nuxt__",
+    component: _3c317128,
+    name: "__laravel_nuxt__"
   }],
 
   fallback: false
