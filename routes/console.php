@@ -74,4 +74,4 @@ Artisan::command('app-deploy', function () {
     }
     
     $this->comment('Finish');
-})->describe('Teste');
+})->describe('App deploy');
