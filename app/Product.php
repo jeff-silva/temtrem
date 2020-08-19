@@ -66,60 +66,77 @@ class Product extends Model
     }
 
     public function getGalleryAttribute() {
-        $value = is_array($this->attributes['gallery'])?
-            $this->attributes['gallery']:
-            json_decode($this->attributes['gallery']);
+        $value = '[]';
+        if (is_string($this->attributes['gallery'])) {
+            $value = json_decode($this->attributes['gallery']);
+        }
         return is_array($value)? $value: [];
     }
 
 
-    public function deployMigration($table, $fields)
+    public function deployMigration($artisan, $table, $fields)
     {
-        foreach(['user_id', 'parent', 'virtual'] as $key) {
-            if (in_array($key, $fields)) continue;
-            $table->integer($key)->nullable()->default(0);
-        }
-
-        foreach(['name', 'description', 'photo', 'type', 'category'] as $key) {
-            if (in_array($key, $fields)) continue;
-            $table->string($key)->nullable();
-        }
-
-        foreach(['price', 'promo'] as $key) {
-            if (in_array($key, $fields)) continue;
-            $table->decimal($key, 10, 2)->nullable()->default(0);
-        }
-
-        foreach(['gallery'] as $key) {
-            if (in_array($key, $fields)) continue;
-            $table->longText($key)->nullable();
-        }
-
-        foreach(['lat', 'lng'] as $key) {
-            if (in_array($key, $fields)) continue;
-            $table->decimal($key, 10, 7)->nullable();
-        }
-
-        foreach(['route', 'number', 'complement', 'zipcode', 'district', 'city', 'state', 'st', 'country', 'co'] as $key) {
-            if (in_array($key, $fields)) continue;
-            $table->string($key)->nullable();
-        }
+        return [
+            'user_id' => ['integer'],
+            'parent' => ['integer'],
+            'virtual' => ['integer'],
+            'name' => ['string'],
+            'description' => ['string'],
+            'photo' => ['string'],
+            'type' => ['string'],
+            'category' => ['string'],
+            'price' => ['decimal', 10, 2],
+            'promo' => ['decimal', 10, 2],
+            'gallery' => ['longText'],
+            'lat' => ['decimal', 10, 7],
+            'lng' => ['decimal', 10, 7],
+            'route' => ['string'],
+            'number' => ['string'],
+            'complement' => ['string'],
+            'zipcode' => ['string'],
+            'district' => ['string'],
+            'city' => ['string'],
+            'state' => ['string'],
+            'st' => ['string'],
+            'country' => ['string'],
+            'co' => ['string'],
+        ];
     }
 
 
-    public function deploySeed($created=false)
+    public function deploySeed($artisan, $exists)
     {
-        if ($created AND 'local'==env('local')) {
-            for($x=0; $x<=10; $x++) {
-                Product::insert([
-                    'name' => uniqid(),
+        if (!$exists AND 'local'==env('local')) {
+            for($x=1; $x<=100; $x++) {
+                $artisan->comment("Insert item $x");
+                $faker = \Faker\Factory::create();
+                $save = array_merge($this->toArray(), [
+                    'user_id' => 1,
+                    'name' => $faker->name(),
+                    'description' => $faker->text(),
+                    'type' => $faker->randomElement(self::types())['slug'],
+                    'virtual' => $faker->randomElement([0, 1]),
+                    'category' => $faker->randomElement(self::categories())['slug'],
+                    'price' => $faker->randomFloat(2, 0, 999),
+                    'route' => $faker->streetName(),
+                    'complement' => $faker->secondaryAddress(),
+                    'number' => $faker->buildingNumber(),
+                    'zipcode' => $faker->postcode(),
+                    'district' => $faker->citySuffix(),
+                    'city' => $faker->city(),
+                    'state' => $faker->state(),
+                    'st' => $faker->stateAbbr(),
+                    'country' => $faker->country(),
+                    'lat' => $faker->latitude(),
+                    'lng' => $faker->longitude(),
                 ]);
+                (new static($save))->save();
             }
         }
     }
     
 
-    public function deployModels($models=[])
+    public function deployModels($artisan, $models=[])
     {
         $models['productCategories'] = array_values(Product::categories());
         $models['productTypes'] = array_values(Product::types());

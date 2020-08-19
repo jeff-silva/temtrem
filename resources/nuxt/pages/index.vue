@@ -5,9 +5,7 @@
 </div></template>
 
 <script>export default {
-    components: {
-        // "ui-navbar": () => import("@/components/ui/ui-navbar"),
-    },
+    layout: 'site',
 
     data() {
         return {};

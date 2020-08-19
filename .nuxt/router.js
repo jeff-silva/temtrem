@@ -4,6 +4,8 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _de834f00 = () => interopDefault(import('..\\resources\\nuxt\\pages\\auth\\index.vue' /* webpackChunkName: "pages/auth/index" */))
+const _f6863a4c = () => interopDefault(import('..\\resources\\nuxt\\pages\\business.vue' /* webpackChunkName: "pages/business" */))
+const _77df3660 = () => interopDefault(import('..\\resources\\nuxt\\pages\\business\\_id.vue' /* webpackChunkName: "pages/business/_id" */))
 const _73761a2c = () => interopDefault(import('..\\resources\\nuxt\\pages\\dashboard.vue' /* webpackChunkName: "pages/dashboard" */))
 const _1488e57c = () => interopDefault(import('..\\resources\\nuxt\\pages\\search.vue' /* webpackChunkName: "pages/search" */))
 const _b254b22a = () => interopDefault(import('..\\resources\\nuxt\\pages\\store\\index.vue' /* webpackChunkName: "pages/store/index" */))
@@ -38,6 +40,15 @@ export const routerOptions = {
     path: "/auth",
     component: _de834f00,
     name: "auth"
+  }, {
+    path: "/business",
+    component: _f6863a4c,
+    name: "business",
+    children: [{
+      path: ":id?",
+      component: _77df3660,
+      name: "business-id"
+    }]
   }, {
     path: "/dashboard",
     component: _73761a2c,
@@ -90,10 +101,6 @@ export const routerOptions = {
     path: "/",
     component: _3c317128,
     name: "index"
-  }, {
-    path: "/__laravel_nuxt__",
-    component: _3c317128,
-    name: "__laravel_nuxt__"
   }],
 
   fallback: false

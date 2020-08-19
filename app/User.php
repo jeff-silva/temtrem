@@ -132,38 +132,20 @@ class User extends Authenticatable implements JWTSubject
         });
     }
 
-    public function deployMigration($table, $fields)
+    public function deployMigration($artisan, $table, $fields)
     {
-        if (!in_array('name', $fields)) {
-            $table->string('name')->nullable();
-        }
-
-        if (!in_array('email', $fields)) {
-            $table->string('email')->nullable();
-        }
-
-        if (!in_array('birth', $fields)) {
-            $table->dateTime('birth')->nullable();
-        }
-
-        if (!in_array('photo', $fields)) {
-            $table->string('photo')->nullable();
-        }
-
-        if (!in_array('email_verified_at', $fields)) {
-            $table->timestamp('email_verified_at')->nullable();
-        }
-
-        if (!in_array('password', $fields)) {
-            $table->string('password')->nullable();
-        }
-        
-        if (!in_array('remember_token', $fields)) {
-            $table->rememberToken();
-        }
+        return [
+            'name' => ['string'],
+            'email' => ['string'],
+            'birth' => ['dateTime'],
+            'photo' => ['longText'],
+            'email_verified_at' => ['timestamp'],
+            'password' => ['string'],
+            'remember_token' => ['rememberToken'],
+        ];
     }
 
-    public function deploySeed()
+    public function deploySeed($artisan, $created)
     {
         if (!$root = \App\User::where('email', 'root@grr.la')->first()) {
             \Illuminate\Support\Facades\DB::table('users')->insert([

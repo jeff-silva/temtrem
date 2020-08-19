@@ -20,52 +20,71 @@ Artisan::command('inspire', function () {
 
 
 Artisan::command('app-deploy', function () {
+    $this->comment('App Deploy');
+    $this->comment('');
+
     $models = [];
 
-    $this->comment('Verifying tables');
-    
-    $classes = \App\Utils::classes();
-    $bar = $this->output->createProgressBar(count($classes));
-    $bar->start();
-
-    foreach($classes as $class) {
+    foreach(\App\Utils::classes() as $class) {
+        $artisan = $this;
         $instance = new $class;
 
         $table_name = $instance->getTable();
         $table_exists = \Schema::hasTable($table_name);
-        $this->comment("{$class} | {$table_name} | table_exists = {$table_exists}");
+        
+        $artisan->comment("------ $class --------------------");
+        $artisan->comment("{$table_name}". ($table_exists? ' exists': ' not exists'));
 
         $models[ $table_name ] = $instance;
 
         if (in_array('deployMigration', get_class_methods($instance))) {
-            $this->comment("Migrating {$table_name} on {$class} model");
+
+            $createUpdateFields = function($columns, $table, $fields) use($artisan, $table_name) {
+                foreach($columns as $column=>$args) {
+                    
+                    $exists = in_array($column, $fields);
+                    $artisan->comment("{$table_name}.{$column}". ($exists? ' exists': ' not exists'));
+                    if ($exists) continue;
+
+                    $method = $args[0];
+                    $args[0] = $column;
+
+                    if (in_array($method, ['nullableTimestamps', 'softDeletes', 'timestamps', 'rememberToken'])) {
+                        $args = [];
+                    }
+
+                    $this->comment("\$table->{$method}(". implode(', ', $args) .")->nullable();");
+                    call_user_func_array([$table, $method], $args)->nullable();
+                }
+            };
 
             if ($table_exists) {
-                \Schema::table($table_name, function($table) use($instance, $table_name) {
+                \Schema::table($table_name, function($table) use($artisan, $createUpdateFields, $instance, $table_name) {
                     $fields = \Schema::getColumnListing($table_name);
-                    call_user_func([$instance, 'deployMigration'], $table, $fields);
+                    $columns = call_user_func([$instance, 'deployMigration'], $artisan, $table, $fields);
+                    $createUpdateFields($columns, $table, $fields);
                 });
             }
             else {
-                \Schema::create($table_name, function($table) use($instance) {
+                \Schema::create($table_name, function($table) use($artisan, $createUpdateFields, $instance) {
                     $table->id();
-                    call_user_func([$instance, 'deployMigration'], $table, []);
+                    $columns = call_user_func([$instance, 'deployMigration'], $artisan, $table, []);
+                    $createUpdateFields($columns, $table, $fields);
                     $table->timestamps();
                 });
             }
 
             if (in_array('deploySeed', get_class_methods($instance))) {
-                call_user_func([$instance, 'deploySeed'], !$table_exists);
+                call_user_func([$instance, 'deploySeed'], $artisan, $table_exists);
             }
 
             if (in_array('deployModels', get_class_methods($instance))) {
-                $models = call_user_func([$instance, 'deployModels'], $models);
+                $models = call_user_func([$instance, 'deployModels'], $this, $models);
             }
         }
 
-        $bar->advance();
+        $this->comment('');
     }
-    $bar->finish();
 
     if ('local'==env('APP_ENV')) {
         $models_file = base_path(join(['resources', 'nuxt', 'plugins', 'models.json'], DIRECTORY_SEPARATOR));
