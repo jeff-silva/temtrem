@@ -25,50 +25,45 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('me', 'AuthController@me');
 });
 
-$files = glob(base_path(implode(['app', '*.php'], DIRECTORY_SEPARATOR)));
-foreach($files as $file) {
-    $model = '\App\\'. pathinfo($file, PATHINFO_FILENAME);
-    if (class_exists($model)) {
-        $instance = new $model;
-        if ($instance instanceof \Illuminate\Database\Eloquent\Model) {
-            $table_name = $instance->getTable();
-            Route::group(['prefix' => $table_name], function($router) use($model, $instance, $table_name) {
-                if (in_array('endpoints', get_class_methods($instance))) {
-                    call_user_func([$instance, 'endpoints']);
-                }
-            
-                // search
-                \Route::get('/search', function() use($instance) {
-                    $input = request()->all();
-                    $query = $instance;
-                    return $query->get();
-                });
-            
-                // find by id
-                \Route::get('/find', function() {
-                    $request = request();
-                    return $request->all();
-                });
-            
-                //  save
-                \Route::post('/save', function() use($model, $instance) {
-                    $request = request();
-                    $all = array_merge($instance->ToArray(), $request->all());
-                    if (isset($all['id'])) unset($all['id']);
-                    $save = call_user_func([$model, 'find'], $request->input('id'));
-                    $save = $save? $save: new $model;
-                    $save->fill($all)->save();
-                    return $save;
-                });
-            
-                //  delete
-                \Route::post('/delete', function() {
-                    $request = request();
-                    return $request->all();
-                });
-            });
+
+foreach(\App\Utils::classes() as $model) {
+    $instance = new $model;
+    $table_name = $instance->getTable();
+    Route::group(['prefix' => $table_name], function($router) use($model, $instance, $table_name) {
+        if (in_array('endpoints', get_class_methods($instance))) {
+            call_user_func([$instance, 'endpoints']);
         }
-    }
+    
+        // search
+        \Route::get('/search', function() use($instance) {
+            $input = request()->all();
+            $query = $instance;
+            return $query->get();
+        });
+    
+        // find by id
+        \Route::get('/find', function() {
+            $request = request();
+            return $request->all();
+        });
+    
+        //  save
+        \Route::post('/save', function() use($model, $instance) {
+            $request = request();
+            $all = array_merge($instance->ToArray(), $request->all());
+            if (isset($all['id'])) unset($all['id']);
+            $save = call_user_func([$model, 'find'], $request->input('id'));
+            $save = $save? $save: new $model;
+            $save->fill($all)->save();
+            return $save;
+        });
+    
+        //  delete
+        \Route::post('/delete', function() {
+            $request = request();
+            return $request->all();
+        });
+    });
 }
 
 
