@@ -82,5 +82,11 @@
   },
   "LazyUiSelect": {
     "description": "Auto imported from components/ui/ui-select.vue"
+  },
+  "BusinessSearch": {
+    "description": "Auto imported from components/store/business-search.vue"
+  },
+  "LazyBusinessSearch": {
+    "description": "Auto imported from components/store/business-search.vue"
   }
 }

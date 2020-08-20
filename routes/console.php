@@ -20,11 +20,12 @@ Artisan::command('inspire', function () {
 
 
 Artisan::command('app-deploy', function () {
+    \Artisan::call('cache:clear');
+    
     $this->comment('App Deploy');
     $this->comment('');
 
     $models = [];
-
     foreach(\App\Utils::classes() as $class) {
         $artisan = $this;
         $instance = new $class;
@@ -69,7 +70,7 @@ Artisan::command('app-deploy', function () {
                 \Schema::create($table_name, function($table) use($artisan, $createUpdateFields, $instance) {
                     $table->id();
                     $columns = call_user_func([$instance, 'deployMigration'], $artisan, $table, []);
-                    $createUpdateFields($columns, $table, $fields);
+                    $createUpdateFields($columns, $table, []);
                     $table->timestamps();
                 });
             }

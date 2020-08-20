@@ -12,6 +12,7 @@ export { default as UiPhoto } from '../..\\resources\\nuxt\\components\\ui\\ui-p
 export { default as UiProductCategories } from '../..\\resources\\nuxt\\components\\ui\\ui-product-categories.vue'
 export { default as UiProduct } from '../..\\resources\\nuxt\\components\\ui\\ui-product.vue'
 export { default as UiSelect } from '../..\\resources\\nuxt\\components\\ui\\ui-select.vue'
+export { default as BusinessSearch } from '../..\\resources\\nuxt\\components\\store\\business-search.vue'
 
 export const LazyUiAddressOld = import('../..\\resources\\nuxt\\components\\ui\\ui-address-old.vue' /* webpackChunkName: "components_ui/ui-address-old" */).then(c => c.default || c)
 export const LazyUiAddress = import('../..\\resources\\nuxt\\components\\ui\\ui-address.vue' /* webpackChunkName: "components_ui/ui-address" */).then(c => c.default || c)
@@ -27,3 +28,4 @@ export const LazyUiPhoto = import('../..\\resources\\nuxt\\components\\ui\\ui-ph
 export const LazyUiProductCategories = import('../..\\resources\\nuxt\\components\\ui\\ui-product-categories.vue' /* webpackChunkName: "components_ui/ui-product-categories" */).then(c => c.default || c)
 export const LazyUiProduct = import('../..\\resources\\nuxt\\components\\ui\\ui-product.vue' /* webpackChunkName: "components_ui/ui-product" */).then(c => c.default || c)
 export const LazyUiSelect = import('../..\\resources\\nuxt\\components\\ui\\ui-select.vue' /* webpackChunkName: "components_ui/ui-select" */).then(c => c.default || c)
+export const LazyBusinessSearch = import('../..\\resources\\nuxt\\components\\store\\business-search.vue' /* webpackChunkName: "components_store/business-search" */).then(c => c.default || c)

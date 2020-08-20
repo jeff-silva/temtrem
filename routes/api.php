@@ -35,11 +35,19 @@ foreach(\App\Utils::classes() as $model) {
         }
     
         // search
-        \Route::get('/search', function() use($instance) {
+        $call = function() use($instance) {
             $input = request()->all();
-            $query = $instance;
-            return $query->get();
-        });
+            return $instance->get();
+        };
+        
+        if (in_array('search', get_class_methods($instance))) {
+            $call = function() use($instance) {
+                return call_user_func([$instance, 'search'], request()->all());
+            };
+        }
+        
+        \Route::get('/search', $call);
+
     
         // find by id
         \Route::get('/find', function() {
