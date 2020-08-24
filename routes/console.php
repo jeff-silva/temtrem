@@ -92,67 +92,67 @@ Artisan::command('app-deploy', function () {
                 $models = call_user_func([$instance, 'deployModels'], $this, $models);
             }
 
-            $jsmodel = ["export default class {$classname} {", ''];
-            foreach($instance->toArray() as $key=>$val) {
-                $val = json_encode($val);
-                $jsmodel[] = "\t{$key} = {$val};";
-            }
-            
-            $jsmodel[] = "\t_loading = false;";
-            $jsmodel[] = '';
-            
-            $jsmodel[] = "\tconstructor(attributes={}) {";
-            $jsmodel[] = "\t\tattributes = Object.assign(".json_encode($instance->toArray()).", attributes);";
-            $jsmodel[] = "\t\tfor(var i in attributes) { this[i] = attributes[i]; }";
-            $jsmodel[] = "\t}";
-            $jsmodel[] = '';
-
-            if ($instance->jsMethods AND is_array($instance->jsMethods)) {
-                foreach($instance->jsMethods as $method=>$sets) {
-                    if (!is_callable([$instance, $method])) continue;
-                    $sets = is_array($sets)? $sets: [];
-
-                    $params = [];
-                    foreach((new \ReflectionMethod($instance, $method))->getParameters() as $param) {
-                        $paramValue = json_encode($param->getDefaultValue());
-                        $params[] = "{$param->getName()}={$paramValue}";
-                    }
-                    $params = implode(', ', $params);
-
-                    $jsmodel[] = "\t{$method}({$params}) {";
-                    $jsmodel[] = "\t\treturn new Promise((resolve, reject) => {";
-                    
-                    $jsmodel[] = "\t\t\tlet _delete = () => {";
-                    $jsmodel[] = "\t\t\t\tthis._loading = true;";
-                    $jsmodel[] = "\t\t\t\tlet post = {attributes:this, class:'{$classname}', method:'{$method}', arguments:([].slice.call(arguments))};";
-                    $jsmodel[] = "\t\t\t\twindow.\$nuxt.\$axios.post('/api/call/', post).then((resp) => {";
-                    $jsmodel[] = "\t\t\t\t\tthis._loading = false;";
-                    $jsmodel[] = "\t\t\t\t\tresolve(resp);";
-                    $jsmodel[] = "\t\t\t\t}).catch((a, b, c, d, e) => { reject(a, b, c, d, e); });";
-                    $jsmodel[] = "\t\t\t};";
-
-                    if (isset($sets['confirm'])) {
-                        $jsmodel[] = "\t\t\twindow.\$nuxt.\$swal({title: 'Confirmação', html: `{$sets['confirm']}`, }).then((resp) => {";
-                        $jsmodel[] = "\t\t\t\tif (resp.value) { _delete(); }";
-                        $jsmodel[] = "\t\t\t});";
-                    }
-
-                    else { $jsmodel[] = "\t\t\t_delete();"; }
-
-                    
-                    $jsmodel[] = "\t\t});";
-                    $jsmodel[] = "\t}";
-                    $jsmodel[] = '';
+            if ('local'==env('APP_ENV')) {
+                $jsmodel = ["export default class {$classname} {", ''];
+                foreach($instance->toArray() as $key=>$val) {
+                    $val = json_encode($val);
+                    $jsmodel[] = "\t{$key} = {$val};";
                 }
+                
+                $jsmodel[] = "\t_loading = false;";
+                $jsmodel[] = '';
+                
+                $jsmodel[] = "\tconstructor(attributes={}) {";
+                $jsmodel[] = "\t\tattributes = Object.assign(".json_encode($instance->toArray()).", attributes);";
+                $jsmodel[] = "\t\tfor(var i in attributes) { this[i] = attributes[i]; }";
+                $jsmodel[] = "\t}";
+                $jsmodel[] = '';
+    
+                if ($instance->jsMethods AND is_array($instance->jsMethods)) {
+                    foreach($instance->jsMethods as $method=>$sets) {
+                        if (!is_callable([$instance, $method])) continue;
+                        $sets = is_array($sets)? $sets: [];
+    
+                        $params = [];
+                        foreach((new \ReflectionMethod($instance, $method))->getParameters() as $param) {
+                            $paramValue = json_encode($param->getDefaultValue());
+                            $params[] = "{$param->getName()}={$paramValue}";
+                        }
+                        $params = implode(', ', $params);
+    
+                        $jsmodel[] = "\t{$method}({$params}) {";
+                        $jsmodel[] = "\t\treturn new Promise((resolve, reject) => {";
+                        
+                        $jsmodel[] = "\t\t\tlet _delete = () => {";
+                        $jsmodel[] = "\t\t\t\tthis._loading = true;";
+                        $jsmodel[] = "\t\t\t\tlet post = {attributes:this, class:'{$classname}', method:'{$method}', arguments:([].slice.call(arguments))};";
+                        $jsmodel[] = "\t\t\t\twindow.\$nuxt.\$axios.post('/api/call/', post).then((resp) => {";
+                        $jsmodel[] = "\t\t\t\t\tthis._loading = false;";
+                        $jsmodel[] = "\t\t\t\t\tresolve(resp);";
+                        $jsmodel[] = "\t\t\t\t}).catch((a, b, c, d, e) => { reject(a, b, c, d, e); });";
+                        $jsmodel[] = "\t\t\t};";
+    
+                        if (isset($sets['confirm'])) {
+                            $jsmodel[] = "\t\t\twindow.\$nuxt.\$swal({title: 'Confirmação', html: `{$sets['confirm']}`, }).then((resp) => {";
+                            $jsmodel[] = "\t\t\t\tif (resp.value) { _delete(); }";
+                            $jsmodel[] = "\t\t\t});";
+                        }
+    
+                        else { $jsmodel[] = "\t\t\t_delete();"; }
+    
+                        
+                        $jsmodel[] = "\t\t});";
+                        $jsmodel[] = "\t}";
+                        $jsmodel[] = '';
+                    }
+                }
+    
+                $jsmodel[] = '}';
+                $jsmodel = implode("\n", $jsmodel);
+    
+                $model_file = base_path(implode(DIRECTORY_SEPARATOR, ['resources', 'nuxt', 'models', "{$classname}.js"]));
+                file_put_contents($model_file, $jsmodel);
             }
-
-            $jsmodel[] = '}';
-            $jsmodel = implode("\n", $jsmodel);
-
-            $model_file = base_path(implode(DIRECTORY_SEPARATOR, ['resources', 'nuxt', 'models', "{$classname}.js"]));
-            file_put_contents($model_file, $jsmodel);
-            $this->comment($model_file);
-            $this->comment($jsmodel);
         }
 
         $this->comment('');
