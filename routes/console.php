@@ -149,7 +149,7 @@ Artisan::command('app-deploy', function () {
             $jsmodel[] = '}';
             $jsmodel = implode("\n", $jsmodel);
 
-            $model_file = base_path(join(['resources', 'nuxt', 'models', "{$classname}.js"], DIRECTORY_SEPARATOR));
+            $model_file = base_path(implode(DIRECTORY_SEPARATOR, ['resources', 'nuxt', 'models', "{$classname}.js"]));
             file_put_contents($model_file, $jsmodel);
             $this->comment($model_file);
             $this->comment($jsmodel);
@@ -159,7 +159,7 @@ Artisan::command('app-deploy', function () {
     }
 
     if ('local'==env('APP_ENV')) {
-        $models_file = base_path(join(['resources', 'nuxt', 'plugins', 'models.json'], DIRECTORY_SEPARATOR));
+        $models_file = base_path(implode(DIRECTORY_SEPARATOR, ['resources', 'nuxt', 'plugins', 'models.json']));
         file_put_contents($models_file, json_encode($models));
         $this->comment('Models generated');
     }
