@@ -1,4 +1,22 @@
 {
+  "BusinessCategory": {
+    "description": "Auto imported from components/store/business-category.vue"
+  },
+  "LazyBusinessCategory": {
+    "description": "Auto imported from components/store/business-category.vue"
+  },
+  "BusinessSearch": {
+    "description": "Auto imported from components/store/business-search.vue"
+  },
+  "LazyBusinessSearch": {
+    "description": "Auto imported from components/store/business-search.vue"
+  },
+  "BusinessType": {
+    "description": "Auto imported from components/store/business-type.vue"
+  },
+  "LazyBusinessType": {
+    "description": "Auto imported from components/store/business-type.vue"
+  },
   "UiAddressOld": {
     "description": "Auto imported from components/ui/ui-address-old.vue"
   },
@@ -82,11 +100,5 @@
   },
   "LazyUiSelect": {
     "description": "Auto imported from components/ui/ui-select.vue"
-  },
-  "BusinessSearch": {
-    "description": "Auto imported from components/store/business-search.vue"
-  },
-  "LazyBusinessSearch": {
-    "description": "Auto imported from components/store/business-search.vue"
   }
 }

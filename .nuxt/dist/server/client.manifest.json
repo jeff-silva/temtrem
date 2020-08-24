@@ -2,54 +2,54 @@
   "publicPath": "/_nuxt/",
   "all": [
     "../server/index.spa.html",
-    "19.e29ffb4.js",
+    "19.7a54a1b.js",
     "LICENSES",
-    "app.2a037b0.js",
+    "app.6754e4c.js",
     "img/layers-2x.4f0283c.png",
     "img/marker-icon.2273e3d.png",
     "manifest.b9ee0fe1.json",
-    "node_modules/commons.c1db2b7.js",
-    "pages/auth/index.bd202dd.js",
-    "pages/auth/password.c192554.js",
-    "pages/auth/register.9dc86b4.js",
-    "pages/business.78d3a7c.js",
-    "pages/business/_id.0821881.js",
-    "pages/dashboard.bd6ed7d.js",
-    "pages/index.8656709.js",
-    "pages/search.3ee4127.js",
-    "pages/store/index.44bf582.js",
-    "pages/store/products.3425d3a.js",
-    "pages/store/settings.fe2619c.js",
-    "pages/store/stores.317e004.js",
-    "pages/test.558c2df.js",
-    "pages/user/index.2bf03bc.js",
-    "pages/user/notifications.453e04a.js",
-    "pages/user/settings.158b1af.js",
-    "runtime.b4a1b8c.js"
+    "node_modules/commons.c518255.js",
+    "pages/auth/index.90238fb.js",
+    "pages/auth/password.496bc54.js",
+    "pages/auth/register.5d88699.js",
+    "pages/business.9050f8a.js",
+    "pages/business/_id.4488c7f.js",
+    "pages/dashboard.3286e47.js",
+    "pages/index.995c993.js",
+    "pages/search.8e74c29.js",
+    "pages/store/index.0fe3384.js",
+    "pages/store/products.ee5ea8e.js",
+    "pages/store/settings.5b6615a.js",
+    "pages/store/stores.c2201d9.js",
+    "pages/test.20b8538.js",
+    "pages/user/index.53c3015.js",
+    "pages/user/notifications.e815e64.js",
+    "pages/user/settings.8ba3853.js",
+    "runtime.b610a78.js"
   ],
   "initial": [
-    "runtime.b4a1b8c.js",
-    "node_modules/commons.c1db2b7.js",
-    "app.2a037b0.js"
+    "runtime.b610a78.js",
+    "node_modules/commons.c518255.js",
+    "app.6754e4c.js"
   ],
   "async": [
-    "19.e29ffb4.js",
-    "pages/auth/index.bd202dd.js",
-    "pages/auth/password.c192554.js",
-    "pages/auth/register.9dc86b4.js",
-    "pages/business.78d3a7c.js",
-    "pages/business/_id.0821881.js",
-    "pages/dashboard.bd6ed7d.js",
-    "pages/index.8656709.js",
-    "pages/search.3ee4127.js",
-    "pages/store/index.44bf582.js",
-    "pages/store/products.3425d3a.js",
-    "pages/store/settings.fe2619c.js",
-    "pages/store/stores.317e004.js",
-    "pages/test.558c2df.js",
-    "pages/user/index.2bf03bc.js",
-    "pages/user/notifications.453e04a.js",
-    "pages/user/settings.158b1af.js"
+    "19.7a54a1b.js",
+    "pages/auth/index.90238fb.js",
+    "pages/auth/password.496bc54.js",
+    "pages/auth/register.5d88699.js",
+    "pages/business.9050f8a.js",
+    "pages/business/_id.4488c7f.js",
+    "pages/dashboard.3286e47.js",
+    "pages/index.995c993.js",
+    "pages/search.8e74c29.js",
+    "pages/store/index.0fe3384.js",
+    "pages/store/products.ee5ea8e.js",
+    "pages/store/settings.5b6615a.js",
+    "pages/store/stores.c2201d9.js",
+    "pages/test.20b8538.js",
+    "pages/user/index.53c3015.js",
+    "pages/user/notifications.e815e64.js",
+    "pages/user/settings.8ba3853.js"
   ],
   "modules": {
     "13277697": [
@@ -74,6 +74,9 @@
     ],
     "72067985": [
       7
+    ],
+    "74063494": [
+      23
     ],
     "74286730": [
       16
@@ -113,25 +116,25 @@
     "7318492f": [
       7
     ],
-    "2711b0ac": [
-      7
-    ],
     "8ab642f8": [
       7
     ],
-    "39c854b5": [
+    "2711b0ac": [
       7
     ],
     "fa9a441e": [
       7
     ],
-    "cdc61c28": [
-      7
-    ],
     "1686574a": [
       7
     ],
+    "39c854b5": [
+      7
+    ],
     "6846f254": [
+      7
+    ],
+    "cdc61c28": [
       7
     ],
     "853ffe8e": [
@@ -459,19 +462,8 @@
     "7d447a9e": [
       7
     ],
-    "53efd1aa": [
-      7
-    ],
-    "a29dedb4": [
-      7
-    ],
     "21cb29c4": [
       7
-    ],
-    "3f1afa8a": [
-      3,
-      4,
-      5
     ],
     "42d0e8d2": [
       7
@@ -486,6 +478,12 @@
       7
     ],
     "452bcd0a": [
+      7
+    ],
+    "53efd1aa": [
+      7
+    ],
+    "a29dedb4": [
       7
     ],
     "17d9cc06": [
@@ -509,9 +507,6 @@
     "6acda7b2": [
       7
     ],
-    "1c179a1c": [
-      7
-    ],
     "5403fca8": [
       7
     ],
@@ -528,6 +523,11 @@
       7
     ],
     "45b157ea": [
+      3,
+      4,
+      5
+    ],
+    "3f1afa8a": [
       3,
       4,
       5
@@ -592,6 +592,9 @@
       7
     ],
     "a0c0e34a": [
+      7
+    ],
+    "1c179a1c": [
       7
     ],
     "123eb509": [
@@ -704,6 +707,11 @@
       4,
       5
     ],
+    "1d754ac9": [
+      3,
+      4,
+      5
+    ],
     "73c21097": [
       7
     ],
@@ -753,9 +761,6 @@
       7
     ],
     "2982d10a": [
-      7
-    ],
-    "b358cd30": [
       7
     ],
     "6090a129": [
@@ -818,46 +823,6 @@
       7
     ],
     "66ec6d26": [
-      3,
-      4,
-      5
-    ],
-    "1d754ac9": [
-      3,
-      4,
-      5
-    ],
-    "fa285752": [
-      3,
-      4,
-      5
-    ],
-    "04d647e3": [
-      3,
-      4,
-      5
-    ],
-    "6af9c08c": [
-      3,
-      4,
-      5
-    ],
-    "7ea9ae78": [
-      3,
-      4,
-      5
-    ],
-    "ff8738ce": [
-      3,
-      4,
-      5
-    ],
-    "46a01684": [
-      3,
-      4,
-      5
-    ],
-    "31d2c4fa": [
       3,
       4,
       5
@@ -926,6 +891,9 @@
       7
     ],
     "0d6785a5": [
+      7
+    ],
+    "b358cd30": [
       7
     ],
     "7cb74b85": [
@@ -1047,12 +1015,6 @@
       4,
       5
     ],
-    "06edccc2": [
-      7
-    ],
-    "406b8dc3": [
-      7
-    ],
     "a3e5c3fc": [
       3,
       4,
@@ -1172,11 +1134,29 @@
     "6c2f0113": [
       15
     ],
+    "cb7eef2e": [
+      16
+    ],
     "7478a19a": [
       16
     ],
-    "fa726dc6": [
-      23
+    "976f91a6": [
+      16
+    ],
+    "76c5fa9f": [
+      16
+    ],
+    "e74fc264": [
+      16
+    ],
+    "fe23cd58": [
+      16
+    ],
+    "15c6e0dc": [
+      16
+    ],
+    "50d7d71b": [
+      16
     ],
     "d8aaf106": [
       15
@@ -1184,31 +1164,58 @@
     "f9ad5008": [
       15
     ],
+    "5b85f95a": [
+      16
+    ],
+    "0a5ada92": [
+      16
+    ],
     "e3885620": [
       16
     ],
     "6907e1de": [
       16
     ],
-    "28c4d307": [
+    "6abab717": [
+      16
+    ],
+    "2dac05d6": [
+      16
+    ],
+    "36bfc5c0": [
       23
     ],
-    "017450c6": [
+    "4f67271f": [
       23
     ],
-    "024cbf48": [
+    "7992a10e": [
       16
     ],
-    "6198bd27": [
+    "59e276d3": [
       16
     ],
-    "45dae74a": [
+    "a3e1dd2e": [
       16
     ],
-    "116264e3": [
+    "2afaa38f": [
       16
     ],
-    "0a608774": [
+    "24b4c142": [
+      16
+    ],
+    "07e41d6c": [
+      16
+    ],
+    "c1eac0be": [
+      16
+    ],
+    "281cc5ad": [
+      16
+    ],
+    "c462eb46": [
+      16
+    ],
+    "4e3e4a06": [
       16
     ],
     "3780c95f": [
@@ -1241,49 +1248,19 @@
     "67ce5c21": [
       23
     ],
-    "76c5fa9f": [
-      16
-    ],
-    "4a59b61b": [
-      16
-    ],
-    "fe23cd58": [
-      16
-    ],
-    "99c3b242": [
-      16
-    ],
-    "50d7d71b": [
-      16
-    ],
-    "557715b2": [
-      16
-    ],
-    "bfd30dde": [
-      16
-    ],
-    "d412b968": [
-      16
-    ],
-    "83ef6a56": [
-      16
-    ],
-    "9a19b25a": [
-      16
-    ],
-    "293e5f4c": [
+    "05aa64e1": [
       23
     ],
-    "29c1c11e": [
+    "f04943bc": [
       23
     ],
-    "5c4c8a9d": [
+    "79ce7776": [
       23
     ],
-    "6bebb04c": [
+    "37a505de": [
       23
     ],
-    "423f1014": [
+    "b1c71ae2": [
       23
     ],
     "1b06094c": [
@@ -1361,10 +1338,10 @@
     "1d785b8b": [
       16
     ],
-    "f78c5fba": [
+    "2a6f3dfe": [
       16
     ],
-    "324323e7": [
+    "ce5c9676": [
       16
     ],
     "7f65a922": [
@@ -1517,64 +1494,64 @@
   },
   "assetsMapping": {
     "bba68bf6": [
-      "19.e29ffb4.js"
+      "19.7a54a1b.js"
     ],
     "1a3ae26b": [
-      "app.2a037b0.js"
+      "app.6754e4c.js"
     ],
     "dabc93ce": [
-      "node_modules/commons.c1db2b7.js"
+      "node_modules/commons.c518255.js"
     ],
     "27f1eccc": [
-      "pages/auth/index.bd202dd.js"
+      "pages/auth/index.90238fb.js"
     ],
     "982c873e": [
-      "pages/auth/password.c192554.js"
+      "pages/auth/password.496bc54.js"
     ],
     "423c3069": [
-      "pages/auth/register.9dc86b4.js"
+      "pages/auth/register.5d88699.js"
     ],
     "d577d9be": [
-      "pages/business.78d3a7c.js"
+      "pages/business.9050f8a.js"
     ],
     "60ea69cc": [
-      "pages/business/_id.0821881.js"
+      "pages/business/_id.4488c7f.js"
     ],
     "1bd60353": [
-      "pages/dashboard.bd6ed7d.js"
+      "pages/dashboard.3286e47.js"
     ],
     "2a130dde": [
-      "pages/index.8656709.js"
+      "pages/index.995c993.js"
     ],
     "f72dc56e": [
-      "pages/search.3ee4127.js"
+      "pages/search.8e74c29.js"
     ],
     "48e1df23": [
-      "pages/store/index.44bf582.js"
+      "pages/store/index.0fe3384.js"
     ],
     "22662d73": [
-      "pages/store/products.3425d3a.js"
+      "pages/store/products.ee5ea8e.js"
     ],
     "9885cf9c": [
-      "pages/store/settings.fe2619c.js"
+      "pages/store/settings.5b6615a.js"
     ],
     "367790fe": [
-      "pages/store/stores.317e004.js"
+      "pages/store/stores.c2201d9.js"
     ],
     "b6ff1f1a": [
-      "pages/test.558c2df.js"
+      "pages/test.20b8538.js"
     ],
     "0ff294af": [
-      "pages/user/index.2bf03bc.js"
+      "pages/user/index.53c3015.js"
     ],
     "0846d3c5": [
-      "pages/user/notifications.453e04a.js"
+      "pages/user/notifications.e815e64.js"
     ],
     "2533e726": [
-      "pages/user/settings.158b1af.js"
+      "pages/user/settings.8ba3853.js"
     ],
     "6fca0322": [
-      "runtime.b4a1b8c.js"
+      "runtime.b610a78.js"
     ]
   }
 }

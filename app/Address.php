@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
-{   
+{
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+    
     protected $fillable = [
         'id',
         'name',

@@ -1,7 +1,7 @@
 <template><div class="business-search">
     <l-map ref="map" v-bind="props.map" style="position:relative; width:100%; height:100%;"
         @update:bounds="updateBounds($event)"
-        @update:center="$emit('update:center', $event)"
+        @update:center="updateCenter($event)"
     >
         <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
 
@@ -15,31 +15,54 @@
 
 
 <script>
-let updateBoundsTimeout, setPlaceTimeout;
+import Business from '@/models/Business';
+let getBusinessTimeout, setPlaceTimeout;
 
 export default {
     props: {
         map: {default:()=>({})},
         search: {default:()=>({})},
         value: {default:()=>([])},
+        searchInsideBounds: {default:true},
     },
 
     watch: {
         $props: {
             deep: true,
             handler(value) {
-                this.$set(this, 'props', Object.assign({}, value));
+                value = Object.assign({}, this.props||{});
+                this.$set(this, 'props', value);
             }
         },
     },
 
     methods: {
-        doSearch() {
-            this.$axios.get('/api/business/search', {params:this.props.search}).then((resp) => {
-                this.$set(this.props, 'value', resp.data);
-            });
+        emit() {
+            this.$emit('input', this.props.value);
+            this.$emit('change', this.props.value);
+            this.$emit('value', this.props.value);
         },
 
+        getBusiness() {
+            if (getBusinessTimeout) clearTimeout(getBusinessTimeout);
+            getBusinessTimeout = setTimeout(() => {
+                let params = Object.assign({}, this.props.search);
+
+                if (!this.searchInsideBounds) {
+                    delete params.lat_min;
+                    delete params.lat_max;
+                    delete params.lng_min;
+                    delete params.lng_max;
+                }
+
+                this.$axios.get('/api/business/search', {params:params}).then((resp) => {
+                    let items = resp.data.map((item) => { return new Business(item); });
+                    this.$set(this.props, 'value', items);
+                    this.emit();
+                });
+            }, 500);
+        },
+        
         updateBounds(ev) {
             this.props.search.lat_min = ev._southWest.lat;
             this.props.search.lat_max = ev._northEast.lat;
@@ -47,8 +70,22 @@ export default {
             this.props.search.lng_max = ev._northEast.lng;
             this.$emit('update:bounds', ev);
 
-            if (updateBoundsTimeout) clearTimeout(updateBoundsTimeout);
-            updateBoundsTimeout = setTimeout(this.doSearch, 1000);
+            if (this.searchInsideBounds) {
+                this.getBusiness();
+            }
+        },
+
+        updateCenter(ev) {
+            if (ev.lat && ev.lng && ev.lat!=this.props.map.center[0] && ev.lng!=this.props.map.center[1]) {
+                this.$set(this.props.map, 'center', [
+                    ev.lat,
+                    ev.lng,
+                ]);
+                this.$emit('update:center', ev);
+                if (this.searchInsideBounds) {
+                    this.getBusiness();
+                }
+            }
         },
 
         setPlace(ev, marker) {
@@ -72,6 +109,13 @@ export default {
                     }
                 }, 500);
             });
+        },
+
+        moveToMarker(marker) {
+            this.$set(this.props.map, 'center', [
+                marker.lat,
+                marker.lng,
+            ]);
         },
     },
 
@@ -101,13 +145,14 @@ export default {
     mounted() {
         this.$geolocation().then((resp) => {
             this.$set(this.props.map, 'center', [resp.lat, resp.lng]);
-            this.doSearch();
+            this.getBusiness();
         });
     },
 };</script>
 
 <style>
 .business-search {position:relative;}
+.business-search .vue2leaflet-map {z-index:1;}
 
 .leaflet-popup-content-wrapper {
     padding: 0px !important;

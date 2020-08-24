@@ -1,25 +1,35 @@
-<template><div v-if="props.value" class="ui-modal" @click.self="props.value=false; emit();">
-    <div class="card">
-        <div class="card-header" v-if="$slots.header">
-            <slot name="header"></slot>
-        </div>
+<template><div>
+    <transition name="custom-unique-name"
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+    >
+        <div v-if="props.value" class="ui-modal" @click.self="props.value=false; emit();" style="animation-duration:300ms;">
+            <component :is="tag" @submit.prevent="$emit('submit', $event)">
+                <div class="card">
+                    <div class="card-header" v-if="$slots.header">
+                        <slot name="header"></slot>
+                    </div>
 
-        <div class="card-body" style="max-height:80vh; overflow:auto;">
-            <slot name="body"></slot>
-        </div>
+                    <div class="card-body">
+                        <slot name="body"></slot>
+                    </div>
 
-        <div class="card-footer text-right">
-            <button type="button" class="btn pull-left" @click="props.value=false; emit();">
-                Ok
-            </button>
-            <slot name="footer"></slot>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn pull-left" @click="props.value=false; emit();">
+                            Ok
+                        </button>
+                        <slot name="footer"></slot>
+                    </div>
+                </div>
+            </component>
         </div>
-    </div>
+    </transition>
 </div></template>
 
 <script>export default {
     props: {
         value: {default: false},
+        tag: {default: 'div'},
     },
 
     watch: {
@@ -58,7 +68,7 @@
     width: 100vw;
     height: 100vh;
     background: #00000033;
-    z-index: 99;
+    z-index: 99 !important;
     display: flex;
     align-items: center;
     justify-content: center;

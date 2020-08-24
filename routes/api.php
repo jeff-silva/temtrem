@@ -25,6 +25,23 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('me', 'AuthController@me');
 });
 
+Route::post('/call', function() {
+    $class = '\App\\'. request()->input('class');
+    $method = request()->input('method');
+    $arguments = request()->input('arguments');
+    $attributes = request()->input('attributes');
+
+    $instance = call_user_func([$class, 'find'], $attributes['id']);
+    $instance = $instance? $instance: new $class();
+    $instance->fill($attributes);
+
+    $call = [$instance, $method];
+    if (is_callable($call) AND is_array($instance->jsMethods) AND isset($instance->jsMethods[$method])) {
+        return call_user_func_array($call, $arguments);
+    }
+
+    return ['error' => 'Cant execute'];
+});
 
 foreach(\App\Utils::classes() as $model) {
     $instance = new $model;

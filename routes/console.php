@@ -29,6 +29,7 @@ Artisan::command('app-deploy', function () {
     foreach(\App\Utils::classes() as $class) {
         $artisan = $this;
         $instance = new $class;
+        $classname = str_replace('\App\\', '', $class);
 
         $table_name = $instance->getTable();
         $table_exists = \Schema::hasTable($table_name);
@@ -61,9 +62,16 @@ Artisan::command('app-deploy', function () {
 
             if ($table_exists) {
                 \Schema::table($table_name, function($table) use($artisan, $createUpdateFields, $instance, $table_name) {
-                    $fields = \Schema::getColumnListing($table_name);
+                    $fields = [];
+                    foreach(\Schema::getColumnListing($table_name) as $field) {
+                        $fields[ $field ] = $field;
+                    }
+
                     $columns = call_user_func([$instance, 'deployMigration'], $artisan, $table, $fields);
                     $createUpdateFields($columns, $table, $fields);
+
+                    if (!isset($fields['created_at']) OR !isset($fields['updated_at'])) { $table->timestamps(); }
+                    if (!isset($fields['deleted_at'])) { $table->softDeletes(); }
                 });
             }
             else {
@@ -72,6 +80,7 @@ Artisan::command('app-deploy', function () {
                     $columns = call_user_func([$instance, 'deployMigration'], $artisan, $table, []);
                     $createUpdateFields($columns, $table, []);
                     $table->timestamps();
+                    $table->softDeletes();
                 });
             }
 
@@ -82,6 +91,68 @@ Artisan::command('app-deploy', function () {
             if (in_array('deployModels', get_class_methods($instance))) {
                 $models = call_user_func([$instance, 'deployModels'], $this, $models);
             }
+
+            $jsmodel = ["export default class {$classname} {", ''];
+            foreach($instance->toArray() as $key=>$val) {
+                $val = json_encode($val);
+                $jsmodel[] = "\t{$key} = {$val};";
+            }
+            
+            $jsmodel[] = "\t_loading = false;";
+            $jsmodel[] = '';
+            
+            $jsmodel[] = "\tconstructor(attributes={}) {";
+            $jsmodel[] = "\t\tattributes = Object.assign(".json_encode($instance->toArray()).", attributes);";
+            $jsmodel[] = "\t\tfor(var i in attributes) { this[i] = attributes[i]; }";
+            $jsmodel[] = "\t}";
+            $jsmodel[] = '';
+
+            if ($instance->jsMethods AND is_array($instance->jsMethods)) {
+                foreach($instance->jsMethods as $method=>$sets) {
+                    if (!is_callable([$instance, $method])) continue;
+                    $sets = is_array($sets)? $sets: [];
+
+                    $params = [];
+                    foreach((new \ReflectionMethod($instance, $method))->getParameters() as $param) {
+                        $paramValue = json_encode($param->getDefaultValue());
+                        $params[] = "{$param->getName()}={$paramValue}";
+                    }
+                    $params = implode(', ', $params);
+
+                    $jsmodel[] = "\t{$method}({$params}) {";
+                    $jsmodel[] = "\t\treturn new Promise((resolve, reject) => {";
+                    
+                    $jsmodel[] = "\t\t\tlet _delete = () => {";
+                    $jsmodel[] = "\t\t\t\tthis._loading = true;";
+                    $jsmodel[] = "\t\t\t\tlet post = {attributes:this, class:'{$classname}', method:'{$method}', arguments:([].slice.call(arguments))};";
+                    $jsmodel[] = "\t\t\t\twindow.\$nuxt.\$axios.post('/api/call/', post).then((resp) => {";
+                    $jsmodel[] = "\t\t\t\t\tthis._loading = false;";
+                    $jsmodel[] = "\t\t\t\t\tresolve(resp);";
+                    $jsmodel[] = "\t\t\t\t}).catch((a, b, c, d, e) => { reject(a, b, c, d, e); });";
+                    $jsmodel[] = "\t\t\t};";
+
+                    if (isset($sets['confirm'])) {
+                        $jsmodel[] = "\t\t\twindow.\$nuxt.\$swal({title: 'Confirmação', html: `{$sets['confirm']}`, }).then((resp) => {";
+                        $jsmodel[] = "\t\t\t\tif (resp.value) { _delete(); }";
+                        $jsmodel[] = "\t\t\t});";
+                    }
+
+                    else { $jsmodel[] = "\t\t\t_delete();"; }
+
+                    
+                    $jsmodel[] = "\t\t});";
+                    $jsmodel[] = "\t}";
+                    $jsmodel[] = '';
+                }
+            }
+
+            $jsmodel[] = '}';
+            $jsmodel = implode("\n", $jsmodel);
+
+            $model_file = base_path(join(['resources', 'nuxt', 'models', "{$classname}.js"], DIRECTORY_SEPARATOR));
+            file_put_contents($model_file, $jsmodel);
+            $this->comment($model_file);
+            $this->comment($jsmodel);
         }
 
         $this->comment('');

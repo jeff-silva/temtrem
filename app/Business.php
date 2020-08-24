@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Business extends Model
 {
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+    
     protected $table = 'business';
     protected $fillable = [
         'id',
@@ -59,6 +61,8 @@ class Business extends Model
         'st' => '',
         'country' => '',
         'co' => '',
+        'created_at' => '',
+        'updated_at' => '',
     ];
 
     protected $appends = [
@@ -68,17 +72,15 @@ class Business extends Model
         'category_photo',
     ];
 
-
-    // public function __construct($attributes = [])  {
-    //     parent::__construct($attributes);
-    //     $categories = $this->categories();
-
-    //     if ($this->category AND isset($categories[$this->category]) AND $cat=$categories[$this->category]) {
-    //         $this->category_name = $cat['name'];
-    //         $this->category_photo = $cat['photo'];
-    //     }
-    // }
-
+    public $jsMethods = [
+        'save' => [],
+        'remove' => [
+            'confirm' => 'Tem certeza que deseja deletar ${this.name}?',
+        ],
+        'search' => [],
+        'types' => [],
+        'categories' => [],
+    ];
 
     public function setGalleryAttribute($value) {
         if (is_array($value)) { $value = json_encode($value); }
@@ -95,24 +97,29 @@ class Business extends Model
 
     public function getTypeNameAttribute($value) {
         $types = $this->types();
-        return isset($types[$this->type])? $types[$this->type]['name']: null;
+        return isset($types[$this->type])? $types[$this->type]['name']: '';
     }
 
     public function getTypePhotoAttribute($value) {
         $types = $this->types();
-        return isset($types[$this->type])? $types[$this->type]['photo']: null;
+        return isset($types[$this->type])? $types[$this->type]['photo']: '';
     }
 
     public function getCategoryNameAttribute($value) {
         $categories = $this->categories();
-        return isset($categories[$this->category])? $categories[$this->category]['name']: null;
+        return isset($categories[$this->category])? $categories[$this->category]['name']: '';
     }
 
     public function getCategoryPhotoAttribute($value) {
         $categories = $this->categories();
-        return isset($categories[$this->category])? $categories[$this->category]['photo']: null;
+        return isset($categories[$this->category])? $categories[$this->category]['photo']: '';
     }
 
+
+    public function remove()
+    {
+        return $this->delete();
+    }
 
     public function search($params=[]) {
         $params = (object) array_merge([
