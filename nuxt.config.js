@@ -98,6 +98,15 @@ export default {
 		'nuxt-route-meta',
 	],
 
+	// module: {
+	// 	rules: [
+	// 		{
+	// 			test: /\.s[ac]ss$/i,
+	// 			use: ['style-loader', 'css-loader', 'sass-loader'],
+	// 		},
+	// 	],
+	// },
+
 	auth: {
 		// https://dev.auth.nuxtjs.org/api/options#redirect
 		redirect: {
@@ -180,6 +189,14 @@ export default {
 
 	router: {
 		// base: '/app/'
+	},
+
+	alias: {
+		'./images/layers.png$': (__dirname+ '/node_modules/leaflet/dist/images/layers.png'),
+		'./images/layers-2x.png$': (__dirname+ '/node_modules/leaflet/dist/images/layers-2x.png'),
+		'./images/marker-icon.png$': (__dirname+ '/node_modules/leaflet/dist/images/marker-icon.png'),
+		'./images/marker-icon-2x.png$': (__dirname+ '/node_modules/leaflet/dist/images/marker-icon-2x.png'),
+		'./images/marker-shadow.png$': (__dirname+ '/node_modules/leaflet/dist/images/marker-shadow.png'),
 	},
 
 	/*

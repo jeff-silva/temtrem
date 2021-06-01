@@ -1,9 +1,5 @@
 import Vue from 'vue';
 
-// https://github.com/Akryum/v-tooltip
-import VTooltip from 'v-tooltip'
-Vue.use(VTooltip);
-
 // https://github.com/avil13/vue-sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -14,7 +10,6 @@ import VueTheMask from 'vue-the-mask'
 Vue.use(VueTheMask);
 
 // https://vue2-leaflet.netlify.app/
-// import 'leaflet/dist/leaflet.css';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
@@ -36,7 +31,7 @@ Vue.prototype.$env = {
 	NODE_ENV: process.env.NODE_ENV,
 	APP_NAME: process.env.APP_NAME,
 	APP_DESCRIPTION: process.env.APP_DESCRIPTION,
-	APP_VERSION: (require('../package.json').version || '0.0.0'),
+	APP_VERSION: (require('../../package.json').version || '0.0.0'),
 	APP_COLOR: (process.env.APP_COLOR || false),
 	APP_LANG: (process.env.APP_LANG || false),
 };

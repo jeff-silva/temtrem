@@ -1,48 +1,46 @@
 // Ref: https://github.com/nuxt-community/vuetify-module#customvariables
-//
-// The variables you want to modify
-// $font-size-root: 20px;
 
-/* Font Awesome */
-@import "@fortawesome/fontawesome-free/css/all.css";
-@import "animate.css/animate.css";
+// $theme-colors: (
+//   "bitbucket": #205081,
+//   "dropbox": #007ee5,
+//   "facebook": #3b5999,
+//   "flickr": #2BA9E1,
+//   "foursquare": #f94877,
+//   "github": #444444,
+//   "google": #DD4B39,
+//   "instagram": #3F729B,
+//   "linkedin": #007BB6,
+//   "medium": #02b875,
+//   "messenger": #0084ff,
+//   "microsoft": #2672EC,
+//   "pinterest": #CB2027,
+//   "reddit": #EFF7FF,
+//   "skype": #00AFF0,
+//   "slack": #3aaf85,
+//   "soundcloud": #ff3300,
+//   "tumblr": #CB2027,
+//   "twitter": #55ACEE,
+//   "vimeo": #1AB7EA,
+//   "vk": #587EA3,
+//   "whatsapp": #25D366,
+//   "wordpress": #21759b,
+//   "yahoo": #720E9E,
+//   "youtube": #cd201f
+// );
 
-$theme-colors: (
-  // "primary": #ED1C24,
 
-  "bitbucket": #205081,
-  "dropbox": #007ee5,
-  "facebook": #3b5999,
-  "flickr": #2BA9E1,
-  "foursquare": #f94877,
-  "github": #444444,
-  "google": #DD4B39,
-  "instagram": #3F729B,
-  "linkedin": #007BB6,
-  "medium": #02b875,
-  "messenger": #0084ff,
-  "microsoft": #2672EC,
-  "pinterest": #CB2027,
-  "reddit": #EFF7FF,
-  "skype": #00AFF0,
-  "slack": #3aaf85,
-  "soundcloud": #ff3300,
-  "tumblr": #CB2027,
-  "twitter": #55ACEE,
-  "vimeo": #1AB7EA,
-  "vk": #587EA3,
-  "whatsapp": #25D366,
-  "wordpress": #21759b,
-  "yahoo": #720E9E,
-  "youtube": #cd201f
-);
-
-@import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap/scss/bootstrap";
+// @import '~/node_modules/bootstrap/scss/bootstrap.scss';
+@import '//cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css';
 
 /* Bootstrap "fixes" */
 .btn, .form-control {height:auto; outline:none!important; box-shadow:none!important; border-radius:2px!important;}
 .form-control {border-color:#00000008;}
 .alert {background:none!important; border-radius:0px !important; border-width:1px 1px 1px 10px !important;}
+
+/* Element UI */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import 'element-ui/lib/theme-chalk/index.css';
 
 /* Element ui input select width */
 .el-input, .el-select {display:block !important; width:auto !important;}
@@ -54,9 +52,11 @@ $theme-colors: (
 .el-collapse-item__header {font-weight:bold!important; padding:0px 6px !important;}
 .el-collapse-item__content {padding:0px 6px !important;}
 
-/* Element UI */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
-@import 'element-ui/lib/theme-chalk/index.css';
-
 /* Leaflet */
 @import url('//unpkg.com/leaflet/dist/leaflet.css');
+
+/* Animate.css */
+@import url("//cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
+
+/* Font Awesome */
+@import "@fortawesome/fontawesome-free/css/all.css";
