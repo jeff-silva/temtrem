@@ -42,6 +42,15 @@ CREATE TABLE IF NOT EXISTS `settings` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `temtrem_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `temtrem_stores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -399,6 +408,76 @@ DROP PROCEDURE IF EXISTS _temp_procedure $$
 DELIMITER ;
 
 ALTER TABLE `settings` MODIFY COLUMN `value` text NOT NULL DEFAULT NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_products' AND COLUMN_NAME = 'id')) THEN
+    ALTER TABLE `temtrem_products` ADD COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_products` MODIFY COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_products' AND COLUMN_NAME = 'name')) THEN
+    ALTER TABLE `temtrem_products` ADD COLUMN `name` varchar(255) NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_products` MODIFY COLUMN `name` varchar(255) NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_products' AND COLUMN_NAME = 'created_at')) THEN
+    ALTER TABLE `temtrem_products` ADD COLUMN `created_at` datetime NULL DEFAULT NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_products` MODIFY COLUMN `created_at` datetime NULL DEFAULT NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_products' AND COLUMN_NAME = 'updated_at')) THEN
+    ALTER TABLE `temtrem_products` ADD COLUMN `updated_at` datetime NULL DEFAULT NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_products` MODIFY COLUMN `updated_at` datetime NULL DEFAULT NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_products' AND COLUMN_NAME = 'deleted_at')) THEN
+    ALTER TABLE `temtrem_products` ADD COLUMN `deleted_at` datetime NULL DEFAULT NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_products` MODIFY COLUMN `deleted_at` datetime NULL DEFAULT NULL;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS _temp_procedure $$

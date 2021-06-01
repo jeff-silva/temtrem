@@ -13,6 +13,13 @@ Vue.use(VueSweetalert2);
 import VueTheMask from 'vue-the-mask'
 Vue.use(VueTheMask);
 
+// https://vue2-leaflet.netlify.app/
+// import 'leaflet/dist/leaflet.css';
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+Vue.component('l-map', LMap);
+Vue.component('l-tile-layer', LTileLayer);
+Vue.component('l-marker', LMarker);
+
 // https://element.eleme.io/
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/pt-BR';
@@ -29,7 +36,7 @@ Vue.prototype.$env = {
 	NODE_ENV: process.env.NODE_ENV,
 	APP_NAME: process.env.APP_NAME,
 	APP_DESCRIPTION: process.env.APP_DESCRIPTION,
-	APP_VERSION: (require('../../../package.json').version || '0.0.0'),
+	APP_VERSION: (require('../package.json').version || '0.0.0'),
 	APP_COLOR: (process.env.APP_COLOR || false),
 	APP_LANG: (process.env.APP_LANG || false),
 };

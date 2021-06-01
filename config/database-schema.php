@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Gerado em 01/06/2021 às 04:59:18
+ * Gerado em 01/06/2021 às 05:12:03
  * Por favor, não altere manualmente.
  */
 
@@ -295,6 +295,68 @@ return [
           'Field' => 'value',
           'Type' => 'text',
           'Null' => 'NO',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+      ],
+    ],
+    'temtrem_products' => [
+      'Name' => 'temtrem_products',
+      'Engine' => 'InnoDB',
+      'Version' => 10,
+      'Row_format' => 'Dynamic',
+      'Rows' => 0,
+      'Avg_row_length' => 0,
+      'Data_length' => 16384,
+      'Max_data_length' => 0,
+      'Index_length' => 0,
+      'Data_free' => 0,
+      'Auto_increment' => 1,
+      'Create_time' => '2021-06-01 02:11:53',
+      'Update_time' => NULL,
+      'Check_time' => NULL,
+      'Collation' => 'utf8_unicode_ci',
+      'Checksum' => NULL,
+      'Create_options' => '',
+      'Comment' => '',
+      'Fields' => [
+        'id' => [
+          'Field' => 'id',
+          'Type' => 'int(11)',
+          'Null' => 'NO',
+          'Key' => 'PRI',
+          'Default' => NULL,
+          'Extra' => 'auto_increment',
+        ],
+        'name' => [
+          'Field' => 'name',
+          'Type' => 'varchar(255)',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'created_at' => [
+          'Field' => 'created_at',
+          'Type' => 'datetime',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'updated_at' => [
+          'Field' => 'updated_at',
+          'Type' => 'datetime',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'deleted_at' => [
+          'Field' => 'deleted_at',
+          'Type' => 'datetime',
+          'Null' => 'YES',
           'Key' => '',
           'Default' => NULL,
           'Extra' => '',
