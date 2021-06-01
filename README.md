@@ -1,91 +1,79 @@
-TL;DR:
-Start server:
-`npm start`
+# Installation
 
-Build:
-`npm run build`
+```bash
+npm install
+composer install
+php artisan key:generate
+php artisan jwt:secret
+php artisan app:deploy
+npm run dev
+```
 
-Deploy:
-`php artisan app-deploy`
+Caso obtenha o erro "JWT payload does not contain the required claims", acesse o arquivo config/jwt.php e comente o item 'required_claims.exp'
 
----
+# Build
+``npm run build``
 
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+
+# Laranuxt
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+  <a href="https://laravel.com"><img alt="Laravel" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1200px-Laravel.svg.png" width="92" height="92" /></a>
+  <a href="https://vuejs.org"><img alt="Vue.js" src="https://vuejs.org/images/logo.png" width="92" height="92" /></a>
+  <a href="https://nuxtjs.org/"><img alt="Nuxt.js" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Nuxt-js.png" width="92" height="92" /></a>
+  <a href="https://vuetifyjs.com/"><img alt="Vuetify" src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" width="92" height="92" /></a>
+  <a href="https://eslint.org/"><img alt="ESLint" src="https://d33wubrfki0l68.cloudfront.net/204482ca413433c80cd14fe369e2181dd97a2a40/092e2/assets/img/logo.svg" width="92" height="92" /></a>
+  <a href="https://jestjs.io/"><img alt="Jest" src="https://miro.medium.com/max/600/1*i37IyHf6vnhqWIA9osxU3w.png" width="92" height="92" /></a>
 </p>
 
-## About Laravel
+## Laravel + Nuxt.js template
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[![](https://img.shields.io/badge/nuxt.js-v2.14.5-04C690.svg)](https://nuxtjs.org)
+[![](https://img.shields.io/badge/Laravel-v8.0.3-ff2e21.svg)](https://laravel.com)
+[![](https://img.shields.io/badge/Vuetify-v2.3.10-1697F6.svg)](https://laravel.com)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+For typescript support checkout the [`typescript`](https://github.com/m2sd/nuxt-laravel-starter/tree/typescript) branch.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Scripts
 
-## Learning Laravel
+```bash
+# *** Global ***
+# development build with nuxt dev server with hot reloading
+npm run dev
+# production build
+npm run build
+# perform tests
+npm run test
+# find linting errors
+npm run lint
+# autofix linting errors
+npm run lint:fix
+# check for conflicting lint rules
+npm run lint:check
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# *** Laravel ***
+# development build
+npm run mix:dev
+# development build with file watching
+npm run mix:watch
+# development build with file watching and polling
+npm run mix:watch:poll
+# development build with file watching, polling and hot reloading
+npm run mix:hot
+# production build
+npm run mix:build
+# perform tests (not implemented)
+npm run mix:test
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# *** Nuxt ***
+# run dev server with hot reloading
+npm run nuxt:dev
+# production build
+npm run nuxt:build
+# perform tests
+npm run nuxt:test
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# *** Development ***
+# cut a new release
+npm run release
+```

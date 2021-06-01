@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[66],{784:function(e,o,t){"use strict";t.r(o);var n={meta:{comoLidar:{title:"Assistente executivo",group:"product-manager"}}},c=t(13),component=Object(c.a)(n,void 0,void 0,!1,null,null,null);o.default=component.exports}}]);

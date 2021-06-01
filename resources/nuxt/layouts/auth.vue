@@ -1,63 +1,36 @@
-<template><div class="layout-auth">
-    <div class="layout-auth-content p-3">
-        <nuxt />
-        <div class="row mt-3">
-            <div class="col-4"><nuxt-link to="/auth/" class="btn btn-link btn-block">Login</nuxt-link></div>
-            <div class="col-4"><nuxt-link to="/auth/register/" class="btn btn-link btn-block">Registrar</nuxt-link></div>
-            <div class="col-4"><nuxt-link to="/auth/password/" class="btn btn-link btn-block">Senha</nuxt-link></div>
-        </div>
+<template><div class="l-auth">
+  <div class="row no-gutters">
+    <div class="col-12 col-sm-4 col-md-7 d-none d-sm-flex l-auth-background" style="height:100vh;">
+      &nbsp;
     </div>
+
+    <div class="col-12 col-sm-8 col-md-5 d-flex align-items-center l-auth-pattern" style="height:100vh;">
+      <div class="mx-auto px-5" style="width:100%; max-width:500px;">
+
+        <div class="bg-white p-2 mb-2"><nuxt /></div>
+
+        <div class="bg-white d-block p-2">
+          <div><nuxt-link to="/auth">Fazer login</nuxt-link></div>
+          <div><nuxt-link to="/auth/register">Criar conta</nuxt-link></div>
+          <div><nuxt-link to="/auth/password">Recuperar senha</nuxt-link></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div></template>
 
-<script>export default {
-    components: {
-        // "ui-navbar": () => import("@/components/ui/ui-navbar"),
-    },
-
-    data() {
-        return {};
-    },
-};</script>
-
-
 <style>
-.layout-auth {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:url(https://source.unsplash.com/1600x900/?store,market,shop) center center no-repeat;
-    background-size: cover;
+.l-auth-background {
+  /* background: url(https://source.unsplash.com/random/800x600/?free,human&r=6) center center no-repeat; */
+  background: url(https://source.unsplash.com/collection/1534020/800x600) center center no-repeat;
+  background-size: cover;
 }
 
-.layout-auth:after {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom, #000000cc 0%, #00000022 40%, #00000022 60%, #000000cc 100%);
-}
-
-.layout-auth-content {
-    position: relative;
-    width: 400px;
-    max-width: 90%;
-    background:#ffffffdd;
-    z-index: 2;
-}
-
-.colorgraph {
-  height: 5px;
-  border-top: 0;
-  background: #c4e17f;
-  border-radius: 5px;
-  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+.l-auth-pattern {
+  background-color: #FFFFFF44;
+  background-image:  radial-gradient(#444CF744 1px, transparent 1px), radial-gradient(#444CF744 1px, #FFFFFF44 1px);
+  background-size: 40px 40px;
+  background-position: 0 0,20px 20px;
 }
 </style>

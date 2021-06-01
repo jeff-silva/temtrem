@@ -1,0 +1,1207 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel",
+        "description": "Atualizado em 21/03/2021 02:47",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Autenticação",
+                "description": "Autenticação",
+                "operationId": "authLogin",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Dados do usuário logado",
+                "description": "Dados do usuário logado",
+                "operationId": "authMe",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sair do sistema",
+                "description": "Sair do sistema",
+                "operationId": "authLogout",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Atualiza token",
+                "description": "Atualiza token",
+                "operationId": "authRefresh",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/auth/password-token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Inicia o processo de alteração de senha enviando e-mail com token para usuário",
+                "description": "Inicia o processo de alteração de senha enviando e-mail com token para usuário",
+                "operationId": "authPasswordToken",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/auth/password-refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Finaliza processo de alteração de senha recebendo e-mail, token, nova senha e confirmação de nova senha",
+                "description": "Finaliza processo de alteração de senha recebendo e-mail, token, nova senha e confirmação de nova senha",
+                "operationId": "authPasswordRefresh",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/email/search": {
+            "get": {
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Buscar Emails",
+                "description": "Buscar Emails",
+                "operationId": "email-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/email/find/{id}": {
+            "get": {
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Retornar Email por id",
+                "description": "Retornar Email por id",
+                "operationId": "email-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/email/save": {
+            "post": {
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Salvar Emails",
+                "description": "Salvar Emails",
+                "operationId": "email-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/email/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Deletar Email",
+                "description": "Deletar Email",
+                "operationId": "email-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/setting/search": {
+            "get": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Buscar Settings",
+                "description": "Buscar Settings",
+                "operationId": "setting-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/setting/find/{id}": {
+            "get": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Retornar Setting por id",
+                "description": "Retornar Setting por id",
+                "operationId": "setting-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/setting/save": {
+            "post": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Salvar Settings",
+                "description": "Salvar Settings",
+                "operationId": "setting-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/setting/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Deletar Setting",
+                "description": "Deletar Setting",
+                "operationId": "setting-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-business/search": {
+            "get": {
+                "tags": [
+                    "TemtremBusiness"
+                ],
+                "summary": "Buscar Negócios",
+                "description": "Buscar Negócios",
+                "operationId": "temtrem-business-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-business/find/{id}": {
+            "get": {
+                "tags": [
+                    "TemtremBusiness"
+                ],
+                "summary": "Retornar Negócio por id",
+                "description": "Retornar Negócio por id",
+                "operationId": "temtrem-business-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-business/save": {
+            "post": {
+                "tags": [
+                    "TemtremBusiness"
+                ],
+                "summary": "Salvar Negócios",
+                "description": "Salvar Negócios",
+                "operationId": "temtrem-business-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-business/delete/{id}": {
+            "post": {
+                "tags": [
+                    "TemtremBusiness"
+                ],
+                "summary": "Deletar Negócio",
+                "description": "Deletar Negócio",
+                "operationId": "temtrem-business-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-business/types": {
+            "get": {
+                "tags": [
+                    "TemtremBusiness"
+                ],
+                "summary": "Listar opções de type",
+                "description": "Listar opções de type",
+                "operationId": "temtrem-business-types",
+                "responses": {
+                    "200": {
+                        "description": "Dados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-business/type/{id}": {
+            "get": {
+                "tags": [
+                    "TemtremBusiness"
+                ],
+                "summary": "Pegar opção de type por ID",
+                "description": "Pegar opção de type por ID",
+                "operationId": "temtrem-business-type",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-item/search": {
+            "get": {
+                "tags": [
+                    "TemtremBusinessesItem"
+                ],
+                "summary": "Buscar Temtrem_businesses_items",
+                "description": "Buscar Temtrem_businesses_items",
+                "operationId": "temtrem-businesses-item-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-item/find/{id}": {
+            "get": {
+                "tags": [
+                    "TemtremBusinessesItem"
+                ],
+                "summary": "Retornar Temtrem_businesses_item por id",
+                "description": "Retornar Temtrem_businesses_item por id",
+                "operationId": "temtrem-businesses-item-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-item/save": {
+            "post": {
+                "tags": [
+                    "TemtremBusinessesItem"
+                ],
+                "summary": "Salvar Temtrem_businesses_items",
+                "description": "Salvar Temtrem_businesses_items",
+                "operationId": "temtrem-businesses-item-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-item/delete/{id}": {
+            "post": {
+                "tags": [
+                    "TemtremBusinessesItem"
+                ],
+                "summary": "Deletar Temtrem_businesses_item",
+                "description": "Deletar Temtrem_businesses_item",
+                "operationId": "temtrem-businesses-item-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-post/search": {
+            "get": {
+                "tags": [
+                    "TemtremBusinessesPost"
+                ],
+                "summary": "Buscar Temtrem_businesses_posts",
+                "description": "Buscar Temtrem_businesses_posts",
+                "operationId": "temtrem-businesses-post-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-post/find/{id}": {
+            "get": {
+                "tags": [
+                    "TemtremBusinessesPost"
+                ],
+                "summary": "Retornar Temtrem_businesses_post por id",
+                "description": "Retornar Temtrem_businesses_post por id",
+                "operationId": "temtrem-businesses-post-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-post/save": {
+            "post": {
+                "tags": [
+                    "TemtremBusinessesPost"
+                ],
+                "summary": "Salvar Temtrem_businesses_posts",
+                "description": "Salvar Temtrem_businesses_posts",
+                "operationId": "temtrem-businesses-post-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-businesses-post/delete/{id}": {
+            "post": {
+                "tags": [
+                    "TemtremBusinessesPost"
+                ],
+                "summary": "Deletar Temtrem_businesses_post",
+                "description": "Deletar Temtrem_businesses_post",
+                "operationId": "temtrem-businesses-post-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-category/search": {
+            "get": {
+                "tags": [
+                    "TemtremCategory"
+                ],
+                "summary": "Buscar Temtrem_categories",
+                "description": "Buscar Temtrem_categories",
+                "operationId": "temtrem-category-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-category/find/{id}": {
+            "get": {
+                "tags": [
+                    "TemtremCategory"
+                ],
+                "summary": "Retornar Temtrem_category por id",
+                "description": "Retornar Temtrem_category por id",
+                "operationId": "temtrem-category-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-category/save": {
+            "post": {
+                "tags": [
+                    "TemtremCategory"
+                ],
+                "summary": "Salvar Temtrem_categories",
+                "description": "Salvar Temtrem_categories",
+                "operationId": "temtrem-category-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/temtrem-category/delete/{id}": {
+            "post": {
+                "tags": [
+                    "TemtremCategory"
+                ],
+                "summary": "Deletar Temtrem_category",
+                "description": "Deletar Temtrem_category",
+                "operationId": "temtrem-category-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user/search": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Buscar Usuários",
+                "description": "Buscar Usuários",
+                "operationId": "user-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user/find/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Retornar Usuário por id",
+                "description": "Retornar Usuário por id",
+                "operationId": "user-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user/save": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Salvar Usuários",
+                "description": "Salvar Usuários",
+                "operationId": "user-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user/delete/{id}": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Deletar Usuário",
+                "description": "Deletar Usuário",
+                "operationId": "user-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user/types": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Listar opções de type",
+                "description": "Listar opções de type",
+                "operationId": "user-types",
+                "responses": {
+                    "200": {
+                        "description": "Dados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user/type/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Pegar opção de type por ID",
+                "description": "Pegar opção de type por ID",
+                "operationId": "user-type",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user-notification/search": {
+            "get": {
+                "tags": [
+                    "UserNotification"
+                ],
+                "summary": "Buscar User_notifications",
+                "description": "Buscar User_notifications",
+                "operationId": "user-notification-search",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termo de busca",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Página",
+                        "required": false
+                    },
+                    {
+                        "name": "perpage",
+                        "in": "query",
+                        "description": "Quantidade de resultados por página",
+                        "required": false
+                    },
+                    {
+                        "name": "orderby",
+                        "in": "query",
+                        "description": "Nome da coluna de referência para ordenação",
+                        "required": false
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordem asc ou desc",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user-notification/find/{id}": {
+            "get": {
+                "tags": [
+                    "UserNotification"
+                ],
+                "summary": "Retornar User_notification por id",
+                "description": "Retornar User_notification por id",
+                "operationId": "user-notification-find",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados de order"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user-notification/save": {
+            "post": {
+                "tags": [
+                    "UserNotification"
+                ],
+                "summary": "Salvar User_notifications",
+                "description": "Salvar User_notifications",
+                "operationId": "user-notification-save",
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        },
+        "/api/user-notification/delete/{id}": {
+            "post": {
+                "tags": [
+                    "UserNotification"
+                ],
+                "summary": "Deletar User_notification",
+                "description": "Deletar User_notification",
+                "operationId": "user-notification-delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados salvos"
+                    },
+                    "500": {
+                        "description": "{'message':'Erro', 'fields':[]}"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Autenticação"
+        },
+        {
+            "name": "Email",
+            "description": "Operações de Emails"
+        },
+        {
+            "name": "Setting",
+            "description": "Operações de Settings"
+        },
+        {
+            "name": "TemtremBusiness",
+            "description": "Operações de Negócios"
+        },
+        {
+            "name": "TemtremBusinessesItem",
+            "description": "Operações de Temtrem_businesses_items"
+        },
+        {
+            "name": "TemtremBusinessesPost",
+            "description": "Operações de Temtrem_businesses_posts"
+        },
+        {
+            "name": "TemtremCategory",
+            "description": "Operações de Temtrem_categories"
+        },
+        {
+            "name": "User",
+            "description": "Operações de Usuários"
+        },
+        {
+            "name": "UserNotification",
+            "description": "Operações de User_notifications"
+        }
+    ],
+    "security": [
+        []
+    ]
+}

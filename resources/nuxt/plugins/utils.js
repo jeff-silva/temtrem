@@ -1,8 +1,23 @@
 import Vue from 'vue';
 
+// https://github.com/Akryum/v-tooltip
+import VTooltip from 'v-tooltip'
+Vue.use(VTooltip);
+
+// https://github.com/avil13/vue-sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
+
+// https://vuejs-tips.github.io/vue-the-mask/
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask);
+
+// https://element.eleme.io/
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/pt-BR';
+Vue.use(ElementUI, {locale});
 
 
 Vue.prototype.$log = function() {
@@ -11,71 +26,101 @@ Vue.prototype.$log = function() {
 	}
 };
 
-
-Vue.prototype.$swalConfirm = function(html, call) {
-	this.$swal({
-		title: "Confirmação",
-		html: html,
-	}).then((resp) => {
-		if (resp.value) {
-			call();
-		}
-	});
+Vue.prototype.$env = {
+	NODE_ENV: process.env.NODE_ENV,
+	APP_NAME: process.env.APP_NAME,
+	APP_DESCRIPTION: process.env.APP_DESCRIPTION,
+	APP_VERSION: (require('../../../package.json').version || '0.0.0'),
+	APP_COLOR: (process.env.APP_COLOR || false),
+	APP_LANG: (process.env.APP_LANG || false),
 };
 
-
-Vue.prototype.$swalSuccess = function(title, html) {
-	this.$swal({
-		title: title,
-		html: html,
-		icon: 'success',
-	});
-};
-
-
-Vue.prototype.$swalPrompt = function(question, callback) {
-    this.$swal({
-        // title: 'Submit your Github username',
-        html: question,
-        input: 'text',
-        showCancelButton: true,
-        confirmButtonText: 'Confirmar',
-    }).then((result) => {
-        if (!result.isConfirmed) return;
-        callback(result.value);
-    });
-};
-
-
-Vue.prototype.$user = function(attr) {
-	let user = JSON.parse(localStorage.getItem('user'));
-	if (attr) return user[attr]||false;
-	return user;
-};
-
-
-Vue.prototype.$geolocation = function() {
-	if (!navigator.geolocation) return;
+Vue.prototype.$copy = function(text) {
 	return new Promise((resolve, reject) => {
-		navigator.geolocation.getCurrentPosition((pos) => {
-			resolve({
-				lat: pos.coords.latitude,
-				lng: pos.coords.longitude,
-			})
-		}, reject);
+		if (text.nodeType) {
+			text = text.innerText;
+		}
+	
+		let ta = Object.assign(document.createElement('textarea'), {
+			style: {position:"fixed", top:-1000},
+			value: text,
+		});
+	
+		document.body.appendChild(ta);
+		ta.focus();
+		ta.select();
+		let bool = document.execCommand('copy');
+		document.body.removeChild(ta);
+		
+		if (bool) resolve(text);
+		else reject('Erro ao copiar');
 	});
 };
 
+Vue.prototype.$debounce = function(fn, delay=500) {
+	window.vueTimeouts = window.vueTimeouts||{};
+	let id = fn.toString();
+	if (window.vueTimeouts[id]) clearTimeout(window.vueTimeouts[id]);
+	window.vueTimeouts[id] = setTimeout(fn, delay);
+};
 
-Vue.filter('date', function(date) {
-	let d = (date||'').split(/[^0-9a-zA-Z]/g);
-	if (!d[1]) return '';
-	return `${d[2]}/${d[1]}/${d[0]} ${d[3]}:${d[4]}`;
+Vue.prototype.$push = function(sessions, callback) {
+	let preventFirstRun = true;
+	this.$fire.database.ref('push').on('value', (snap) => {
+		// if (preventFirstRun) {
+		// 	preventFirstRun = false;
+		// 	return callback({model: {}});
+		// }
+
+		let value = snap.val();
+		sessions = Array.isArray(sessions)? sessions: [sessions];
+		sessions.forEach(session => {
+			if (value.session!=session) return;
+			callback(value);
+		});
+	});
+};
+
+Vue.prototype.$graphql = function(query) {
+	return this.$axios.post('/graphql', {query});
+};
+
+// Filters
+
+import moment from 'moment';
+
+Vue.filter('date', function(value, format='DD/MM/YYYY') {
+	let d = moment(value);
+	return d.isValid()? d.format(format): '';
+});
+
+Vue.filter('time', function(value, format='hh:mm') {
+	let d = moment(value);
+	return d.isValid()? d.format(format): '';
+});
+
+Vue.filter('datetime', function(value, format='DD/MM/YYYY à\\s hh:mm') {
+	let d = moment(value);
+	return d.isValid()? d.format(format): '';
+});
+
+Vue.filter('numberFormat', function(value, decimals=2, decimal_separator='.', thousands_separator=',') {
+	value = isNaN(value)? 0: value;
+	return new Intl.NumberFormat('pt-BR', {minimumSignificantDigits:decimals, maximumSignificantDigits:decimals})
+		.format(value).split(',').map(n => n.replace(/\./g, decimal_separator))
+		.join(thousands_separator);
 });
 
 
-Vue.prototype.modelDefault = function(name=false) {
-	let models = require('@/plugins/models.json');
-	if (name) return models[name]||{};
-	return models;
-};
+Vue.filter('linkWhatsapp', function(number, text='') {
+	number = (number||'').replace(/[^0-9]/g, '');
+	text = encodeURI(text);
+	return `https://api.whatsapp.com/send?phone=${number}&text=${text}`;
+});
+
+// Directives
+
+
+
+// Redirect
+// https://auth.nuxtjs.org/api/auth/#onredirecthandler

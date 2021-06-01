@@ -1,0 +1,10 @@
+{
+    "name": "JToolKit",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_title": "JToolKit Embed",
+        "default_icon": "https://jtoolkit.herokuapp.com/favicon.ico",
+        "default_popup": "popup.html"
+    }
+}

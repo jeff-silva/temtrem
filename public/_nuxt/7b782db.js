@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[67],{766:function(t,n,o){"use strict";o.r(n);var r={layout:"tools",meta:{comoLidar:{title:"Ditador",group:"product-manager"}}},e=o(13),component=Object(e.a)(r,(function(){var t=this.$createElement;return(this._self._c||t)("div",[this._v("\r\n    Ditador\r\n")])}),[],!1,null,null,null);n.default=component.exports}}]);

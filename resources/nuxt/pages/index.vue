@@ -1,13 +1,14 @@
+<!-- Clone from auth/index.vue -->
+
 <template><div>
-    <div class="container">
-        Bem vindo.
-    </div>
+    <PageIndex></PageIndex>
 </div></template>
 
-<script>export default {
-    layout: 'site',
+<script>
+import PageIndex from './tools/index.vue';
 
-    data() {
-        return {};
-    },
-};</script>
+export default {
+    layout: 'tools',
+    components: { PageIndex },
+};
+</script>

@@ -1,0 +1,151 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+
+/* Font Awesome */
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import "animate.css/animate.css";
+
+$theme-colors: (
+  // "primary": #ED1C24,
+
+  "bitbucket": #205081,
+  "dropbox": #007ee5,
+  "facebook": #3b5999,
+  "flickr": #2BA9E1,
+  "foursquare": #f94877,
+  "github": #444444,
+  "google": #DD4B39,
+  "instagram": #3F729B,
+  "linkedin": #007BB6,
+  "medium": #02b875,
+  "messenger": #0084ff,
+  "microsoft": #2672EC,
+  "pinterest": #CB2027,
+  "reddit": #EFF7FF,
+  "skype": #00AFF0,
+  "slack": #3aaf85,
+  "soundcloud": #ff3300,
+  "tumblr": #CB2027,
+  "twitter": #55ACEE,
+  "vimeo": #1AB7EA,
+  "vk": #587EA3,
+  "whatsapp": #25D366,
+  "wordpress": #21759b,
+  "yahoo": #720E9E,
+  "youtube": #cd201f
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+
+/* v-tooltip */
+.tooltip {
+  display: block !important;
+  z-index: 10000;
+
+  .tooltip-inner {
+    background: #000000dd;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 10px 4px;
+  }
+
+  .tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+    border-color: black;
+    z-index: 1;
+  }
+
+  &[x-placement^="top"] {
+    margin-bottom: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 0 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      bottom: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^="bottom"] {
+    margin-top: 5px;
+
+    .tooltip-arrow {
+      border-width: 0 5px 5px 5px;
+      border-left-color: transparent !important;
+      border-right-color: transparent !important;
+      border-top-color: transparent !important;
+      top: -5px;
+      left: calc(50% - 5px);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  &[x-placement^="right"] {
+    margin-left: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 5px 5px 0;
+      border-left-color: transparent !important;
+      border-top-color: transparent !important;
+      border-bottom-color: transparent !important;
+      left: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[x-placement^="left"] {
+    margin-right: 5px;
+
+    .tooltip-arrow {
+      border-width: 5px 0 5px 5px;
+      border-top-color: transparent !important;
+      border-right-color: transparent !important;
+      border-bottom-color: transparent !important;
+      right: -5px;
+      top: calc(50% - 5px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .15s, visibility .15s;
+  }
+
+  &[aria-hidden='false'] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .15s;
+  }
+}
+
+/* Bootstrap "fixes" */
+.btn, .form-control {height:auto; outline:none!important; box-shadow:none!important; border-radius:2px!important;}
+.form-control {border-color:#00000008;}
+.alert {background:none!important; border-radius:0px !important; border-width:1px 1px 1px 10px !important;}
+
+/* Element ui input select width */
+.el-input, .el-select {display:block !important; width:auto !important;}
+
+// Element ui loading background
+.el-loading-mask {background-color: #ffffff44 !important;}
+
+// Element.io accordion title
+.el-collapse-item__header {font-weight:bold!important; padding:0px 6px !important;}
+.el-collapse-item__content {padding:0px 6px !important;}

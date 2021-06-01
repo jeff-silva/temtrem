@@ -1,57 +1,28 @@
-<template><div class="form-group">
-    <div class="row">
-        <div class="col-12 col-md-4 col-lg-3 p-2">
+<template><div class="form-group row no-gutters mb-3">
+    <template v-if="horizontal">
+        <label>{{ label }}</label>
+        <slot name="default"></slot>
+        <small class="d-block text-muted" v-if="help" v-html="help"></small>
+        <small class="d-block text-danger" v-if="error" v-html="error"></small>
+    </template>
+
+    <template v-else>
+        <div class="col-12 col-md-4 col-lg-3 p-2 px-0 px-md-2">
             <div>{{ label }}</div>
+            <small class="d-block text-muted" v-if="help" v-html="help"></small>
         </div>
         <div class="col-12 col-md-8 col-lg-9">
-            <template v-if="$slots.field"><slot name="field"></slot></template>
-
-            <template v-else-if="type=='textarea'">
-                <textarea class="form-control" v-model="props.value" @keyup="emit()"></textarea>
-            </template>
-
-            <template v-else>
-                <input :type="type" class="form-control"
-                    :placeholder="placeholder" v-model="props.value" @keyup="emit()" >
-            </template>
-
-            <small class="d-block text-danger" v-if="props.error" v-html="props.error"></small>
-            <small class="text-muted" v-if="$slots.hint"><slot name="hint"></slot></small>
+            <slot name="default"></slot>
+            <small class="d-block text-danger mt-1 mx-1" v-if="error">{{ error }}</small>
         </div>
-    </div>
+    </template>
 </div></template>
 
 <script>export default {
     props: {
-        value: {default: ''},
+        horizontal: {default: false},
         label: {default: ''},
-        placeholder: {default: ''},
-        type: {default: 'text'},
-        imgMaxWidth: {default: 800},
-        imgMaxHeight: {default: 600},
+        help: {default: ''},
         error: {default: ''},
-    },
-
-    watch: {
-        $props: {
-            deep: true,
-            handler(value) {
-                this.props = Object.assign({}, value);
-            },
-        },
-    },
-
-    methods: {
-        emit() {
-            this.$emit('input', this.props.value);
-            this.$emit('value', this.props.value);
-            this.$emit('change', this.props.value);
-        },
-    },
-
-    data() {
-        return {
-            props: Object.assign({}, this.$props),
-        };
     },
 };</script>

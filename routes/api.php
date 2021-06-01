@@ -18,89 +18,39 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
+// Apps
+// Route::get('/', '\App\Http\Controllers\AppController@index');
+Route::get('/upload', '\App\Http\Controllers\AppController@upload');
+Route::get('/test', '\App\Http\Controllers\AppController@test');
+Route::get('/dashboard', '\App\Http\Controllers\AppController@dashboard');
+Route::get('/app/navigation', '\App\Http\Controllers\AppController@getNavigation');
+Route::get('/cron', '\App\Http\Controllers\AppController@cron');
+
+
+
+// Auth routes
+Route::group(['middleware' => 'api'], function($router) {
+    Route::post('auth/login', '\App\Http\Controllers\AuthController@login');
+    Route::post('auth/logout', '\App\Http\Controllers\AuthController@logout');
+    Route::post('auth/refresh', '\App\Http\Controllers\AuthController@refresh');
+    Route::post('auth/me', '\App\Http\Controllers\AuthController@me');
+    Route::post('auth/password-token', '\App\Http\Controllers\AuthController@passwordToken');
+    Route::post('auth/password-reset', '\App\Http\Controllers\AuthController@passwordReset');
 });
 
-Route::post('/call', function() {
-    $class = '\App\\'. request()->input('class');
-    $method = request()->input('method');
-    $arguments = request()->input('arguments');
-    $attributes = request()->input('attributes');
-
-    $instance = call_user_func([$class, 'find'], $attributes['id']);
-    $instance = $instance? $instance: new $class();
-    $instance->fill($attributes);
-
-    $call = [$instance, $method];
-    if (is_callable($call) AND is_array($instance->jsMethods) AND isset($instance->jsMethods[$method])) {
-        return call_user_func_array($call, $arguments);
-    }
-
-    return ['error' => 'Cant execute'];
-});
-
-foreach(\App\Utils::classes() as $model) {
-    $instance = new $model;
-    $table_name = $instance->getTable();
-    Route::group(['prefix' => $table_name], function($router) use($model, $instance, $table_name) {
-        if (in_array('endpoints', get_class_methods($instance))) {
-            call_user_func([$instance, 'endpoints']);
-        }
-    
-        // search
-        $call = function() use($instance) {
-            $input = request()->all();
-            return $instance->get();
-        };
-        
-        if (in_array('search', get_class_methods($instance))) {
-            $call = function() use($instance) {
-                return call_user_func([$instance, 'search'], request()->all());
-            };
-        }
-        
-        \Route::get('/search', $call);
-
-    
-        // find by id
-        \Route::get('/find', function() {
-            $request = request();
-            return $request->all();
-        });
-    
-        //  save
-        \Route::post('/save', function() use($model, $instance) {
-            $request = request();
-            $all = array_merge($instance->ToArray(), $request->all());
-            if (isset($all['id'])) unset($all['id']);
-            $save = call_user_func([$model, 'find'], $request->input('id'));
-            $save = $save? $save: new $model;
-            $save->fill($all)->save();
-            return $save;
-        });
-    
-        //  delete
-        \Route::post('/delete', function() {
-            $request = request();
-            return $request->all();
-        });
-    });
-}
 
 
-Route::get('/', function() {
-    $routes = [];
+// Route::group(['middleware' => ['auth:api', 'permission']], function($router) {
+// });
 
-    foreach(\Route::getRoutes() as $route) {
-        $routes[] = [
-            'methods' => $route->methods(),
-            'uri' => $route->uri(),
-        ];
-    }
 
-    return $routes;
-});
+
+// Convigurações
+// Route::get('/setting/search', '\App\Http\Controllers\SettingController@search');
+// Route::get('/setting/find/{id}', '\App\Http\Controllers\SettingController@find');
+// Route::post('/setting/save', '\App\Http\Controllers\SettingController@save');
+// Route::post('/setting/delete/{id}', '\App\Http\Controllers\SettingController@delete');
+// Route::get('/setting/load-all', '\App\Http\Controllers\SettingController@loadAll');
+// Route::post('/setting/save-all', '\App\Http\Controllers\SettingController@saveAll');
+
+include __DIR__ . '/api-generated.php';

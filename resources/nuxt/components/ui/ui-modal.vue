@@ -3,25 +3,28 @@
         enter-active-class="animate__animated animate__fadeIn"
         leave-active-class="animate__animated animate__fadeOut"
     >
-        <div v-if="props.value" class="ui-modal" @click.self="props.value=false; emit();" style="animation-duration:300ms;">
-            <component :is="tag" @submit.prevent="$emit('submit', $event)">
-                <div class="card">
-                    <div class="card-header" v-if="$slots.header">
-                        <slot name="header"></slot>
+        <div class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLiveLabel"
+            style="display:block; background:#00000044; animation-duration:200ms;"
+            v-if="props.value" @click.self="toggle()"
+            aria-modal="true" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" v-if="$slots.header && $scopedSlots.header">
+                            <slot name="header"></slot>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggle()">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
-
-                    <div class="card-body">
+                    <div class="modal-body">
                         <slot name="body"></slot>
                     </div>
-
-                    <div class="card-footer text-right">
-                        <button type="button" class="btn pull-left" @click="props.value=false; emit();">
-                            Ok
-                        </button>
+                    <div class="modal-footer" v-if="$slots.footer && $scopedSlots.footer">
                         <slot name="footer"></slot>
                     </div>
                 </div>
-            </component>
+            </div>
         </div>
     </transition>
 </div></template>
@@ -33,12 +36,9 @@
     },
 
     watch: {
-        $props: {
-            deep: true,
-            handler(value) {
-                this.props = Object.assign({}, value);
-            },
-        },
+        $props: {deep: true, handler(value) {
+            this.props = Object.assign({}, value);
+        }},
     },
 
     methods: {
@@ -50,6 +50,7 @@
 
         toggle() {
             this.props.value = !this.props.value;
+            this.emit();
         },
     },
 
@@ -68,13 +69,17 @@
     width: 100vw;
     height: 100vh;
     background: #00000033;
-    z-index: 99 !important;
+    z-index: 9999 !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 !important;
 }
 .ui-modal .card {
     width: 600px;
-    max-width: 90% !important;
+    max-width: 90vw !important;
+    max-height: 90vh;
+    margin: 0 !important;
+    overflow: auto !important;
 }
 </style>

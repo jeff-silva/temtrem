@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -27,29 +26,31 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
+     * Register the exception handling callbacks for the application.
      *
-     * @param  \Throwable  $exception
      * @return void
-     *
-     * @throws \Exception
      */
-    public function report(Throwable $exception)
-    {
-        parent::report($exception);
-    }
+    public function register()
+    {   
+        if (\Request::is('api/*')) {
+            $this->renderable(function (\Exception $e, $request) {
+                $message = $e->getMessage();
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Throwable
-     */
-    public function render($request, Throwable $exception)
-    {
-        return parent::render($request, $exception);
+                $error = json_decode($message, true);
+                $error = is_array($error)? $error: [];
+                $error = array_merge([
+                    'message' => $message,
+                    'fields' => [],
+                ], $error);
+
+                if (! app()->environment('production')) {
+                    $error['file'] = $e->getFile();
+                    $error['line'] = $e->getLine();
+                    $error['debug'] = debug_backtrace();
+                }
+                
+                return response()->json($error, 500);
+            });
+        }
     }
 }

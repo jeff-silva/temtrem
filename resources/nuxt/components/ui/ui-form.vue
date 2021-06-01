@@ -1,21 +1,26 @@
 <template><form class="ui-form" :method="method" :action="action" @submit.prevent="submit()">
-    <slot :loading="loading"></slot>
+    <div v-if="responseSuccess && ($slots.success || $scopedSlots.success)" class="alert alert-success">
+        <slot name="success" :response="responseSuccess"></slot>
+    </div>
+
+    <slot name="error" :errorMessage="responseErrorMessage" :fields="responseErrorFields" v-if="responseErrorMessage">
+        <div class="alert alert-danger" v-if="responseErrorMessage" v-html="responseErrorMessage"></div>
+    </slot>
+
+    <slot :loading="loading" :error="responseErrorFields" :errorMessage="responseErrorMessage" :success="responseSuccess"></slot>
 </form></template>
 
 <script>export default {
     props: {
         value: {default: ()=>({})},
         method: {default: 'post'},
-        action: {default: 'api'},
+        action: {default: ''},
     },
 
     watch: {
-        $props: {
-            deep: true,
-            handler(value) {
-                this.props = Object.assign({}, value);
-            },
-        },
+        $props: {deep:true, handler(value) {
+            this.props = Object.assign({}, value);
+        }},
     },
 
     methods: {
@@ -26,23 +31,46 @@
         },
 
         submit() {
-            let method = this.$axios[this.method];
-            let params = this.method=='get'? {params:this.props.value}: this.props.value;
-
-            this.loading = `<i class="fa fa-fw fa-spin fa-spinner"></i>`;
-            method(this.action, params).then((resp) => {
-                this.loading = false;
-                this.$emit('saved', this.props.value);
-            }).catch((err, a, b, c, d) => {
-                this.loading = false;
-                console.log(err, a, b, c, d);
+            if (this.action && this.method && this.$axios[this.method]) {
+                let method = this.$axios[this.method];
+                let params = this.method=='get'? {params:this.props.value}: this.props.value;
+    
+                this.loading = `<i class="fa fa-fw fa-spin fa-spinner"></i>`;
+                this.responseSuccess = false;
+                this.responseErrorMessage = false;
+                this.responseErrorFields = {};
+    
+                method(this.action, params).then((resp) => {
+                    this.loading = '';
+                    this.responseSuccess = resp.data;
+                    this.$emit('success', this.responseSuccess);
+                }).catch((err) => {
+                    this.loading = '';
+                    this.responseErrorMessage = err.response.data.message||'Erro';
+                    this.responseErrorFields = err.response.data.fields||{};
+                    for(let i in this.responseErrorFields) {
+                        if (Array.isArray(this.responseErrorFields[i])) {
+                            this.responseErrorFields[i] = this.responseErrorFields[i].join('<br>');
+                        }
+                    }
+                    this.$emit('error', this.responseErrorFields);
+                });
+            }
+            
+            this.$emit('submit', {
+                action: this.props.action,
+                method: this.props.method,
+                value: this.props.value,
             });
         },
     },
 
     data() {
         return {
-            loading: false,
+            loading: '',
+            responseSuccess: false,
+            responseErrorMessage: false,
+            responseErrorFields: {},
             props: Object.assign({}, this.$props),
         };
     },
