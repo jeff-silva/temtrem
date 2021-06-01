@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "npm run mix:dev && npm run nuxt:dev && php artisan app:deploy",
+        "dev": "npm run mix:dev && npm run nuxt:dev && php artisan app:build",
         "build": "npm run mix:build && npm run nuxt:build",
         "lint": "eslint --ext .js,.vue .",
         "lint:fix": "npm run lint -- --fix",
@@ -17,7 +17,8 @@
         "nuxt:dev": "nuxt",
         "nuxt:build": "nuxt build",
         "nuxt:test": "jest",
-        "release": "standard-version"
+        "release": "standard-version",
+        "heroku-postbuild": "php artisan app:deploy"
     },
     "devDependencies": {
         "@commitlint/cli": "^11.0.0",
