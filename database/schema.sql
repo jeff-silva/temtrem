@@ -1,19 +1,5 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE TABLE IF NOT EXISTS `correio_rastreamentos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `object` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` text COLLATE utf8_unicode_ci,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_correios_rastreamentos_users` (`user_id`),
-  CONSTRAINT `FK_correios_rastreamentos_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 CREATE TABLE IF NOT EXISTS `emails` (
   `id` int(11) NOT NULL,
   `from` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -56,6 +42,15 @@ CREATE TABLE IF NOT EXISTS `settings` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `temtrem_stores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -82,118 +77,6 @@ CREATE TABLE IF NOT EXISTS `users_notifications` (
   KEY `FK_users_notifications_users` (`user_id`),
   CONSTRAINT `FK_users_notifications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'id')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'user_id')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `user_id` bigint(20) unsigned NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `user_id` bigint(20) unsigned NULL;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'name')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `name` varchar(255) NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `name` varchar(255) NULL;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'object')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `object` varchar(255) NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `object` varchar(255) NULL;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'data')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `data` text NULL DEFAULT NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `data` text NULL DEFAULT NULL;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'created_at')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `created_at` datetime NULL DEFAULT NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `created_at` datetime NULL DEFAULT NULL;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'updated_at')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `updated_at` datetime NULL DEFAULT NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `updated_at` datetime NULL DEFAULT NULL;
-
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'correio_rastreamentos' AND COLUMN_NAME = 'deleted_at')) THEN
-    ALTER TABLE `correio_rastreamentos` ADD COLUMN `deleted_at` datetime NULL DEFAULT NULL;
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-
-ALTER TABLE `correio_rastreamentos` MODIFY COLUMN `deleted_at` datetime NULL DEFAULT NULL;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS _temp_procedure $$
@@ -521,6 +404,76 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS _temp_procedure $$
 CREATE PROCEDURE _temp_procedure()
 BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_stores' AND COLUMN_NAME = 'id')) THEN
+    ALTER TABLE `temtrem_stores` ADD COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_stores` MODIFY COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_stores' AND COLUMN_NAME = 'name')) THEN
+    ALTER TABLE `temtrem_stores` ADD COLUMN `name` varchar(255) NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_stores` MODIFY COLUMN `name` varchar(255) NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_stores' AND COLUMN_NAME = 'created_at')) THEN
+    ALTER TABLE `temtrem_stores` ADD COLUMN `created_at` datetime NULL DEFAULT NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_stores` MODIFY COLUMN `created_at` datetime NULL DEFAULT NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_stores' AND COLUMN_NAME = 'updated_at')) THEN
+    ALTER TABLE `temtrem_stores` ADD COLUMN `updated_at` datetime NULL DEFAULT NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_stores` MODIFY COLUMN `updated_at` datetime NULL DEFAULT NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
+IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'temtrem_stores' AND COLUMN_NAME = 'deleted_at')) THEN
+    ALTER TABLE `temtrem_stores` ADD COLUMN `deleted_at` datetime NULL DEFAULT NULL;
+END IF;
+END $$
+CALL _temp_procedure() $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+DELIMITER ;
+
+ALTER TABLE `temtrem_stores` MODIFY COLUMN `deleted_at` datetime NULL DEFAULT NULL;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS _temp_procedure $$
+CREATE PROCEDURE _temp_procedure()
+BEGIN
 IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users' AND COLUMN_NAME = 'id')) THEN
     ALTER TABLE `users` ADD COLUMN `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
 END IF;
@@ -754,7 +707,6 @@ DROP PROCEDURE IF EXISTS _temp_procedure $$
 DELIMITER ;
 
 ALTER TABLE `users_notifications` MODIFY COLUMN `deleted_at` timestamp NULL;
-
 
 
 SET FOREIGN_KEY_CHECKS = 1;
