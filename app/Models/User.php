@@ -32,6 +32,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject {
 
 	public function setPasswordAttribute($value) {
 		if (! $value) return;
+		if (! \Hash::needsRehash($value)) return;
 		return $this->attributes['password'] = \Hash::make($value);
 	}
 
@@ -58,23 +59,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject {
 		return $this->hasMany(\App\Models\TemtremBusiness::class, 'user_id', 'id');
 	}
 
-	public function temtremBusinessesItems() {
-		return $this->hasMany(\App\Models\TemtremBusinessesItem::class, 'store', 'id');
-	}
-
-	public function userNotifications() {
-		return $this->hasMany(\App\Models\UserNotification::class, 'user_id', 'id');
-	}
-
 	public function usersNotifications() {
 		return $this->hasMany(\App\Models\UsersNotification::class, 'user_id', 'id');
-	}
-
-	public function correiosRastreamentos() {
-		return $this->hasMany(\App\Models\CorreiosRastreamento::class, 'user_id', 'id');
-	}
-
-	public function correioRastreamentos() {
-		return $this->hasMany(\App\Models\CorreioRastreamento::class, 'user_id', 'id');
 	}
 }

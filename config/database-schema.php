@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Gerado em 02/06/2021 às 05:56:57
+ * Gerado em 02/06/2021 às 06:47:25
  * Por favor, não altere manualmente.
  */
 
@@ -301,20 +301,20 @@ return [
         ],
       ],
     ],
-    'temtrem_products' => [
-      'Name' => 'temtrem_products',
+    'temtrem_businesses' => [
+      'Name' => 'temtrem_businesses',
       'Engine' => 'InnoDB',
       'Version' => 10,
       'Row_format' => 'Dynamic',
-      'Rows' => 0,
-      'Avg_row_length' => 0,
+      'Rows' => 2,
+      'Avg_row_length' => 8192,
       'Data_length' => 16384,
       'Max_data_length' => 0,
-      'Index_length' => 0,
+      'Index_length' => 16384,
       'Data_free' => 0,
-      'Auto_increment' => 1,
-      'Create_time' => '2021-06-01 02:11:53',
-      'Update_time' => NULL,
+      'Auto_increment' => 3,
+      'Create_time' => '2021-06-02 03:15:19',
+      'Update_time' => '2021-06-02 03:44:04',
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
       'Checksum' => NULL,
@@ -328,6 +328,14 @@ return [
           'Key' => 'PRI',
           'Default' => NULL,
           'Extra' => 'auto_increment',
+        ],
+        'user_id' => [
+          'Field' => 'user_id',
+          'Type' => 'bigint(20) unsigned',
+          'Null' => 'YES',
+          'Key' => 'MUL',
+          'Default' => NULL,
+          'Extra' => '',
         ],
         'name' => [
           'Field' => 'name',
@@ -363,8 +371,8 @@ return [
         ],
       ],
     ],
-    'temtrem_stores' => [
-      'Name' => 'temtrem_stores',
+    'temtrem_products' => [
+      'Name' => 'temtrem_products',
       'Engine' => 'InnoDB',
       'Version' => 10,
       'Row_format' => 'Dynamic',
@@ -375,7 +383,7 @@ return [
       'Index_length' => 0,
       'Data_free' => 0,
       'Auto_increment' => 1,
-      'Create_time' => '2021-06-01 01:58:41',
+      'Create_time' => '2021-06-01 02:11:53',
       'Update_time' => NULL,
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
@@ -607,6 +615,20 @@ return [
     ],
   ],
   'fks' => [
+    'FK_temtrem_business_users' => [
+      'CONSTRAINT_CATALOG' => 'def',
+      'CONSTRAINT_SCHEMA' => 'temtrem',
+      'CONSTRAINT_NAME' => 'FK_temtrem_business_users',
+      'TABLE_CATALOG' => 'def',
+      'TABLE_SCHEMA' => 'temtrem',
+      'TABLE_NAME' => 'temtrem_businesses',
+      'COLUMN_NAME' => 'user_id',
+      'ORDINAL_POSITION' => 1,
+      'POSITION_IN_UNIQUE_CONSTRAINT' => 1,
+      'REFERENCED_TABLE_SCHEMA' => 'temtrem',
+      'REFERENCED_TABLE_NAME' => 'users',
+      'REFERENCED_COLUMN_NAME' => 'id',
+    ],
     'FK_users_notifications_users' => [
       'CONSTRAINT_CATALOG' => 'def',
       'CONSTRAINT_SCHEMA' => 'temtrem',

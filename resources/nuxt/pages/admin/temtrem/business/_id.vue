@@ -1,5 +1,5 @@
 <template><div>
-    <ui-form action="/api/user/save" method="post" v-model="model"
+    <ui-form action="/api/temtrem-business/save" method="post" v-model="model"
         @success="successHandler($event)"
         #default="{loading, error}"
     >
@@ -7,8 +7,8 @@
             <input type="text" class="form-control" v-model="model.name">
         </ui-field>
 
-        <ui-field label="e-mail" :error="error.email">
-            <input type="text" class="form-control" v-model="model.email">
+        <ui-field label="Proprietário" :error="error.user_id">
+            <ui-user v-model="model.user_id"></ui-user>
         </ui-field>
 
         <ui-actions>
@@ -34,12 +34,12 @@ export default {
     methods: {
         successHandler(model) {
             this.$swal('', 'Negócio salva', 'success');
-            this.$router.push(`/admin/user/${model.id}`);
+            this.$router.push(`/admin/temtrem/business/${model.id}`);
         },
 
         modelLoad() {
             if (! +this.$route.params.id) return;
-            this.$axios.get(`/api/user/find/${this.$route.params.id}`).then(resp => {
+            this.$axios.get(`/api/temtrem-business/find/${this.$route.params.id}`).then(resp => {
                 this.model = resp.data;
             });
         },

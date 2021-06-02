@@ -75,7 +75,7 @@ export default {
                 children: [
                     {
                         label: "Usuários",
-                        to: "/admin/users",
+                        to: "/admin/user",
                         icon: false,
                         children: []
                     },
@@ -95,7 +95,7 @@ export default {
                 children: [
                     {
                         label: "Lojas",
-                        to: "/admin/temtrem/businesses",
+                        to: "/admin/temtrem/business",
                         icon: false,
                         children: []
                     },
