@@ -98,14 +98,14 @@ export default {
 		'nuxt-route-meta',
 	],
 
-	// module: {
-	// 	rules: [
-	// 		{
-	// 			test: /\.s[ac]ss$/i,
-	// 			use: ['style-loader', 'css-loader', 'sass-loader'],
-	// 		},
-	// 	],
-	// },
+	module: {
+		rules: [
+			{
+				test: /\.scss$/,
+				use: ['style-loader', 'css-loader'],
+			},
+		],
+	},
 
 	auth: {
 		// https://dev.auth.nuxtjs.org/api/options#redirect
