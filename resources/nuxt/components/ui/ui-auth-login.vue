@@ -21,7 +21,12 @@
     </form>
 </div></template>
 
-<script>export default {
+<script>
+export default {
+    props: {
+        redirect: {default:false},
+    },
+
     methods: {
         submit() {
             this.error = false;
@@ -30,6 +35,9 @@
                 this.loading = false;
                 if (resp.data.access_token) {
                     this.$emit('success', resp.data);
+                    if (this.redirect) {
+                        this.$router.push(this.redirect);
+                    }
                 }
             }).catch(err => {
                 this.error = err.response.data.message;
@@ -48,4 +56,5 @@
             },
         };
     },
-};</script>
+}
+</script>

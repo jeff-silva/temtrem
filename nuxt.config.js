@@ -110,7 +110,7 @@ export default {
 	auth: {
 		// https://dev.auth.nuxtjs.org/api/options#redirect
 		redirect: {
-			login: false,
+			login: '/auth',
 			logout: '/',
 			callback: false,
 			home: false,

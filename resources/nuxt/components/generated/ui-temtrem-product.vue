@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	name: "ui-correios-rastreamento",
+	name: "ui-temtrem-product",
 	
 	props: {
 		value: {default:"", type:[Number, String, Array]},
@@ -32,7 +32,7 @@ export default {
 		},
 		
 		remoteSearch(q='', id=null) {
-			this.$axios.get('/api/correios-rastreamento/search', {params:{q, id}}).then(resp => {
+			this.$axios.get('/api/temtrem-product/search', {params:{q, id}}).then(resp => {
 				this.items = resp.data.data;
 			});
 		},

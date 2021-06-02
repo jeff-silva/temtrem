@@ -1,10 +1,14 @@
 <template><div>
     <div class="row no-gutters">
         <div class="col-3 d-none d-md-block p-0 bg-white shadow">
-            <a href="" class="btn btn-primary d-block rounded-0">Refresh</a>
-            <a href="" class="btn btn-secondary d-block rounded-0">secondary</a>
-            <a href="" class="btn btn-warning d-block rounded-0">warning</a>
-            <a href="" class="btn btn-bitbucket d-block rounded-0">bitbucket</a>
+            <div v-if="$auth.user">
+                Bem vindo {{ $auth.user.name }}. <br>
+                <div><nuxt-link to="/admin">Admin</nuxt-link></div>
+                <ui-auth-logout>Sair</ui-auth-logout>
+            </div>
+            <div v-else>
+                <ui-auth-login></ui-auth-login>
+            </div>
         </div>
         <div class="col-12 col-md-9 p-0">
             <l-map v-bind="{zoom:13, center:[-19.9830486, -44.0079828]}" style="width:100%; height:100vh;">

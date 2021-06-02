@@ -44,10 +44,8 @@ class AppSchema extends Command
         $_procedure = function($query) {
             $procedureName = '_temporary';
             return implode("\n", [
-                "DROP PROCEDURE IF EXISTS `{$procedureName}`;",
-                "DELIMITER //",
-                "CREATE PROCEDURE `{$procedureName}`()",
-                "BEGIN",
+                "DROP PROCEDURE IF EXISTS `{$procedureName}`; DELIMITER //",
+                "CREATE PROCEDURE `{$procedureName}`() BEGIN",
                 "\tDECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;",
                 "\t{$query};",
                 "END // DELIMITER ; CALL {$procedureName}();",
@@ -58,7 +56,7 @@ class AppSchema extends Command
         $sqls = ['SET FOREIGN_KEY_CHECKS = 0;', ''];
         
         foreach($database_schema['tables'] as $table_name=>$table) {
-            // $sqls[] = "-- create table {$table_name} ";
+            $sqls[] = "-- create table {$table_name} ";
             $sql = collect(\DB::select("SHOW CREATE TABLE `{$table_name}`;"))->pluck('Create Table')->first();
             $sql = str_replace('CREATE TABLE', 'CREATE TABLE IF NOT EXISTS', $sql) .';';
             $sql = preg_replace('/AUTO_INCREMENT=\d+\s/', '', $sql);
@@ -66,39 +64,24 @@ class AppSchema extends Command
             $sqls[] = '';
         }
 
-
         foreach($database_schema['tables'] as $table_name=>$table) {
             foreach($table['Fields'] as $col_field=>$col) {
                 $fieldSchema = $this->getFieldSchema((array) $col);
-                // $sqls[] = "-- create field '{$col_field}' if not exists";
-                // $sqls[] = $_procedure("ALTER TABLE `{$table_name}` ADD COLUMN `{$col_field}` {$fieldSchema};");
-
-                $sqls[] = <<<EOF
-DELIMITER $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-CREATE PROCEDURE _temp_procedure()
-BEGIN
-IF NOT EXISTS((SELECT COUNT(COLUMN_NAME) FROM INFORMATION_SCHEMA.columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '{$table_name}' AND COLUMN_NAME = '{$col_field}')) THEN
-    ALTER TABLE `{$table_name}` ADD COLUMN `{$col_field}` {$fieldSchema};
-END IF;
-END $$
-CALL _temp_procedure() $$
-DROP PROCEDURE IF EXISTS _temp_procedure $$
-DELIMITER ;
-EOF;
-
+                $sqls[] = "-- create field '{$col_field}' if not exists";
+                $sqls[] = $_procedure("ALTER TABLE `{$table_name}` ADD COLUMN `{$col_field}` {$fieldSchema};");
                 $sqls[] = '';
                 
-                // $sqls[] = "-- modify field {$col_field} ";
+                $sqls[] = "-- modify field {$col_field} ";
                 $sqls[] = "ALTER TABLE `{$table_name}` MODIFY COLUMN `{$col_field}` {$fieldSchema};";
                 $sqls[] = '';
             }
         }
 
         foreach($database_schema['fks'] as $fk_name=>$fk) {
-            // $sqls[] = "-- creating fk if not exists";
-            // $sqls[] = $_procedure("ALTER TABLE {$fk['TABLE_NAME']} ADD CONSTRAINT {$fk_name} FOREIGN KEY ({$fk['COLUMN_NAME']}) REFERENCES {$fk['REFERENCED_TABLE_NAME']}({$fk['REFERENCED_COLUMN_NAME']});");
+            $sqls[] = "-- creating fk if not exists";
+            $sqls[] = $_procedure("ALTER TABLE {$fk['TABLE_NAME']} ADD CONSTRAINT {$fk_name} FOREIGN KEY ({$fk['COLUMN_NAME']}) REFERENCES {$fk['REFERENCED_TABLE_NAME']}({$fk['REFERENCED_COLUMN_NAME']});");
             $sqls[] = '';
+            dump($fk_name);
         }
         
         $sqls[] = 'SET FOREIGN_KEY_CHECKS = 1;';

@@ -2,17 +2,17 @@
 
     <el-drawer direction="ltr" :visible.sync="drawer" size="300px">
         <div style="height:100vh; overflow:auto;">
-            <app-nav></app-nav>
+            <app-nav class="layout-admin-nav"></app-nav>
         </div>
     </el-drawer>
 
     <div class="d-flex">
         <div class="bg-white shadow d-none d-lg-block" style="position:relative; z-index:10; min-width:250px; height:100vh; overflow:auto;">
-            <div class="bg-light p-3">
+            <div class="bg-light p-3" v-if="$auth.user">
                 <div class="font-weight-bold text-uppercase">{{ $store.state.auth.user.name }}</div>
                 <small class="d-block text-muted">{{ $store.state.auth.user.email }}</small>
             </div>
-            <app-nav></app-nav>
+            <app-nav class="layout-admin-nav"></app-nav>
         </div>
 
         <div class="flex-grow-1 bg-light" style="height:100vh; overflow:auto;">
@@ -25,7 +25,7 @@
 
                 <div class="flex-grow-1"></div>
                 
-                <div>
+                <div v-if="$auth.user">
                     {{ $store.state.auth.user.name }}
                 </div>
             </div>
@@ -56,7 +56,7 @@ export default {
 };</script>
 
 
-<style>
+<style module>
 @import url('https://fonts.googleapis.com/css?family=Exo');
 * {font-family: 'Exo', sans-serif;}
 
@@ -64,7 +64,4 @@ export default {
 *::-webkit-scrollbar {width:15px; height:15px;}
 *::-webkit-scrollbar-track {background:transparent;}
 *::-webkit-scrollbar-thumb {background:transparent; border-radius:6px; box-shadow: inset 0 0 10px 10px var(--gray); border: solid 3px transparent;}
-
-.layout-admin * {transition: all 300ms ease;}
-.layout-admin .el-drawer__header {display:none;}
 </style>

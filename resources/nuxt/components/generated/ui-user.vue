@@ -1,70 +1,48 @@
-<template>
-	<el-select v-model="props.value" filterable remote reserve-keyword
-		:multiple="props.multiple"
-		:placeholder="props.placeholder"
-		:loading="loading"
-		:remote-method="search"
-		@change="emitValue()" @input="emitValue()">
-		<el-option value="" v-if="!props.multiple">Nenhum</el-option>
-		<el-option v-for="i in results.data" :key="i[fieldValue]" :value="i[fieldValue]" :label="i[fieldLabel]">
-			{{ i.name }}
-		</el-option>
+<template><div>
+	<el-select v-model="props.value" :multiple="props.multiple"
+		@change="emitValue()" class="form-control p-0"
+		filterable remote :placeholder="props.placeholder"
+		reserve-keyword :remote-method="remoteSearch"
+	>
+		<el-option :value="i.id" :label="i.name||i.id" v-for="i in items" :key="i.id">{{ i.name||i.id }}</el-option>
 	</el-select>
-</template>
+</div></template>
 
 <script>
 export default {
+	name: "ui-user",
+	
 	props: {
-		value: [String, Number, Array, Object, Boolean],
+		value: {default:"", type:[Number, String, Array]},
+		placeholder: {default:'Selecionar'},
 		multiple: {default:false},
-		placeholder: {default:'Selecione'},
-		fieldValue: {default:'id'},
-		fieldLabel: {default:'name'},
 	},
 	
 	watch: {
 		$props: {deep:true, handler(value) {
-			this.props = Object.assign({}, value);
+			this.props = JSON.parse(JSON.stringify(value));
+			this.remoteSearch('', this.props.value);
 		}},
 	},
 	
-	data() {
-		return {
-			loading: false,
-			results: {data:[]},
-			props: Object.assign({}, this.$props),
-		};
-	},
-	
 	methods: {
-		emitValue() { this.$emit('input', this.props.value); },
+		emitValue() {
+			this.$emit('input', this.props.value);
+			this.$emit('change', this.props.value);
+		},
 		
-		search(term=false) {
-			this.loading = true;
-			// let params = {search:term, perpage:0};
-			// this.$axios.get('/api/user/search', {params}).then(resp => {
-			// 	this.loading = false;
-			// 	this.results = resp.data;
-			// });
-
-			let query = `query {
-				Users(first:50) {
-					data {
-						id
-						name
-					}
-				}
-			}`;
-
-			this.$graphql(query).then(resp => {
-				this.loading = false;
-				this.results.data = resp.data.data.Users.data;
+		remoteSearch(q='', id=null) {
+			this.$axios.get('/api/user/search', {params:{q, id}}).then(resp => {
+				this.items = resp.data.data;
 			});
 		},
 	},
 	
-	mounted() {
-		this.search();
+	data() {
+		return {
+			props: JSON.parse(JSON.stringify(this.$props)),
+			items: [],
+		};
 	},
-};
+}
 </script>

@@ -167,4 +167,20 @@ class UserController extends Controller
         return (new \App\Models\User)->type($id);
     }
                              
+
+	public function getSearch() {
+		return \App\Models\User::querySearch();
+	}
+
+	public function getFind($id) {
+		return \App\Models\User::find($id);
+	}
+
+	public function postSave() {
+		return (new \App\Models\User)->store(request()->all());
+	}
+
+	public function postDelete($id) {
+		return \App\Models\User::find($id)->remove();
+	}
 }

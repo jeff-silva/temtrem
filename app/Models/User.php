@@ -10,17 +10,15 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject {
     use \App\Traits\Model, HasFactory, Notifiable;
  
 	protected $fillable = [
-        'id',
+		'id',
 		'name',
 		'email',
-		'password',
-		'type',
 		'email_verified_at',
+		'password',
 		'remember_token',
 		'created_at',
-		'updated_at',
-		'deleted_at',
-    ];
+		'updated_at'
+	];
 
      
     public function getJWTIdentifier() {

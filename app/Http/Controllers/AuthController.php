@@ -23,10 +23,10 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', [
             'except' => [
-                'login',
-                'passwordToken',
-                'passwordReset',
-            ]
+                'postLogin',
+                'postPasswordToken',
+                'postPasswordReset',
+            ],
         ]);
     }
 
@@ -42,7 +42,7 @@ class AuthController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
-    public function login()
+    public function postLogin()
     {
         $credentials = request(['email', 'password']);
         $token = false;
@@ -74,7 +74,7 @@ class AuthController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
-    public function me()
+    public function postMe()
     {
         return response()->json(auth()->user());
     }
@@ -90,7 +90,7 @@ class AuthController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
-    public function logout()
+    public function postLogout()
     {
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
@@ -108,7 +108,7 @@ class AuthController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
-    public function refresh()
+    public function postRefresh()
     {
         return $this->respondWithToken(auth()->refresh());
     }
@@ -141,7 +141,7 @@ class AuthController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
-    public function passwordToken($request) {
+    public function postPasswordToken($request) {
         return \App\Models\User::passwordToken($request->all());
     }
 
@@ -157,7 +157,7 @@ class AuthController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      */
-    public function passwordReset($request) {
+    public function postPasswordReset($request) {
         return \App\Models\User::passwordReset($request->all());
     }
 }

@@ -38,10 +38,6 @@ class AppMigrate extends Command
     public function handle()
     {
         $this->comment('🗂️  Iniciando migração');
-        
-        $raw_sql = file_get_contents(database_path('schema.sql'));
-        return \DB::unprepared($raw_sql);
-        
 
         $database = env('DB_DATABASE');
         $schema = $this->getSchema();
@@ -102,13 +98,8 @@ class AppMigrate extends Command
 
         $this->comment("\nAlterando tabela:");
         foreach($sqls as $sql) {
-            try {
-                $this->comment($sql);
-                \DB::select(\DB::raw($sql));
-            }
-            catch(\Exception $e) {
-                $this->error($e->getMessage());
-            }
+            $this->comment($sql);
+            \DB::select(\DB::raw($sql));
         }
     }
 
