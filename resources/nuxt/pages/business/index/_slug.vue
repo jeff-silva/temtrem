@@ -1,0 +1,41 @@
+<template><div>
+    <div v-if="$route.params.slug && business" style="position:fixed; top:0px; left:0px; width:100%; height:100%; background:#00000022; z-index:9999;"
+        @click.self="$router.push('/business')">
+        <div class="bg-white shadow-sm p-3" style="position:absolute; top:0px; right:0px; width:50%; height:100vh; min-width:400px;">
+            <h1>{{ business.name }}</h1>
+            <div v-html="business.description"></div>
+        </div>
+    </div>
+</div></template>
+
+<script>
+export default {
+    layout: 'default',
+
+    watch: {
+        $route: {handler() {
+            this.businessFind();
+        }},
+    },
+
+    methods: {
+        businessFind() {
+            this.business = false;
+            if (!this.$route.params.slug) return;
+            this.$axios.get(`/api/temtrem-business/find/${this.$route.params.slug}`).then(resp => {
+                this.business = resp.data;
+            });
+        },
+    },
+
+    data() {
+        return {
+            business: false,
+        };
+    },
+
+    mounted() {
+        this.businessFind();
+    },
+};
+</script>

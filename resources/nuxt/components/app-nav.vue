@@ -100,6 +100,12 @@ export default {
                         children: []
                     },
                     {
+                        label: "Categorias",
+                        to: "/admin/temtrem/category",
+                        icon: false,
+                        children: []
+                    },
+                    {
                         label: "Configurações",
                         to: "/admin/temtrem/settings/",
                         icon: false,

@@ -9,6 +9,7 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 	protected $fillable = [
 		'id',
 		'user_id',
+		'slug',
 		'name',
 		'description',
 		'lat',

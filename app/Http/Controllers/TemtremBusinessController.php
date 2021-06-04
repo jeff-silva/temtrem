@@ -22,7 +22,7 @@ class TemtremBusinessController extends Controller
 	}
 
 	public function getFind($id) {
-		return \App\Models\TemtremBusiness::find($id);
+		return \App\Models\TemtremBusiness::where('id', $id)->orWhere('slug', $id)->first();
 	}
 
 	public function postSave() {

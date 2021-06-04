@@ -1,82 +1,129 @@
 <template><div class="ui-file">
-    <div class="row no-gutters">
-        <div class="col-12 col-md-3 col-lg-2 border bg-light">
-            <a href="javascript:;" class="d-block py-1 px-2" @click="props.folder=''; listFiles()">
-                <i class="fa fa-fw fa-folder"></i>
-                ..
-            </a>
+    <div v-if="props.value">
+        <!-- Edit -->
+        <div class="input-group form-control p-0" v-if="props.value.url">
+            <div class="input-group-btn">
+                <button type="button" class="btn">
+                    <i class="fas fa-fw" :class="computedIcon"></i>
+                </button>
+            </div>
 
-            <a href="javascript:;" class="d-block py-1 px-2" v-for="f in files" :key="f.name" v-if="f.is_folder" @click="props.folder=f.name; listFiles()">
-                <i class="fa fa-fw fa-folder" v-if="f.is_folder"></i>
-                <i class="fa fa-fw fa-file" v-if="!f.is_folder"></i>
-                {{ f.name }}
-            </a>
-        </div>
+            <input type="text" class="form-control border-0" v-model="props.value.name" placeholder="Nome do arquivo" @input="emitValue()">
 
-        <div class="col-12 col-md-9 col-lg-10 border border-left-0">
-            <div class="row no-gutters">
-                <div class="col-6 col-md-3 col-lg-2 p-2" v-for="f in files" :key="f.name" v-if="!f.is_folder">
-                    <div @click="toggle(f)" :class="{'border border-primary':selected(f)}">
-                        <div>
-                            <img :src="f.url" alt="" style="width:100%; height:100px; object-fit:cover;" v-if="f.is_image">
-                            <div class="text-center p-3" v-else-if="f.is_folder"><i class="fa fa-fw fa-folder" style="font-size:68px;"></i></div>
-                            <div class="text-center p-3" v-else><i class="fa fa-fw fa-file" style="font-size:68px;"></i></div>
-                        </div>
-                        <div class="text-center bg-dark p-1">{{ f.name }}</div>
-                    </div>
-                </div>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-danger rounded-0" @click="props.value=valueDefault(); emitValue();">
+                    <i class="fas fa-fw fa-times"></i>
+                </button>
             </div>
         </div>
+
+        <!-- Empty -->
+        <div class="input-group form-control p-0" v-else>
+            <div class="input-group-btn">
+                <a href="javascript:;" class="btn" @click="handleFile()">
+                    <i class="fas fa-fw fa-upload"></i>
+                </a>
+            </div>
+            <div class="form-control border-0">
+                <a href="javascript:;" @click="showModal=true">Informar URL</a>
+            </div>
+        </div>
+
+        <ui-modal v-model="showModal">
+            <template #body>
+                <div class="form-group">
+                    <label>URL</label>
+                    <input type="text" class="form-control" v-model="props.value.url">
+                </div>
+            </template>
+            <template #footer>
+                <button type="button" class="btn" @click="showModal=false; emitValue()">
+                    Ok
+                </button>
+            </template>
+        </ui-modal>
     </div>
 </div></template>
 
 <script>
-import TimeAgo from 'vue2-timeago';
-
 export default {
-    components: {TimeAgo},
-
     props: {
-        value: {default:()=>([])},
-        folder: {default:''},
+        value: {default:Object},
     },
 
     watch: {
-		$props: {deep:true, handler(value) {
-            this.props = Object.assign({}, value);
+        $props: {deep:true, handler(value) {
+            this.props = JSON.parse(JSON.stringify(value));
+            this.props.value = this.valueDefault(this.props.value);
         }},
     },
 
     data() {
         return {
-            files: [],
-            props: Object.assign({}, this.$props),
+            props: JSON.parse(JSON.stringify(this.$props)),
+            showModal: false,
         };
     },
 
     methods: {
-        listFiles() {
-            let params = {folder:this.props.folder};
-            this.$axios.get('/api/file/list', {params}).then(resp => {
-                this.files = resp.data.files;
-            });
-        },
-
-        toggle(item) {
-            if (item.is_folder) return;
-            let value = Array.isArray(this.props.value)? this.props.value: [];
-            let index = value.indexOf(item);
-            index>=0? value.splice(index, 1): value.push(item);
-            this.props.value = value;
+        emitValue() {
             this.$emit('input', this.props.value);
         },
 
-        selected(item) {
-            return this.props.value.indexOf(item)>=0;
+        valueDefault(value={}) {
+            value = JSON.parse(JSON.stringify(value||{}));
+            return {
+                name: "",
+                filename: "",
+                size: 0,
+                type: "",
+                url: "",
+                ...value,
+            };
+        },
+
+        handleFile() {
+            Object.assign(document.createElement('input'), {
+                type: 'file',
+                onchange: (ev) => {
+                    let file = ev.target.files[0];
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => {
+                        this.props.value = {
+                            name: file.name.split('.').slice(0, -1).join('.'),
+                            filename: file.name,
+                            size: file.size,
+                            type: file.type,
+                            url: reader.result,
+                        };
+                        this.emitValue();
+                    };
+                },
+            }).click();
         },
     },
 
-    mounted() {
-        this.listFiles();
+    computed: {
+        computedIcon() {
+            let icon = 'fa-upload';
+
+            if (this.props.value && this.props.value.type) {
+                icon = this.props.value.type.split('/')[0];
+
+                if (icon=='audio') {
+                    icon = 'fa-file-audio';
+                }
+                else if (icon=='image') {
+                    icon = 'fa-image';
+                }
+                else {
+                    icon = 'fa-file';
+                }
+            }
+
+            return icon;
+        },
     },
-};</script>
+}
+</script>

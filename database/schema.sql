@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 CREATE TABLE IF NOT EXISTS `temtrem_businesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `lat` decimal(11,8) DEFAULT NULL,
@@ -72,6 +73,19 @@ CREATE TABLE IF NOT EXISTS `temtrem_businesses` (
   PRIMARY KEY (`id`),
   KEY `FK_temtrem_business_users` (`user_id`),
   CONSTRAINT `FK_temtrem_business_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- create table temtrem_categories 
+CREATE TABLE IF NOT EXISTS `temtrem_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `type` enum('product','service') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `icon` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- create table temtrem_products 
@@ -388,6 +402,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 -- modify field user_id 
 ALTER TABLE `temtrem_businesses` MODIFY COLUMN `user_id` bigint(20) unsigned NULL;
 
+-- create field 'slug' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `slug` varchar(255) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field slug 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `slug` varchar(255) NULL;
+
 -- create field 'name' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
 CREATE PROCEDURE `_temporary`() BEGIN
@@ -585,6 +610,94 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 
 -- modify field deleted_at 
 ALTER TABLE `temtrem_businesses` MODIFY COLUMN `deleted_at` datetime NULL DEFAULT NULL;
+
+-- create field 'id' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field id 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `id` int(11) NOT NULL AUTO_INCREMENT;
+
+-- create field 'name' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `name` varchar(255) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field name 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `name` varchar(255) NULL;
+
+-- create field 'description' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `description` text NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field description 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `description` text NULL DEFAULT NULL;
+
+-- create field 'type' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `type` enum('product','service') NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field type 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `type` enum('product','service') NULL DEFAULT NULL;
+
+-- create field 'icon' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `icon` text NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field icon 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `icon` text NULL DEFAULT NULL;
+
+-- create field 'created_at' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `created_at` datetime NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field created_at 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `created_at` datetime NULL DEFAULT NULL;
+
+-- create field 'updated_at' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `updated_at` datetime NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field updated_at 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `updated_at` datetime NULL DEFAULT NULL;
+
+-- create field 'deleted_at' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `deleted_at` datetime NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field deleted_at 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `deleted_at` datetime NULL DEFAULT NULL;
 
 -- create field 'id' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //

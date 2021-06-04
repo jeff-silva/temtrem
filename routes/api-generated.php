@@ -22,6 +22,11 @@ Route::get('temtrem-business/find/{id}', '\App\Http\Controllers\TemtremBusinessC
 Route::post('temtrem-business/save', '\App\Http\Controllers\TemtremBusinessController@postSave');
 Route::post('temtrem-business/delete/{id}', '\App\Http\Controllers\TemtremBusinessController@postDelete');
 
+Route::get('temtrem-category/search', '\App\Http\Controllers\TemtremCategoryController@getSearch');
+Route::get('temtrem-category/find/{id}', '\App\Http\Controllers\TemtremCategoryController@getFind');
+Route::post('temtrem-category/save', '\App\Http\Controllers\TemtremCategoryController@postSave');
+Route::post('temtrem-category/delete/{id}', '\App\Http\Controllers\TemtremCategoryController@postDelete');
+
 Route::get('temtrem-product/search', '\App\Http\Controllers\TemtremProductController@getSearch');
 Route::get('temtrem-product/find/{id}', '\App\Http\Controllers\TemtremProductController@getFind');
 Route::post('temtrem-product/save', '\App\Http\Controllers\TemtremProductController@postSave');
