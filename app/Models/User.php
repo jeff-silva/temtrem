@@ -38,9 +38,26 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject {
 
     
 	public function validate($data=[]) {
-		return \Validator::make($data, [
+		$rules = [
 			'name' => ['required'],
-		]);
+			'email' => ['required', 'email:rfc,dns'],
+		];
+
+		if (isset($data['id']) AND !empty($data['id'])) {
+            $rules['email'][] = "unique:users,email,{$data['id']}";
+			$rules['password'][] = 'confirmed';
+        }
+		else {
+			$rules['email'][] = 'unique:users,email';
+            $rules['password'][] = 'required';
+            $rules['password'][] = 'confirmed';
+
+			if (isset($data['password']) AND !empty($data['password'])) {
+				$rules['password'][] = 'confirmed';
+			}
+		}
+
+		return \Validator::make($data, $rules);
 	}
 
 	public function type($id) {

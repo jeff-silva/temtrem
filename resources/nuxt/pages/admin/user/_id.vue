@@ -1,5 +1,6 @@
 <template><div>
-    <ui-form action="/api/user/save" method="post" v-model="model"
+    <ui-form action="/api/user/save" method="post"
+        v-model="model" v-loading="loading"
         @success="successHandler($event)"
         #default="{loading, error}"
     >
@@ -7,8 +8,19 @@
             <input type="text" class="form-control" v-model="model.name">
         </ui-field>
 
-        <ui-field label="e-mail" :error="error.email">
+        <ui-field label="E-mail" :error="error.email">
             <input type="text" class="form-control" v-model="model.email">
+        </ui-field>
+
+        <ui-field label="Senha" :error="error.password">
+            <div class="row">
+                <div class="col-6">
+                    <ui-password v-model="model.password"></ui-password>
+                </div>
+                <div class="col-6">
+                    <ui-password v-model="model.password_confirmation" :meter="false"></ui-password>
+                </div>
+            </div>
         </ui-field>
 
         <ui-actions>
@@ -27,6 +39,7 @@ export default {
 
     data() {
         return {
+            loading: false,
             model: {},
         };
     },
@@ -39,8 +52,11 @@ export default {
 
         modelLoad() {
             if (! +this.$route.params.id) return;
+            this.loading= true;
             this.$axios.get(`/api/user/find/${this.$route.params.id}`).then(resp => {
+                delete resp.data.password;
                 this.model = resp.data;
+                this.loading= false;
             });
         },
     },
