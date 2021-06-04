@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Gerado em 04/06/2021 às 14:02:17
+ * Gerado em 04/06/2021 às 14:35:40
  * Por favor, não altere manualmente.
  */
 
@@ -313,7 +313,7 @@ return [
       'Index_length' => 16384,
       'Data_free' => 0,
       'Auto_increment' => 5,
-      'Create_time' => '2021-06-04 01:45:24',
+      'Create_time' => '2021-06-04 11:35:25',
       'Update_time' => NULL,
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
@@ -355,6 +355,14 @@ return [
         ],
         'description' => [
           'Field' => 'description',
+          'Type' => 'text',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'cover' => [
+          'Field' => 'cover',
           'Type' => 'text',
           'Null' => 'YES',
           'Key' => '',
@@ -504,7 +512,7 @@ return [
       'Data_free' => 0,
       'Auto_increment' => 4,
       'Create_time' => '2021-06-04 10:58:28',
-      'Update_time' => NULL,
+      'Update_time' => '2021-06-04 11:10:45',
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
       'Checksum' => NULL,

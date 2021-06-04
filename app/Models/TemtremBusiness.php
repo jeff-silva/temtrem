@@ -12,6 +12,7 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 		'slug',
 		'name',
 		'description',
+		'cover',
 		'lat',
 		'lng',
 		'route',
@@ -32,6 +33,14 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 
 	public function validate($data=[]) {
 		return \Validator::make($data, ['name' => ['required']]);
+	}
+
+	public function getCoverAttribute($value) {
+		if (!is_array($value)) {
+			$value = json_decode($value, true);
+			$value = is_array($value)? $value: [];
+		}
+		return $value;
 	}
 
 	public function user() {

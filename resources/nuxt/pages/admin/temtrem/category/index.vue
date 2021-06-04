@@ -1,4 +1,4 @@
-<template><div>
+<template><div class="admin-temtrem-category-index">
 
     <ui-table v-bind.sync="results">
         <template #header>
@@ -56,3 +56,7 @@ export default {
     },
 }
 </script>
+
+<style>
+.admin-temtrem-category-index p {padding:0px!important; margin:0px!important;}
+</style>

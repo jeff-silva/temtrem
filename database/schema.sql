@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `temtrem_businesses` (
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `cover` text COLLATE utf8_unicode_ci,
   `lat` decimal(11,8) DEFAULT NULL,
   `lng` decimal(11,8) DEFAULT NULL,
   `route` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -434,6 +435,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 
 -- modify field description 
 ALTER TABLE `temtrem_businesses` MODIFY COLUMN `description` text NULL DEFAULT NULL;
+
+-- create field 'cover' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `cover` text NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field cover 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `cover` text NULL DEFAULT NULL;
 
 -- create field 'lat' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //

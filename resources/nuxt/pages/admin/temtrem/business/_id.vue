@@ -30,6 +30,10 @@
             <ui-html v-model="model.description"></ui-html>
         </ui-field>
 
+        <ui-field label="Capa" :error="error.cover">
+            <ui-file v-model="model.cover"></ui-file>
+        </ui-field>
+
         <ui-actions>
             <button type="submit" class="btn btn-primary">
                 <span v-if="loading" v-html="loading"></span>
