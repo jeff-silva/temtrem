@@ -105,6 +105,7 @@ class AppMigrate extends Command
 
     public function getFieldSchema($field) {
         $schema = [ $field['Type'] ];
+        if ($field['Type']=='text') continue;
         $schema[] = (($field['Null']=='NO' || $field['Key']=='PRI')? 'NOT NULL': 'NULL');
         if ($field['Extra']=='auto_increment') $schema[] = 'AUTO_INCREMENT';
         if ($field['Key'] != 'PRI' AND !\Str::contains($field['Type'], 'varchar') AND !\Str::contains($field['Type'], 'int') AND $field['Type']!='longtext' AND $field['Type']!='timestamp') {
