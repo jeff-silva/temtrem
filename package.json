@@ -17,8 +17,7 @@
         "nuxt:dev": "nuxt",
         "nuxt:build": "nuxt build",
         "nuxt:test": "jest",
-        "release": "standard-version",
-        "heroku-postbuild": "php artisan app:deploy"
+        "release": "standard-version"
     },
     "devDependencies": {
         "@commitlint/cli": "^11.0.0",
