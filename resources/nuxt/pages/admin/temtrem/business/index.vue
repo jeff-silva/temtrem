@@ -2,14 +2,16 @@
 
     <ui-table v-bind.sync="results">
         <template #header>
-            <th>Nome</th>
+            <th width="200px">Nome</th>
             <th>Proprietário</th>
+            <th width="400px">Localização</th>
             <th width="300px">Alterado em</th>
         </template>
 
         <template #item="{item}">
             <td>{{ item.name }}</td>
             <td>{{ item.user? item.user.name: 'Ninguém' }}</td>
+            <td>{{ item.route }}, {{ item.district }}, {{ item.city }}</td>
             <td><ui-timeago v-model="item.updated_at"></ui-timeago></td>
         </template>
 

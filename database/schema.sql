@@ -52,6 +52,20 @@ CREATE TABLE IF NOT EXISTS `temtrem_businesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `lat` decimal(11,8) DEFAULT NULL,
+  `lng` decimal(11,8) DEFAULT NULL,
+  `route` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `number` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `complement` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `zipcode` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `district` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state_code` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country_code` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nomadic` int(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -384,6 +398,160 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 
 -- modify field name 
 ALTER TABLE `temtrem_businesses` MODIFY COLUMN `name` varchar(255) NULL;
+
+-- create field 'description' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `description` text NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field description 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `description` text NULL DEFAULT NULL;
+
+-- create field 'lat' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `lat` decimal(11,8) NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field lat 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `lat` decimal(11,8) NULL DEFAULT NULL;
+
+-- create field 'lng' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `lng` decimal(11,8) NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field lng 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `lng` decimal(11,8) NULL DEFAULT NULL;
+
+-- create field 'route' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `route` varchar(255) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field route 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `route` varchar(255) NULL;
+
+-- create field 'number' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `number` varchar(20) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field number 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `number` varchar(20) NULL;
+
+-- create field 'complement' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `complement` varchar(50) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field complement 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `complement` varchar(50) NULL;
+
+-- create field 'zipcode' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `zipcode` varchar(10) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field zipcode 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `zipcode` varchar(10) NULL;
+
+-- create field 'district' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `district` varchar(50) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field district 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `district` varchar(50) NULL;
+
+-- create field 'city' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `city` varchar(20) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field city 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `city` varchar(20) NULL;
+
+-- create field 'state' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `state` varchar(20) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field state 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `state` varchar(20) NULL;
+
+-- create field 'state_code' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `state_code` varchar(2) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field state_code 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `state_code` varchar(2) NULL;
+
+-- create field 'country' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `country` varchar(20) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field country 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `country` varchar(20) NULL;
+
+-- create field 'country_code' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `country_code` varchar(2) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field country_code 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `country_code` varchar(2) NULL;
+
+-- create field 'nomadic' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `nomadic` int(1) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field nomadic 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `nomadic` int(1) NULL;
 
 -- create field 'created_at' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //

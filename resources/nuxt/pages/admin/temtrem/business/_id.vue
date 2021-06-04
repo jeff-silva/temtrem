@@ -11,6 +11,25 @@
             <ui-user v-model="model.user_id"></ui-user>
         </ui-field>
 
+        <ui-field label="Endereço">
+            <el-switch v-model="model.nomadic"
+                class="mb-3"
+                :active-value="1" :inactive-value="0"
+                active-text="Comério itinerante"
+            ></el-switch>
+
+            <div v-if="model.nomadic==1">
+                Este comércio é itinerante. Sua localização será atualizada constantemente <br>
+                de acordo com a localização do dispositivo.
+            </div>
+
+            <ui-address v-model="model" v-if="model.nomadic!=1"></ui-address>
+        </ui-field>
+
+        <ui-field label="Descrição" :error="error.description">
+            <ui-html v-model="model.description"></ui-html>
+        </ui-field>
+
         <ui-actions>
             <button type="submit" class="btn btn-primary">
                 <span v-if="loading" v-html="loading"></span>

@@ -108,6 +108,13 @@ export default {
                 ],
             });
 
+            items.push({
+                label: "Site",
+                to: "/",
+                icon: "fas fa-fw fa-globe",
+                children: [],
+            });
+
             return items;
         },
     },
