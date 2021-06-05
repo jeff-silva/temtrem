@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `temtrem_products` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` enum('admin') COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -787,6 +788,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 
 -- modify field name 
 ALTER TABLE `users` MODIFY COLUMN `name` varchar(255) NULL;
+
+-- create field 'type' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `users` ADD COLUMN `type` enum('admin') NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field type 
+ALTER TABLE `users` MODIFY COLUMN `type` enum('admin') NULL DEFAULT NULL;
 
 -- create field 'email' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //

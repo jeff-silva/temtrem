@@ -54,6 +54,16 @@ trait Model
         $this->delete();
         return $this;
     }
+
+
+    public function scopeSelectExcept($query, $fields=[]) {
+        $select = [];
+        foreach($this->fillable as $col) {
+            if (in_array($col, $fields)) continue;
+            $select[] = $col;
+        }
+        return $query->select($select);
+    }
     
 
     /* [

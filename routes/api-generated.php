@@ -6,6 +6,7 @@
 Route::get('app/routes', '\App\Http\Controllers\AppController@getRoutes');
 Route::get('app/dashboard', '\App\Http\Controllers\AppController@getDashboard');
 Route::get('app/cron', '\App\Http\Controllers\AppController@getCron');
+Route::get('app/panel-nav', '\App\Http\Controllers\AppController@getPanelNav');
 
 Route::post('auth/login', '\App\Http\Controllers\AuthController@postLogin');
 Route::post('auth/me', '\App\Http\Controllers\AuthController@postMe');

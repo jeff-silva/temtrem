@@ -40,4 +40,35 @@ class AppController extends Controller
 
         return $log;
     }
+
+    public function getPanelNav() {
+        $user = auth()->user();
+        if (!$user) return [];
+
+        $items = [];
+        
+        $items[] = [
+            'label' => 'Home',
+            'to' => '/business',
+        ];
+
+        foreach(\App\Models\TemtremBusiness::where('user_id', $user->id)->get() as $business) {
+            $items[] = [
+                'label' => $business->name,
+                'to' => '',
+                'children' => [
+                    [
+                        'label' => 'Editar',
+                        'to' => "/panel/business/{$business->slug}",
+                    ],
+                    [
+                        'label' => 'Produtos',
+                        'to' => "/panel/business/{$business->slug}/products/",
+                    ],
+                ],
+            ];
+        }
+        
+        return $items;
+    }
 }

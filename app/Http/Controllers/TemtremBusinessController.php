@@ -7,7 +7,7 @@ class TemtremBusinessController extends Controller
 
 	public function getSearch() {
 		$input = request()->all();
-		$search = \App\Models\TemtremBusiness::with(['user']);
+		$search = \App\Models\TemtremBusiness::with(['user:id,name']);
 
 		if (isset($input['latMin']) AND isset($input['latMax']) AND isset($input['lngMin']) AND isset($input['lngMax'])) {
 			$search = $search->where(function($q) use($input) {

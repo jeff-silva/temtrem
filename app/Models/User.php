@@ -12,6 +12,7 @@ class User extends \Illuminate\Foundation\Auth\User implements JWTSubject {
 	protected $fillable = [
 		'id',
 		'name',
+		'type',
 		'email',
 		'email_verified_at',
 		'password',

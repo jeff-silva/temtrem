@@ -1,131 +1,80 @@
-<template><div>
-    <!-- Horizontal -->
-    <div v-if="type=='horizontal'" :class="`ui-nav ui-nav-horizontal ui-level-${level}`">
-        <div v-for="i in menuItems" class="ui-nav-item">
-            <nuxt-link :to="i.to" class="p-2 btn text-left">
-                <slot name="link"><span v-html="i.title" :item="i"></span></slot>
-            </nuxt-link>
+<template><div class="ui-nav">
+    <el-menu
+        :collapse="false"
+        background-color="transparent"
+        text-color="#444"
+        class="border-0"
+    >
+        <template v-for="(i, index) in navItems">
 
-            <ui-nav v-model="i.items" class="ui-nav-child" :level="level+1"></ui-nav>
-        </div>
-    </div>
-    
-    <!-- Vertical -->
-    <div v-if="type=='vertical'" :class="`ui-nav ui-nav-vertical ui-level-${level}`">
-        <div v-for="i in menuItems" class="ui-nav-item">
-            <div class="d-flex align-items-center">
-                <nuxt-link :to="i.to" class="p-2 btn text-left flex-grow-1" @click.native="i.items.length>0? toggleDropdown(i): null">
-                    <slot name="link"><span v-html="i.title" :item="i"></span></slot>
-                </nuxt-link>
+            <!-- Single -->
+            <template v-if="i.children.length==0">
+                <el-menu-item :index="i.id">
+                    <nuxt-link :to="i.to" class="d-block" @click.native="clickHandle(i, $event)">
+                        <i v-if="i.icon" :class="i.icon" class="app-nav-item-icon"></i>
+                        <span>{{ i.label }}</span>
+                    </nuxt-link>
+                </el-menu-item>
+            </template>
 
-                <div v-if="i.items.length>0">
-                    <a href="javascript:void(0);" class="btn" @click="toggleDropdown(i)">
-                        <i class="fas fa-caret-down"></i>
-                    </a>
-                </div>
-            </div>
+            <!-- Submenu -->
+            <el-submenu :index="i.id" v-else>
+                <template slot="title">
+                    <i v-if="i.icon" :class="i.icon" class="app-nav-item-icon"></i>
+                    <span>{{ i.label }}</span>
+                </template>
 
-            <ui-nav v-model="i.items" class="ui-nav-child" :level="level+1" :type="type" :style="getNavVerticalItemStyle(i)"></ui-nav>
-        </div>
-    </div>
+                <template v-for="(ii, iindex) in i.children">
+                    <el-menu-item :index="ii.id">
+                        <nuxt-link :to="ii.to" class="d-block" @click.native="clickHandle(ii, $event)">
+                            <i v-if="ii.icon" :class="ii.icon" class="app-nav-item-icon"></i>
+                            <span>{{ ii.label }}</span>
+                        </nuxt-link>
+                    </el-menu-item>
+                </template>
+            </el-submenu>
+        </template>
+    </el-menu>
 </div></template>
 
-<style>
-.ui-nav {}
-.ui-nav * {transition: all 200ms ease;}
-.ui-nav-item {}
-
-.ui-nav-horizontal {display:flex;}
-.ui-nav-horizontal > .ui-nav-item {position:relative;}
-.ui-nav-horizontal > .ui-nav-item > .ui-nav-child {position:absolute; top:100%; left:0px;}
-.ui-nav-horizontal.ui-level-0 > .ui-nav-item .ui-nav-child {visibility:hidden; opacity:0;}
-.ui-nav-horizontal > .ui-nav-item:hover > .ui-nav-child,
-.ui-nav-horizontal > .ui-nav-item:active > .ui-nav-child {visibility:visible; opacity:1;}
-.ui-nav-horizontal.ui-level-0 > .ui-nav-item > .ui-nav-child {background:#fff;}
-.ui-nav-horizontal.ui-level-0 > .ui-nav-item > .ui-nav-child > .ui-level-1 > .ui-nav-item {width:200px;}
-.ui-nav-horizontal.ui-level-0 > .ui-nav-item > .ui-nav-child > .ui-level-1 > .ui-nav-item > .ui-nav-child {top:0px; left:100%;}
-.ui-nav-horizontal.ui-level-0 > .ui-nav-item > .ui-nav-child > .ui-level-1 > .ui-nav-item > .ui-nav-child > .ui-nav-horizontal {display:block;}
-
-.ui-nav-vertical {display:block;}
-.ui-nav-vertical > .ui-nav-item {display:block;}
-.ui-nav-vertical > .ui-nav-item > .ui-nav-child {}
-.ui-nav-vertical .ui-nav-child {padding-left:20px;}
-
-
-/* .ui-nav * {transition: all 200ms ease;}
-.ui-nav {list-style-type:none; padding:0px; margin:0px;}
-.ui-nav > li {position:relative;}
-.ui-nav > li > a {display:block;}
-.ui-nav > li ul {visibility:hidden; opacity:0; position:absolute; width:100%; min-width:150px; z-index:2;}
-.ui-nav > li:hover > ul,
-.ui-nav > li:active > ul {visibility:visible; opacity:1;}
-
-.ui-nav-type-vertical > li ul {top:0; left:100%;}
-
-.ui-nav-type-horizontal.ui-nav-level-0 {display:flex;}
-.ui-nav-type-horizontal.ui-nav-level-0 > li > ul {top:100%; left:0;}
-.ui-nav-type-horizontal.ui-nav-level-1 ul {top:0; left:100%;}
-
-.ui-nav-item-active > a, .ui-nav a:hover {background:#eee;} */
-</style>
 
 <script>
 export default {
-    components: {
-        'ui-nav': () => import('@/components/ui/ui-nav.vue'),
-    },
-
     props: {
         value: Array,
-        type: {default:'horizontal'},
-        level: {default:0},
-        active: Function,
-    },
-
-    watch: {
-        $props: {deep:true, handler(value) {
-            // this.props = Object.assign({}, value);
-            this.menuItems = this.getMenuItems(value);
-        }},
-
-        $route: {deep:true, handler(value) {
-            this.$forceUpdate();
-        }},
     },
 
     methods: {
-        getMenuItems(items) {
-            return items.map(item => {
+        clickHandle(item, ev) {
+            if (item.click && typeof item.click=='function') {
+                item.click(item, ev);
+            }
+        },
+
+        deepMerge(items, level=0) {
+            if (!Array.isArray(items)) return [];
+            return items.map((item, index) => {
+                item.children = this.deepMerge(item.children||[], level+1);
                 return Object.assign({
-                    title: '',
-                    to: '',
-                    showItems: false,
-                    items: [],
+                    id: (level+'-'+index),
+                    label: "",
+                    to: "",
+                    icons: "",
+                    children: item.children,
                 }, item);
             });
         },
-
-        toggleDropdown(item) {
-            this.menuItems.forEach(iitem => {
-                if (iitem==item) return;
-                iitem.showItems = false;
-            });
-            item.showItems = !item.showItems;
-        },
-
-        getNavVerticalItemStyle(item) {
-            if (item.showItems) {
-                return `transform:scaleY(1); transform-origin:top;`;
-            }
-            return `transform:scaleY(0); transform-origin:top; height:0px;`;
-        },
     },
 
-    data() {
-        return {
-            // props: Object.assign({}, this.$props),
-            menuItems: this.getMenuItems(this.$props.value),
-        };
+    computed: {
+        navItems() {
+            return this.deepMerge(this.value);
+        },
     },
 }
 </script>
+
+<style>
+.ui-nav a {text-decoration:none!important; color:var(--bs-dark); display:block;}
+.ui-nav .app-nav-item-icon {margin:-2px 10px 0px 4px;}
+</style>

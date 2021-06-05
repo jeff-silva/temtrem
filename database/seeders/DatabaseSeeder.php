@@ -15,12 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
 
-        if (!$root = \App\Models\User::where('email', 'root@grr.la')->first()) {
+        if (!$root = \App\Models\User::find(1)) {
             DB::table('users')->insert([
                 'name' => 'Root User',
                 'email' => 'root@grr.la',
                 'password' => Hash::make('321321'),
             ]);
+            $root = \App\Models\User::find(1);
         }
+
+        $root->type = 'admin';
+        $root->save();
     }
 }

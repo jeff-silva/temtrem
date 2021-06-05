@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Gerado em 04/06/2021 às 14:35:40
+ * Gerado em 05/06/2021 às 08:13:35
  * Por favor, não altere manualmente.
  */
 
@@ -314,7 +314,7 @@ return [
       'Data_free' => 0,
       'Auto_increment' => 5,
       'Create_time' => '2021-06-04 11:35:25',
-      'Update_time' => NULL,
+      'Update_time' => '2021-06-04 11:46:00',
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
       'Checksum' => NULL,
@@ -659,8 +659,8 @@ return [
       'Index_length' => 0,
       'Data_free' => 0,
       'Auto_increment' => 4,
-      'Create_time' => '2021-06-01 01:56:31',
-      'Update_time' => NULL,
+      'Create_time' => '2021-06-04 23:40:51',
+      'Update_time' => '2021-06-04 23:42:50',
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
       'Checksum' => NULL,
@@ -678,6 +678,14 @@ return [
         'name' => [
           'Field' => 'name',
           'Type' => 'varchar(255)',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'type' => [
+          'Field' => 'type',
+          'Type' => 'enum(\'admin\')',
           'Null' => 'YES',
           'Key' => '',
           'Default' => NULL,

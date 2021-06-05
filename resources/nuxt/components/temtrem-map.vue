@@ -1,4 +1,4 @@
-<template><div class="temtrem-map" style="position:relative; height:100vh;">
+<template><div class="temtrem-map" style="position:relative; height:100vh; z-index:0;">
     <l-map ref="map" v-bind="{zoom:13, center:[-19.9830486, -44.0079828]}"
         @update:bounds="updateBoundsHandler($event)"
         @ready="mapReadyHandler"
