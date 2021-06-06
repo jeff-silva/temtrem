@@ -45,6 +45,11 @@ class AppDeploy extends Command
         ];
 
         $commands[] = [
+            'title' => 'Migrando banco de dados:',
+            'command' => 'app:migrate',
+        ];
+
+        $commands[] = [
             'title' => 'Seed',
             'command' => 'db:seed',
         ];
@@ -52,11 +57,6 @@ class AppDeploy extends Command
         $commands[] = [
             'title' => 'Limpando cache de configurações:',
             'command' => 'config:clear',
-        ];
-
-        $commands[] = [
-            'title' => 'Migrando banco de dados:',
-            'command' => 'app:migrate',
         ];
 
         foreach($commands as $com) {
