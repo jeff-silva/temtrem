@@ -9,6 +9,7 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 	protected $fillable = [
 		'id',
 		'user_id',
+		'category_id',
 		'slug',
 		'name',
 		'description',
@@ -45,5 +46,13 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 
 	public function user() {
 		return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+	}
+
+	public function temtremCategory() {
+		return $this->belongsTo(\App\Models\TemtremCategory::class, 'category_id', 'id');
+	}
+
+	public function temtremProducts() {
+		return $this->hasMany(\App\Models\TemtremProduct::class, 'business_id', 'id');
 	}
 }

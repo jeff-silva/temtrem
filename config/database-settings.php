@@ -10,7 +10,6 @@
     'temtrem_products' => true,
     'users' => true,
     'users_notifications' => false,
-    'temtrem_business' => true,
   ],
   'controllers' => [
     'emails' => false,
@@ -23,6 +22,5 @@
     'temtrem_products' => true,
     'users' => true,
     'users_notifications' => false,
-    'temtrem_business' => true,
   ],
 ];

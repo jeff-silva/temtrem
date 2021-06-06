@@ -1,48 +1,36 @@
 <template><div class="ui-file">
-    <div v-if="props.value">
-        <!-- Edit -->
-        <div class="input-group form-control p-0" v-if="props.value.url">
-            <div class="input-group-btn">
-                <button type="button" class="btn">
-                    <i class="fas fa-fw" :class="computedIcon"></i>
-                </button>
-            </div>
+    <div class="input-group form-control p-0 rounded-0">
+        <div class="input-group-prepend"><div class="input-group-btn">
+            <button type="button" class="btn" @click="handleFile()">
+                <i class="fas fa-upload"></i>
+            </button>
+        </div></div>
 
-            <input type="text" class="form-control border-0" v-model="props.value.name" placeholder="Nome do arquivo" @input="emitValue()">
+        <input type="text" class="form-control border-0" v-model="props.value.name" @change="emitValue()" placeholder="Descrição">
 
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-danger rounded-0" @click="props.value=valueDefault(); emitValue();">
-                    <i class="fas fa-fw fa-times"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Empty -->
-        <div class="input-group form-control p-0" v-else>
-            <div class="input-group-btn">
-                <a href="javascript:;" class="btn" @click="handleFile()">
-                    <i class="fas fa-fw fa-upload"></i>
-                </a>
-            </div>
-            <div class="form-control border-0">
-                <a href="javascript:;" @click="showModal=true">Informar URL</a>
-            </div>
-        </div>
-
-        <ui-modal v-model="showModal">
-            <template #body>
-                <div class="form-group">
-                    <label>URL</label>
-                    <input type="text" class="form-control" v-model="props.value.url">
-                </div>
-            </template>
-            <template #footer>
-                <button type="button" class="btn" @click="showModal=false; emitValue()">
-                    Ok
-                </button>
-            </template>
-        </ui-modal>
+        <div class="input-group-append"><div class="input-group-btn">
+            <button type="button" class="btn btn-danger rounded-0 border border-danger text-white"
+                v-if="props.value.url" @click="props.value=valueDefault()"
+            >
+                <i class="fas fa-times"></i>
+            </button>
+        </div></div>
     </div>
+
+    <el-collapse-transition>
+        <div v-if="focused">
+            <div class="input-group">
+                <div class="input-group-prepend"><div class="input-group-text rounded-0">URL:</div></div>
+                <input type="text" class="form-control rounded-0 border-top-0" v-model="props.value.url" @change="emitValue()" placeholder="URL">
+            </div>
+        </div>
+    </el-collapse-transition>
+
+    <el-collapse-transition>
+        <div class="border border-top-0" v-if="props.value && props.value.url">
+            <img :src="props.value.url" :alt="props.value.name" style="width:100%; max-height:200px; object-fit:contain;">
+        </div>
+    </el-collapse-transition>
 </div></template>
 
 <script>
@@ -62,6 +50,7 @@ export default {
         return {
             props: JSON.parse(JSON.stringify(this.$props)),
             showModal: false,
+            focused: false,
         };
     },
 
@@ -102,6 +91,10 @@ export default {
                 },
             }).click();
         },
+
+        handleFocused(ev) {
+            this.focused = this.$el.contains(ev.target);
+        },
     },
 
     computed: {
@@ -125,5 +118,13 @@ export default {
             return icon;
         },
     },
+
+    mounted() {
+        document.addEventListener('click', this.handleFocused);
+    },
 }
 </script>
+
+<style>
+.ui-file {position:relative;}
+</style>

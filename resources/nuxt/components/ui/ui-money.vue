@@ -21,13 +21,22 @@ export default {
 
     watch: {
         $props: {deep:true, handler(value) {
-            this.props = Object.assign({}, value);
+            this.props = this.defaultProps(value);
         }},
+    },
+
+    methods: {
+        defaultProps(props) {
+            props = JSON.parse(JSON.stringify(props));
+            props.value = isNaN(props.value)? 0: props.value;
+            props.value = props.value||0;
+            return props;
+        },
     },
 
     data() {
         return {
-            props: Object.assign({}, this.$props),
+            props: this.defaultProps(this.$props),
         };
     },
 };</script>

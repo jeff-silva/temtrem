@@ -30,4 +30,8 @@ class TemtremCategory extends \Illuminate\Database\Eloquent\Model
 		}
 		return $value;
 	}
+
+	public function temtremBusinesses() {
+		return $this->hasMany(\App\Models\TemtremBusiness::class, 'category_id', 'id');
+	}
 }

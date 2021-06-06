@@ -56,7 +56,7 @@ export default {
 	components: [
 		'~/components',
 		{ path: '~/components/ui/', prefix: ''},
-		{ path: '~/components/generated/', prefix: ''}
+		{ path: '~/components/app/', prefix: ''}
 	],
 
 	/*

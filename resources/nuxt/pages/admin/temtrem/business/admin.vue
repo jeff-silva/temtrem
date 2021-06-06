@@ -20,6 +20,10 @@
                 <i class="fa fa-edit"></i>
             </nuxt-link>
 
+            <nuxt-link :to="`/admin/temtrem/business/${item.id}/product`" class="btn btn-primary">
+                <i class="fa fa-shopping-basket"></i>
+            </nuxt-link>
+
             <button type="button" class="btn btn-danger">
                 <i class="fas fa-times"></i>
             </button>
