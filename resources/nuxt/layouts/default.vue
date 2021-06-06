@@ -49,7 +49,7 @@
       </ui-modal>
     </div>
 
-    <div v-if="$auth.user && $auth.user.type=='admin'">
+    <div v-if="$auth.user">
       <nuxt-link to="/admin" class="btn">Admin</nuxt-link>
     </div>
 

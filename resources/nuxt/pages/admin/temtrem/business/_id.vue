@@ -7,7 +7,7 @@
             <input type="text" class="form-control" v-model="model.name">
         </ui-field>
 
-        <ui-field label="Proprietário" :error="error.user_id">
+        <ui-field label="Proprietário" :error="error.user_id" v-if="$auth.user.type=='admin'">
             <ui-user v-model="model.user_id"></ui-user>
         </ui-field>
 

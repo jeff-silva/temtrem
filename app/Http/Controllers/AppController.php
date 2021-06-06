@@ -52,22 +52,16 @@ class AppController extends Controller
             'to' => '/business',
         ];
 
-        foreach(\App\Models\TemtremBusiness::where('user_id', $user->id)->get() as $business) {
-            $items[] = [
-                'label' => $business->name,
-                'to' => '',
-                'children' => [
-                    [
-                        'label' => 'Editar',
-                        'to' => "/panel/business/{$business->slug}",
-                    ],
-                    [
-                        'label' => 'Produtos',
-                        'to' => "/panel/business/{$business->slug}/products/",
-                    ],
-                ],
-            ];
-        }
+        $items[] = [
+            'label' => 'Meus negócios',
+            'to' => '',
+            'children' => \App\Models\TemtremBusiness::where('user_id', $user->id)->get()->transform(function($item) {
+                return [
+                    'label' => $item->name,
+                    'to' => "/panel/business/{$item->id}",
+                ];
+            }),
+        ];
         
         return $items;
     }

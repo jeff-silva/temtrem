@@ -2,7 +2,7 @@
 
     <el-drawer direction="ltr" :visible.sync="drawer" size="300px">
         <div style="height:100vh; overflow:auto;">
-            <app-nav class="layout-admin-nav"></app-nav>
+            <ui-nav v-model="navItems"></ui-nav>
         </div>
     </el-drawer>
 
@@ -12,7 +12,7 @@
                 <div class="font-weight-bold text-uppercase">{{ $store.state.auth.user.name }}</div>
                 <small class="d-block text-muted">{{ $store.state.auth.user.email }}</small>
             </div>
-            <app-nav class="layout-admin-nav"></app-nav>
+            <ui-nav v-model="navItems"></ui-nav>
         </div>
 
         <div class="flex-grow-1 bg-light" style="height:100vh; overflow:auto;">
@@ -44,6 +44,90 @@ export default {
         return {
             drawer: false,
         };
+    },
+
+    computed: {
+        navItems() {
+            let user = this.$auth.user||false;
+            let navItems = [];
+
+            if (user) {
+                navItems.push({
+                    label: "Dashboard",
+                    icon: "fas fa-poll",
+                    to: "/admin",
+                });
+    
+                // Admin
+                if (user.type=='admin') {
+                    navItems.push({
+                        label: "Sistema",
+                        icon: "fas fa-cog",
+                        to: "/admin",
+                        children: [
+                            {
+                                label: "Usuários",
+                                to: "/admin/user",
+                            },
+                            {
+                                label: "Configurações",
+                                to: "/admin/settings",
+                            },
+                        ],
+                    });
+
+                    navItems.push({
+                        label: "Temtrem",
+                        icon: "fas fa-cog",
+                        to: "",
+                        children: [
+                            {
+                                label: "Lojas",
+                                to: "/admin/temtrem/business/admin",
+                            },
+                            {
+                                label: "Categorias",
+                                to: "/admin/temtrem/category",
+                            },
+                            {
+                                label: "Configurações",
+                                to: "/admin/temtrem/settings",
+                            },
+                        ],
+                    });
+                }
+
+                // Simple user
+                else {
+                    // 
+                }
+
+                navItems.push({
+                    label: "Meus negócios",
+                    icon: "fas fa-cog",
+                    to: "/admin/temtrem/business",
+                });
+            }
+
+            navItems.push({
+                label: "Site",
+                icon: "fas fa-globe",
+                to: "/",
+            });
+
+            navItems.push({
+                label: "Sair",
+                icon: "fas fa-power-off",
+                to: "",
+                click: () => {
+                    this.$auth.logout().then(resp => {
+                        this.$router.push('/');
+                    });
+                },
+            });
+
+            return navItems;
+        },
     },
 
     methods: {

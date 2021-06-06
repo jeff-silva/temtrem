@@ -69,6 +69,17 @@ export default {
             this.search.params.lngMax = bounds._northEast.lng;
             this.businessSearch();
         },
+
+        getGeoposition() {
+            if (!navigator.geolocation) return;
+            navigator.geolocation.getCurrentPosition(pos => {
+                console.log(pos);
+            });
+        },
+    },
+
+    mounted() {
+        this.getGeoposition();
     },
 }
 </script>
