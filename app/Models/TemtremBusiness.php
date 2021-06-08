@@ -14,6 +14,7 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 		'name',
 		'description',
 		'cover',
+		'groups',
 		'lat',
 		'lng',
 		'route',
@@ -37,6 +38,14 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 	}
 
 	public function getCoverAttribute($value) {
+		if (!is_array($value)) {
+			$value = json_decode($value, true);
+			$value = is_array($value)? $value: [];
+		}
+		return $value;
+	}
+
+	public function getGroupsAttribute($value) {
 		if (!is_array($value)) {
 			$value = json_decode($value, true);
 			$value = is_array($value)? $value: [];

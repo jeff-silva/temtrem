@@ -6,7 +6,7 @@
             </button>
         </div></div>
 
-        <input type="text" class="form-control border-0" v-model="props.value.name" @change="emitValue()" placeholder="Descrição">
+        <input type="text" class="form-control border-0" v-model="props.value.url" @keyup="emitValue()" placeholder="URL">
 
         <div class="input-group-append"><div class="input-group-btn">
             <button type="button" class="btn btn-danger rounded-0 border border-danger text-white"
@@ -19,10 +19,7 @@
 
     <el-collapse-transition>
         <div v-if="focused">
-            <div class="input-group">
-                <div class="input-group-prepend"><div class="input-group-text rounded-0">URL:</div></div>
-                <input type="text" class="form-control rounded-0 border-top-0" v-model="props.value.url" @change="emitValue()" placeholder="URL">
-            </div>
+            <input type="text" class="form-control rounded-0" v-model="props.value.name" @keyup="emitValue()" placeholder="Descrição">
         </div>
     </el-collapse-transition>
 

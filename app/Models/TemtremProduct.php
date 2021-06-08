@@ -11,6 +11,7 @@ class TemtremProduct extends \Illuminate\Database\Eloquent\Model
 		'business_id',
 		'name',
 		'price',
+		'unity',
 		'cover',
 		'created_at',
 		'updated_at',

@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `temtrem_businesses` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `cover` text COLLATE utf8_unicode_ci,
+  `groups` text COLLATE utf8_unicode_ci,
   `lat` decimal(11,8) DEFAULT NULL,
   `lng` decimal(11,8) DEFAULT NULL,
   `route` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -98,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `temtrem_products` (
   `business_id` int(11) DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
+  `unity` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cover` text COLLATE utf8_unicode_ci,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -467,6 +469,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 -- modify field cover 
 ALTER TABLE `temtrem_businesses` MODIFY COLUMN `cover` text NULL DEFAULT NULL;
 
+-- create field 'groups' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `groups` text NULL DEFAULT NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field groups 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `groups` text NULL DEFAULT NULL;
+
 -- create field 'lat' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
 CREATE PROCEDURE `_temporary`() BEGIN
@@ -774,6 +787,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 
 -- modify field price 
 ALTER TABLE `temtrem_products` MODIFY COLUMN `price` decimal(10,2) NULL DEFAULT NULL;
+
+-- create field 'unity' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_products` ADD COLUMN `unity` varchar(50) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field unity 
+ALTER TABLE `temtrem_products` MODIFY COLUMN `unity` varchar(50) NULL;
 
 -- create field 'cover' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //

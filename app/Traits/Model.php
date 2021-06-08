@@ -19,6 +19,11 @@ trait Model
 
     public function store($data=[]) {
         $data = array_merge($this->toArray(), $data);
+        foreach($data as $key=>$value) {
+            if (is_array($value)) {
+                $data[$key] = json_encode($value);
+            }
+        }
 
         $table_name = $this->getTable();
         $table_pk = $this->getKeyName();
