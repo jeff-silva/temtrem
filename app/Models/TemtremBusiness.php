@@ -13,6 +13,7 @@ class TemtremBusiness extends \Illuminate\Database\Eloquent\Model
 		'slug',
 		'name',
 		'description',
+		'whatsapp',
 		'cover',
 		'groups',
 		'lat',

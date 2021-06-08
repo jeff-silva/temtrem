@@ -1,11 +1,18 @@
 <template><div>
-    <transition name="custom-unique-name" enter-active-class="animate__animated animate__fadeInRight" leave-active-class="animate__animated animate__fadeOutRight">
-        <div v-if="$route.params.slug && business" style="position:fixed; top:0px; left:0px; width:100%; height:100%; background:#00000022; z-index:9999; animation-duration:200ms;"
+    <transition name="transition-01" enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
+        <div v-if="$route.params.slug" style="position:fixed; top:0px; left:0px; width:100%; height:100%; background:#00000022; z-index:9999; animation-duration:200ms;"
             @click.self="$router.push('/business')">
-            <temtrem-business-profile v-model="business"
-                class="bg-white shadow-sm"
-                style="position:absolute; top:0px; right:0px; width:50%; height:100vh; min-width:400px;"
-            ></temtrem-business-profile>
+
+            <div class="bg-white shadow-sm" style="position:absolute; top:0px; right:0px; width:50%; height:100vh; min-width:400px; max-width:500px;">
+                <div v-if="!business">Carregando...</div>
+                <transition name="transition-02" enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
+                    <temtrem-business-profile v-model="business"
+                        v-if="business"
+                        style="position:absolute; top:0px; right:0px; width:100%; height:100vh; animation-duration:200ms;"
+                    ></temtrem-business-profile>
+                </transition>
+            </div>
+
         </div>
     </transition>
 </div></template>

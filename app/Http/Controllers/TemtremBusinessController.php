@@ -7,7 +7,10 @@ class TemtremBusinessController extends Controller
 
 	public function getSearch() {
 		$input = request()->all();
-		$search = \App\Models\TemtremBusiness::with(['user:id,name']);
+		$search = \App\Models\TemtremBusiness::with([
+			'user:id,name',
+			'temtremCategory',
+		]);
 
 		if (isset($input['latMin']) AND isset($input['latMax']) AND isset($input['lngMin']) AND isset($input['lngMax'])) {
 			$search = $search->where(function($q) use($input) {
@@ -22,7 +25,8 @@ class TemtremBusinessController extends Controller
 	}
 
 	public function getFind($id) {
-		return \App\Models\TemtremBusiness::where('id', $id)->orWhere('slug', $id)->first();
+		return \App\Models\TemtremBusiness::with(['temtremCategory'])
+			->where('id', $id)->orWhere('slug', $id)->first();
 	}
 
 	public function postSave() {

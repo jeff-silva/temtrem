@@ -11,6 +11,7 @@ class TemtremCategory extends \Illuminate\Database\Eloquent\Model
 		'name',
 		'description',
 		'type',
+		'color',
 		'icon',
 		'created_at',
 		'updated_at',

@@ -2,13 +2,13 @@
 
     <ui-table v-bind.sync="results">
         <template #header>
-            <th width="50px"></th>
+            <th width="60px"></th>
             <th>Nome</th>
             <th width="300px">Alterado em</th>
         </template>
 
         <template #item="{item}">
-            <td><img :src="item.icon.url" alt="" width="100%" v-if="item.icon.url"></td>
+            <td :style="`border-left:solid 10px ${item.color};`"><img :src="item.icon.url" alt="" width="100%" v-if="item.icon.url"></td>
             <td>{{ item.name }}<br><small class="text-muted" v-html="item.description"></small></td>
             <td><ui-timeago v-model="item.updated_at"></ui-timeago></td>
         </template>

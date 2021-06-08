@@ -1,7 +1,7 @@
 <?php 
 
 /*
- * Gerado em 08/06/2021 às 04:38:01
+ * Gerado em 08/06/2021 às 05:37:10
  * Por favor, não altere manualmente.
  */
 
@@ -313,8 +313,8 @@ return [
       'Index_length' => 32768,
       'Data_free' => 0,
       'Auto_increment' => 5,
-      'Create_time' => '2021-06-08 00:42:28',
-      'Update_time' => '2021-06-08 01:32:36',
+      'Create_time' => '2021-06-08 02:27:33',
+      'Update_time' => '2021-06-08 02:30:38',
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
       'Checksum' => NULL,
@@ -364,6 +364,14 @@ return [
         'description' => [
           'Field' => 'description',
           'Type' => 'text',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'whatsapp' => [
+          'Field' => 'whatsapp',
+          'Type' => 'varchar(255)',
           'Null' => 'YES',
           'Key' => '',
           'Default' => NULL,
@@ -520,14 +528,14 @@ return [
       'Engine' => 'InnoDB',
       'Version' => 10,
       'Row_format' => 'Dynamic',
-      'Rows' => 3,
-      'Avg_row_length' => 5461,
+      'Rows' => 4,
+      'Avg_row_length' => 4096,
       'Data_length' => 16384,
       'Max_data_length' => 0,
       'Index_length' => 0,
       'Data_free' => 0,
       'Auto_increment' => 5,
-      'Create_time' => '2021-06-04 10:58:28',
+      'Create_time' => '2021-06-08 02:33:32',
       'Update_time' => NULL,
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
@@ -562,6 +570,14 @@ return [
         'type' => [
           'Field' => 'type',
           'Type' => 'enum(\'product\',\'service\')',
+          'Null' => 'YES',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+        ],
+        'color' => [
+          'Field' => 'color',
+          'Type' => 'varchar(10)',
           'Null' => 'YES',
           'Key' => '',
           'Default' => NULL,
@@ -606,15 +622,15 @@ return [
       'Engine' => 'InnoDB',
       'Version' => 10,
       'Row_format' => 'Dynamic',
-      'Rows' => 11,
-      'Avg_row_length' => 1489,
+      'Rows' => 12,
+      'Avg_row_length' => 1365,
       'Data_length' => 16384,
       'Max_data_length' => 0,
       'Index_length' => 16384,
       'Data_free' => 0,
-      'Auto_increment' => 12,
+      'Auto_increment' => 13,
       'Create_time' => '2021-06-08 01:37:04',
-      'Update_time' => NULL,
+      'Update_time' => '2021-06-08 01:48:02',
       'Check_time' => NULL,
       'Collation' => 'utf8_unicode_ci',
       'Checksum' => NULL,

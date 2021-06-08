@@ -7,6 +7,15 @@
             <input type="text" class="form-control" v-model="model.name">
         </ui-field>
 
+        <ui-field label="Cor">
+            <div class="input-group form-control p-0">
+                <div class="input-group-prepend"><div class="input-group-text p-0 border-0 bg-transparent">
+                    <el-color-picker v-model="model.color"></el-color-picker>
+                </div></div>
+                <input type="text" class="form-control border-0" v-model="model.color">
+            </div>
+        </ui-field>
+
         <ui-field label="Ícone">
             <ui-file v-model="model.icon"></ui-file>
         </ui-field>

@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `temtrem_businesses` (
   `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `whatsapp` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cover` text COLLATE utf8_unicode_ci,
   `groups` text COLLATE utf8_unicode_ci,
   `lat` decimal(11,8) DEFAULT NULL,
@@ -86,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `temtrem_categories` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
   `type` enum('product','service') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `color` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `icon` text COLLATE utf8_unicode_ci,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -458,6 +460,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 -- modify field description 
 ALTER TABLE `temtrem_businesses` MODIFY COLUMN `description` text NULL DEFAULT NULL;
 
+-- create field 'whatsapp' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_businesses` ADD COLUMN `whatsapp` varchar(255) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field whatsapp 
+ALTER TABLE `temtrem_businesses` MODIFY COLUMN `whatsapp` varchar(255) NULL;
+
 -- create field 'cover' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
 CREATE PROCEDURE `_temporary`() BEGIN
@@ -699,6 +712,17 @@ DROP PROCEDURE IF EXISTS `_temporary`;
 
 -- modify field type 
 ALTER TABLE `temtrem_categories` MODIFY COLUMN `type` enum('product','service') NULL DEFAULT NULL;
+
+-- create field 'color' if not exists
+DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //
+CREATE PROCEDURE `_temporary`() BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+	ALTER TABLE `temtrem_categories` ADD COLUMN `color` varchar(10) NULL;;
+END // DELIMITER ; CALL _temporary();
+DROP PROCEDURE IF EXISTS `_temporary`;
+
+-- modify field color 
+ALTER TABLE `temtrem_categories` MODIFY COLUMN `color` varchar(10) NULL;
 
 -- create field 'icon' if not exists
 DROP PROCEDURE IF EXISTS `_temporary`; DELIMITER //

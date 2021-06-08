@@ -10,11 +10,12 @@ import VueTheMask from 'vue-the-mask'
 Vue.use(VueTheMask);
 
 // https://vue2-leaflet.netlify.app/
-import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LIcon } from 'vue2-leaflet';
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);
 Vue.component('l-popup', LPopup);
+Vue.component('l-icon', LIcon);
 
 // https://element.eleme.io/
 import ElementUI from 'element-ui';
